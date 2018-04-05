@@ -49,6 +49,7 @@ class AnswerController {
     }
     update() {
         if (MQ.choosed) {
+            this.sprite.inputEnabled = false;
             if (this.choosed) {
 
             } else {

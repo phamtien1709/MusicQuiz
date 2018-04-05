@@ -56,7 +56,7 @@ var practiceState = {
         MQ.game.load.onFileComplete.add(this.fileComplete, this);
         MQ.game.load.onLoadComplete.add(this.loadComplete, this);
         MQ.songChoicedPlay = MQ.game.add.audio('songChoiced');
-        MQ.songChoicedPlay.play();
+        // MQ.songChoicedPlay.play();
         // MQ.answerA = new AnswerController(MQ.game.width/2, MQ.game.height/2);
         setTimeout(() => {
             // MQ.game.state.restart();
