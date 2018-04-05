@@ -1,0 +1,20 @@
+{
+  "name": "musicquiz",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "git+https://github.com/phamtien1709/MusicQuiz.git",
+  "author": "Tien Pham <phamtien1709@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/phamtien1709/MusicQuiz/issues"
+  },
+  "homepage": "https://github.com/phamtien1709/MusicQuiz#readme",
+  "dependencies": {
+    "cordova": "^8.0.0",
+    "yarn": "^1.5.1"
+  }
+}
