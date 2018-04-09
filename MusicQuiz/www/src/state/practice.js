@@ -4,6 +4,10 @@ var practiceState = {
     },
     create: function () {
         showConsole('Practice Screen');
+        // sprite ava tween to number of answer
+
+        //
+        // console.log(MQ.indexSongChoiced);
         // console.log(MQ.countQuiz);
         var bg = MQ.game.add.sprite(0, 0, 'bg-practice');
         bg.width = MQ.game.width;
@@ -13,6 +17,7 @@ var practiceState = {
         MQ.answerGroup = MQ.game.add.group();
         // variable
         MQ.choosed = false;
+        MQ.inThisQuiz = true;
         //
         for (i = 0; i < 4; i++) {
             if (i == 0) {
@@ -51,20 +56,21 @@ var practiceState = {
         var tweenSpriteTime = MQ.game.add.tween(spriteTime.scale).to({ x: MQ.configs.SCALE * 60, y: MQ.configs.SCALE }, 10000, "Linear");
         tweenSpriteTime.start();
         //
-        console.log(MQ.songChoiced);        
+        // console.log(MQ.songChoiced);
         MQ.game.load.onLoadStart.add(this.loadStart, this);
         MQ.game.load.onFileComplete.add(this.fileComplete, this);
         MQ.game.load.onLoadComplete.add(this.loadComplete, this);
         MQ.songChoicedPlay = MQ.game.add.audio('songChoiced');
-        // MQ.songChoicedPlay.play();
-        // MQ.answerA = new AnswerController(MQ.game.width/2, MQ.game.height/2);
-        setTimeout(() => {
-            // MQ.game.state.restart();
-            getSongToPractice(() => {
-                // MQ.game.state.restart();
-                this.startLoad();
-            });
-        }, 10000);
+        MQ.songChoicedPlay.play();
+        tweenSpriteTime.onComplete.add(() => {
+            if (!MQ.choosed) {
+                MQ.indexSongChoiced = [];
+                MQ.songChoicedPlay.stop();
+                getSongToPractice(() => {
+                    this.startLoad();
+                });
+            }
+        });
     },
     update: function () {
 
@@ -85,15 +91,6 @@ var practiceState = {
         showConsole(`File Complete: ${progress}% - ${totalLoaded} out of ${totalFiles}`);
     },
     loadComplete: function () {
-        // showConsole('Load Song Complete');
-        // console.log('Load complete');
-        // if (!MQ.loadVar) {
-        // MQ.loadVar = true;
-        // if(MQ.practiceMode){
         MQ.game.state.restart();
-        //     }
-        //     // MQ.game.load.stop();
-        // }
-        // MQ.game.state.start('play');
     }
 }

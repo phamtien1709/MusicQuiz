@@ -6,21 +6,25 @@ class AnswerController {
         this.sprite.update = this.update.bind(this);
         this.sprite.inputEnabled = true;
         this.configs = configs;
-        // console.log(this.configs);
         this.choosed = false;
         this.sprite.events.onInputDown.add(() => {
             this.choosed = true;
             MQ.choosed = true;
-            // MQ.answerB.choosed = true;
-            // MQ.answerC.choosed = true;
-            // MQ.answerD.choosed = true;
-            // MQ.choosed = true;
-            console.log(this.answer);
+            // console.log(this.answer);
             if ((this.answer == MQ.songChoiced.AnswerSong) || (this.answer == MQ.songChoiced.AnswerSinger)) {
                 this.answerText.addColor("#30FF77", 0);
             } else {
+                MQ.indexSongChoiced = [];
                 this.answerText.addColor("#ff0000", 0);
             }
+            // console.log(MQ.indexSongChoiced);
+            setTimeout(() => {
+                MQ.songChoicedPlay.stop();
+                getSongToPractice(() => {
+                    MQ.inThisQuiz= false;
+                    practiceState.startLoad();
+                });
+            }, 3000);
             // if(this.answer == MQ.song){
 
             // }
@@ -55,10 +59,11 @@ class AnswerController {
             } else {
                 this.sprite.alpha = 0.5;
                 if ((this.answer == MQ.songChoiced.AnswerSong) || (this.answer == MQ.songChoiced.AnswerSinger)) {
-                    this.answerText.addColor("#30FF77", 0);
+                    if(MQ.inThisQuiz){
+                        this.answerText.addColor("#30FF77", 0);
+                    }
                 }
             }
-            // this.sprite.scale.setTo(MQ.configs.SCALE + 0.2);
         }
     }
 }

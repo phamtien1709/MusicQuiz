@@ -32,6 +32,7 @@ var menuState = {
         MQ.game.load.onFileComplete.add(this.fileComplete, this);
         MQ.game.load.onLoadComplete.add(this.loadComplete, this);
         //
+        // mask ava in front  of ava sprite 
         var maskAva = MQ.game.add.graphics(0, 0);
         maskAva.beginFill(0xffffff);
         maskAva.drawCircle(200 * MQ.configs.SCALE, 182 * MQ.configs.SCALE, Math.floor(232 * MQ.configs.SCALE));

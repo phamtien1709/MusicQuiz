@@ -4,9 +4,10 @@ function getSongToPractice(callback) {
     for (i = 0; i < MQ.data.length; i++) {
         arr[i] = MQ.data[i];
     };
-    // console.log(arr);
     // splice songChoiced Previous
     for (i = 0; i < MQ.indexSongChoiced.length; i++) {
+        // if(MQ.indexSongChoiced[i])
+        // console.log(arr[MQ.indexSongChoiced[i]]);
         arr.splice(MQ.indexSongChoiced[i], 1);
     };
     //get song to ask
@@ -37,10 +38,8 @@ function getSongToPractice(callback) {
         let randomChoiced = Math.floor(Math.random() * arrNotRandom.length);
         let obj = arrNotRandom[randomChoiced];
         arrNotRandom.splice(randomChoiced, 1);
-        // console.log(obj);
         MQ.songRandomChoiced[i] = obj;
         if (i == 2) {
-            // console.log(arrNotRandom[0]);
             MQ.songRandomChoiced[3] = arrNotRandom[0];
         }
     }

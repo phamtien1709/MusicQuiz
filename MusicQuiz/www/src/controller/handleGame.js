@@ -56,25 +56,30 @@ function getChallengeByFriend(callback) {
         `/${MQ.checkId}/apprequests`,
         function (response) {
             if (response && !response.error) {
+                var countInvite = [];
                 // console.log(response);
                 // console.log()
                 // console.log(response.data[0]);
                 if (response.data[0] !== undefined) {
                     // console.log(response.data[0].data.idData);
                     console.log(response.data[0].message);
-                    if(response.data[0].message == "Come and play MusicQuiz with me!"){
-                        deleteRequest(response.data[0].id);
-                    } else{
-                        MQ.responseChallen = response.data;
-                        // console.log(MQ.responseChallen);
-                        for (i = 0; i < MQ.responseChallen.length; i++) {
-                            MQ.responseChallen[i].data = JSON.parse(MQ.responseChallen[i].data);
-                            // console.log(MQ.responseChallen[i].data);
+                    MQ.responseChallen = response.data;
+                    for (i = 0; i < MQ.responseChallen.length; i++) {
+                        if (MQ.responseChallen[i].message == "Come and play MusicQuiz with me!") {
+                            deleteRequest(response.data[i].id);
+                            countInvite.push(i);
                         }
+                        if (MQ.responseChallen[i].message == "Challenge") {
+                            MQ.responseChallen[i].data = JSON.parse(MQ.responseChallen[i].data);
+                        }
+                        // console.log(MQ.responseChallen[i].data);
                     }
-                    // let objResponse = JSON.parse(response.data[0].data);                   
-                    // console.log(MQ.idRequest);
-                    // console.log(MQ.nameFriendChallenged);
+                    // console.log(countInvite);
+                    for (i = 0; i < countInvite.length; i++) {
+                        MQ.responseChallen.splice(countInvite[i] - i, 1);
+                    }
+                    // console.log(MQ.responseChallen);
+                    // let dataFilter = data.filter(ele => ele._id.$oid == MQ.responseChallen[i].data.idData);
                     callback();
                 } else {
                     callback();
