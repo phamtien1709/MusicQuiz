@@ -16,10 +16,14 @@ class AnswerController {
                 if(MQ.indexSongChoiced.length > MQ.practiceModeScore){
                     const obj = MQ.achievementPractice.filter( ele => ele.answer == MQ.indexSongChoiced.length);
                     MQ.practiceModeScore = MQ.indexSongChoiced.length;
+                    //update practiceModeScore
+                        updatePracticeMode(MQ.practiceModeScore);
                     // console.log(obj[0]);
                     if(obj[0] !== undefined){
                         alert(`Your reward: ${obj[0].reward} diamond!`);
                         MQ.diamond += obj[0].reward;
+                        // ajax diamond
+                        updateDiamond(MQ.diamond);
                     }
                 }
             } else {

@@ -9,18 +9,12 @@ var loadState = {
         MQ.game.load.image('ava_150', 'img/assets/ava-default150x150.png');
         MQ.game.load.image('ava_70', 'img/assets/ava-default70x70.png');
         MQ.game.load.image('btn-next', 'img/assets/btn-next.png');
-        MQ.game.load.image('btn-test', 'img/assets/btn-test.png');
         // MQ.game.load.image('btn-home', 'img/assets/btn-home.png');
         MQ.game.load.image('btn-playing', 'img/assets/btn-playing.png');
         MQ.game.load.image('tween-time', 'img/assets/tween-time.png');
         MQ.game.load.image('answer-tab', 'img/assets/answer.png');
-        MQ.game.load.image('correct', 'img/assets/correct.png');
-        MQ.game.load.image('wrong', 'img/assets/wrong.png');
-        MQ.game.load.image('wrong-mini', 'img/assets/wrong-mini.png');
-        MQ.game.load.image('correct-mini', 'img/assets/correct-mini.png');
         MQ.game.load.image('circle', 'img/assets/circle.png');
         MQ.game.load.image('btn-play', 'img/assets/btn-play.png');
-        MQ.game.load.image('btn-challenge', 'img/assets/btn-challenge.png');
         MQ.game.load.image('btn-findgame', 'img/assets/btn-findgame.png');
         MQ.game.load.image('btn-party', 'img/assets/btn-party.png');
         MQ.game.load.image('btn-practice', 'img/assets/btn-practice.png');
