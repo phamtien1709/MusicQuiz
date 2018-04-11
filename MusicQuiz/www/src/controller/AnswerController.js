@@ -13,7 +13,8 @@ class AnswerController {
             // console.log(this.answer);
             if ((this.answer == MQ.songChoiced.AnswerSong) || (this.answer == MQ.songChoiced.AnswerSinger)) {
                 this.answerText.addColor("#30FF77", 0);
-                if(MQ.indexSongChoiced.length > MQ.practiceModeScore){
+                console.log(MQ.practiceModeScore);
+                if(MQ.indexSongChoiced.length-1 > MQ.practiceModeScore){
                     const obj = MQ.achievementPractice.filter( ele => ele.answer == MQ.indexSongChoiced.length);
                     MQ.practiceModeScore = MQ.indexSongChoiced.length;
                     //update practiceModeScore
