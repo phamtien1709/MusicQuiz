@@ -78,8 +78,6 @@ function getChallengeByFriend(callback) {
                     for (i = 0; i < countInvite.length; i++) {
                         MQ.responseChallen.splice(countInvite[i] - i, 1);
                     }
-                    // console.log(MQ.responseChallen);
-                    // let dataFilter = data.filter(ele => ele._id.$oid == MQ.responseChallen[i].data.idData);
                     callback();
                 } else {
                     callback();

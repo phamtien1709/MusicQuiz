@@ -61,27 +61,27 @@ var menuState = {
         ticket.anchor.set(0.5, 1);
         ticket.scale.set(MQ.configs.SCALE);
         // text reward
-        var txt_heart = MQ.game.add.text(490 * MQ.configs.SCALE, 270 * MQ.configs.SCALE, `${MQ.heart}/20`, {
+        MQ.txt_heart = MQ.game.add.text(490 * MQ.configs.SCALE, 270 * MQ.configs.SCALE, `${MQ.heart}/20`, {
             font: `${35 * MQ.configs.SCALE}px Roboto`,
             fill: "pink",
             boundsAlignH: "center",
             boundsAlignV: "middle"
         });
-        txt_heart.anchor.set(0, 0.5);
-        var txt_diamond = MQ.game.add.text(700 * MQ.configs.SCALE, 270 * MQ.configs.SCALE, `${MQ.diamond}`, {
+        MQ.txt_heart.anchor.set(0, 0.5);
+        MQ.txt_diamond = MQ.game.add.text(700 * MQ.configs.SCALE, 270 * MQ.configs.SCALE, `${MQ.diamond}`, {
             font: `${35 * MQ.configs.SCALE}px Roboto`,
             fill: "orange",
             boundsAlignH: "center",
             boundsAlignV: "middle"
         });
-        txt_diamond.anchor.set(0, 0.5);
-        var txt_ticket = MQ.game.add.text(920 * MQ.configs.SCALE, 270 * MQ.configs.SCALE, `${MQ.ticket}`, {
+        MQ.txt_diamond.anchor.set(0, 0.5);
+        MQ.txt_ticket = MQ.game.add.text(920 * MQ.configs.SCALE, 270 * MQ.configs.SCALE, `${MQ.ticket}`, {
             font: `${35 * MQ.configs.SCALE}px Roboto`,
             fill: "green",
             boundsAlignH: "center",
             boundsAlignV: "middle"
         });
-        txt_ticket.anchor.set(0, 0.5);
+        MQ.txt_ticket.anchor.set(0, 0.5);
         //text turn
         var txt_yourTurn = MQ.game.add.text(110 * MQ.configs.SCALE, 810 * MQ.configs.SCALE, 'LƯỢT CỦA BẠN', {
             font: `${30 * MQ.configs.SCALE}px Roboto`,
@@ -100,6 +100,7 @@ var menuState = {
         //btn-invite
         MQ.btn_invite = MQ.game.add.button(930 * MQ.configs.SCALE, 800 * MQ.configs.SCALE, 'btn-invite');
         MQ.btn_invite.anchor.set(0.5);
+        MQ.btn_invite.scale.set(MQ.configs.SCALE);
         MQ.btn_invite.events.onInputDown.add(() => {
             FB.ui({
                 method: 'apprequests',
@@ -346,18 +347,25 @@ var menuState = {
         });
         // practice btn input
         btn_practice.events.onInputDown.add(() => {
-            getSongToPractice(() => {
-                MQ.practiceMode = true;
-                this.startLoad();
-                // MQ.game.state.start('practice');
-            });
+            if (MQ.heart > 0) {
+                getSongToPractice(() => {
+                    MQ.practiceMode = true;
+                    this.startLoad();
+                    subHeartOnPractice();
+                    // MQ.game.state.start('practice');
+                });
+            } else {
+                alert('Not enough heart! Wait for 3 minutes.');
+            }
         });
     },
     update: function () {
 
     },
     render: function () {
-
+        MQ.txt_diamond.setText(`${MQ.diamond}`);
+        MQ.txt_heart.setText(`${MQ.heart}/20`);
+        MQ.txt_ticket.setText(`${MQ.ticket}`);
     },
     startLoad: function () {
         if (MQ.practiceMode) {
@@ -385,9 +393,9 @@ var menuState = {
         // console.log('Load complete');
         if (!MQ.loadVar) {
             MQ.loadVar = true;
-            if(MQ.practiceMode){
+            if (MQ.practiceMode) {
                 MQ.game.state.start('practice');
-            } else{
+            } else {
                 MQ.game.state.start('play');
             }
             // MQ.game.load.stop();

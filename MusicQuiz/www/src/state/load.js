@@ -10,7 +10,7 @@ var loadState = {
         MQ.game.load.image('ava_70', 'img/assets/ava-default70x70.png');
         MQ.game.load.image('btn-next', 'img/assets/btn-next.png');
         MQ.game.load.image('btn-test', 'img/assets/btn-test.png');
-        MQ.game.load.image('btn-home', 'img/assets/btn-home.png');
+        // MQ.game.load.image('btn-home', 'img/assets/btn-home.png');
         MQ.game.load.image('btn-playing', 'img/assets/btn-playing.png');
         MQ.game.load.image('tween-time', 'img/assets/tween-time.png');
         MQ.game.load.image('answer-tab', 'img/assets/answer.png');
@@ -33,6 +33,9 @@ var loadState = {
         MQ.game.load.image('btn-setting', 'img/assets/Menu/btn-setting.png');
         MQ.game.load.image('popup-profile','img/assets/Menu/popup-profile.png');
         MQ.game.load.image('bg-practice', 'img/assets/Practice/bg-practice.png');
+        MQ.game.load.image('circle-active','img/assets/Practice/Circle_active.png');
+        MQ.game.load.image('map-practice','img/assets/Practice/Map.png');
+        MQ.game.load.image('btn-home', 'img/assets/Practice/btn_home.png');
         // menu
         MQ.game.load.image('bg-menu', 'img/assets/Menu/bg.png');
         MQ.game.load.image('bg-play', 'img/assets/Play/bg-play.png');

@@ -55,6 +55,8 @@ function getUserID(callback) {
                 MQ.albums = obj.albums;
                 MQ.practiceModeScore = obj.practiceModeScore;
                 MQ.practiceModeScore = obj.partyModeScore;
+                MQ.oidUserData = obj._id.$oid;
+                // console.log(MQ.oidUserData);
                 callback();
             }
         }

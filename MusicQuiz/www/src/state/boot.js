@@ -9,6 +9,140 @@ var bootState = {
   },
   create: function () {
     showConsole("Boot screen");
+    MQ.achievementPractice = [
+      {
+        "answer": 2,
+        "reward": 10
+      },
+      {
+        "answer": 5,
+        "reward": 15
+      },
+      {
+        "answer": 8,
+        "reward": 20
+      },
+      {
+        "answer": 12,
+        "reward": 30
+      },
+      {
+        "answer": 18,
+        "reward": 50
+      },
+      {
+        "answer": 25,
+        "reward": 100
+      },
+      {
+        "answer": 33,
+        "reward": 150
+      },
+      {
+        "answer": 45,
+        "reward": 200
+      },
+      {
+        "answer": 56,
+        "reward": 500
+      }
+    ];
+    //diamondposX 245,540,830
+    //diamondposY 430,630,830
+    MQ.posCirclePractice = [
+      {
+        "x": 246.5,
+        "y": 495
+      },
+      {
+        "x": 540,
+        "y": 495
+      },
+      {
+        "x": 831.5,
+        "y": 495
+      },
+      {
+        "x": 831.5,
+        "y": 695
+      },
+      {
+        "x": 540,
+        "y": 695
+      },
+      {
+        "x": 246.5,
+        "y": 695
+      },
+      {
+        "x": 246.5,
+        "y": 893
+      },
+      {
+        "x": 540,
+        "y": 893
+      },
+      {
+        "x": 831.5,
+        "y": 893
+      }
+    ];
+    MQ.posAchievementPractice = [
+      {
+        "diamondPosX": 245,
+        "diamondPosY": 430,
+        "answerPosX": 245,
+        "answerPosY": 555
+      },
+      {
+        "diamondPosX": 540,
+        "diamondPosY": 430,
+        "answerPosX": 540,
+        "answerPosY": 555
+      },
+      {
+        "diamondPosX": 830,
+        "diamondPosY": 430,
+        "answerPosX": 805,
+        "answerPosY": 555
+      },
+      {
+        "diamondPosX": 770,
+        "diamondPosY": 630,
+        "answerPosX": 830,
+        "answerPosY": 760
+      },
+      {
+        "diamondPosX": 540,
+        "diamondPosY": 630,
+        "answerPosX": 540,
+        "answerPosY": 760
+      },
+      {
+        "diamondPosX": 250,
+        "diamondPosY": 630,
+        "answerPosX": 295,
+        "answerPosY": 760
+      },
+      {
+        "diamondPosX": 345,
+        "diamondPosY": 835,
+        "answerPosX": 245,
+        "answerPosY": 960
+      },
+      {
+        "diamondPosX": 540,
+        "diamondPosY": 835,
+        "answerPosX": 540,
+        "answerPosY": 960
+      },
+      {
+        "diamondPosX": 830,
+        "diamondPosY": 835,
+        "answerPosX": 830,
+        "answerPosY": 960
+      },
+    ];
     MQ.game.stage.backgroundColor = "#ffffff";
     var bg = MQ.game.add.sprite(0, 0, 'bg');
     bg.width = MQ.game.width;

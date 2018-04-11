@@ -13,8 +13,18 @@ class AnswerController {
             // console.log(this.answer);
             if ((this.answer == MQ.songChoiced.AnswerSong) || (this.answer == MQ.songChoiced.AnswerSinger)) {
                 this.answerText.addColor("#30FF77", 0);
+                if(MQ.indexSongChoiced.length > MQ.practiceModeScore){
+                    const obj = MQ.achievementPractice.filter( ele => ele.answer == MQ.indexSongChoiced.length);
+                    MQ.practiceModeScore = MQ.indexSongChoiced.length;
+                    // console.log(obj[0]);
+                    if(obj[0] !== undefined){
+                        alert(`Your reward: ${obj[0].reward} diamond!`);
+                        MQ.diamond += obj[0].reward;
+                    }
+                }
             } else {
                 MQ.indexSongChoiced = [];
+                alert('You lose! Game will replay automatically.');
                 this.answerText.addColor("#ff0000", 0);
             }
             // console.log(MQ.indexSongChoiced);
