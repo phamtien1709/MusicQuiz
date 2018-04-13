@@ -44,7 +44,7 @@ var menuState = {
         ava.mask = maskAva;
         //
         var nameFB = MQ.game.add.text(400 * MQ.configs.SCALE, 120 * MQ.configs.SCALE, `${MQ.nameFB}`, {
-            font: `${105 / MQ.configs.DPR}px Roboto`,
+            font: `${80 / MQ.configs.DPR}px Roboto`,
             fill: "black",
             boundsAlignH: "center",
             boundsAlignV: "middle"
@@ -183,12 +183,13 @@ var menuState = {
             // friend_avaInstalled.scale.set(MQ.configs.SCALE);
             testMaskInstalled.addChild(friend_avaInstalled);
             let nameFriendInstalled = MQ.game.add.text(300, 100, `${MQ.installed_friend[i].name}`, {
-                font: `${105 / MQ.configs.DPR}px Roboto`,
+                font: `${45 / MQ.configs.DPR}px Roboto`,
                 fill: "black",
                 boundsAlignH: "center",
                 boundsAlignV: "middle"
             });
             nameFriendInstalled.anchor.set(0, 0.5);
+            nameFriendInstalled.scale.set(1/MQ.configs.SCALE);
             // console.log(nameFriendInstalled);
             let btn_play = MQ.game.add.button(950, 100, 'btn-playing');
             btn_play.anchor.set(0.5);
@@ -210,6 +211,7 @@ var menuState = {
                     "time": [],
                     "score": 0
                 };
+                MQ.sound.stop(MQ.id1);
                 MQ.idFriendChallenge = idFriend;
                 MQ.nameFriendChallenge = nameFriendInstalled._text;
                 MQ.scoreYour = 0;
@@ -293,6 +295,7 @@ var menuState = {
                         "time": [],
                         "score": 0
                     };
+                    MQ.sound.stop(MQ.id1);
                     MQ.dataChooseToChall = MQ.dataChallenge[btn_play.value.value];
                     getSongToChallenge(() => {
                         getSongToChallenge(() => {
@@ -349,6 +352,7 @@ var menuState = {
         // practice btn input
         btn_practice.events.onInputDown.add(() => {
             if (MQ.heart > 0) {
+                MQ.sound.stop(MQ.id1);
                 getSongToPractice(() => {
                     MQ.practiceMode = true;
                     this.startLoad();
@@ -359,6 +363,9 @@ var menuState = {
                 alert('Not enough heart! Wait for 3 minutes.');
             }
         });
+        MQ.id1 = MQ.sound.play();
+        MQ.sound.fade(0, 0.7, 10000, MQ.id1);
+        // var id2 = MQ.sound.play();
     },
     update: function () {
 

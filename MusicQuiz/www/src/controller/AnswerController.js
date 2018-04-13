@@ -14,13 +14,14 @@ class AnswerController {
             if ((this.answer == MQ.songChoiced.AnswerSong) || (this.answer == MQ.songChoiced.AnswerSinger)) {
                 this.answerText.addColor("#30FF77", 0);
                 // console.log(MQ.practiceModeScore);
-                if(MQ.indexSongChoiced.length-1 > MQ.practiceModeScore){
-                    const obj = MQ.achievementPractice.filter( ele => ele.answer == MQ.indexSongChoiced.length);
+                alert(`${MQ.indexSongChoiced.length} right answer!`);
+                if (MQ.indexSongChoiced.length - 1 > MQ.practiceModeScore) {
+                    const obj = MQ.achievementPractice.filter(ele => ele.answer == MQ.indexSongChoiced.length);
                     MQ.practiceModeScore = MQ.indexSongChoiced.length;
                     //update practiceModeScore
-                        updatePracticeMode(MQ.practiceModeScore);
+                    updatePracticeMode(MQ.practiceModeScore);
                     // console.log(obj[0]);
-                    if(obj[0] !== undefined){
+                    if (obj[0] !== undefined) {
                         alert(`Your reward: ${obj[0].reward} diamond!`);
                         MQ.diamond += obj[0].reward;
                         // ajax diamond
@@ -35,7 +36,7 @@ class AnswerController {
             // console.log(MQ.indexSongChoiced);
             setTimeout(() => {
                 getSongToPractice(() => {
-                    MQ.inThisQuiz= false;
+                    MQ.inThisQuiz = false;
                     practiceState.startLoad();
                 });
             }, 3000);
@@ -45,7 +46,7 @@ class AnswerController {
         });
         if (this.configs.answer.typeAnswer == "song") {
             this.answerText = MQ.game.add.text(0, 0, `${this.configs.answer.song}`, {
-                font: `${150/MQ.configs.DPR}px Roboto`,
+                font: `${150 / MQ.configs.DPR}px Roboto`,
                 fill: "black",
                 boundsAlignH: "center",
                 boundsAlignV: "middle"
@@ -55,7 +56,7 @@ class AnswerController {
             this.answer = this.configs.answer.song;
         } else {
             this.answerText = MQ.game.add.text(0, 0, `${this.configs.answer.singer}`, {
-                font: `${150/MQ.configs.DPR}px Roboto`,
+                font: `${150 / MQ.configs.DPR}px Roboto`,
                 fill: "black",
                 boundsAlignH: "center",
                 boundsAlignV: "middle"
@@ -73,7 +74,7 @@ class AnswerController {
             } else {
                 this.sprite.alpha = 0.5;
                 if ((this.answer == MQ.songChoiced.AnswerSong) || (this.answer == MQ.songChoiced.AnswerSinger)) {
-                    if(MQ.inThisQuiz){
+                    if (MQ.inThisQuiz) {
                         this.answerText.addColor("#30FF77", 0);
                     }
                 }

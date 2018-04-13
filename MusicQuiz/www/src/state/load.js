@@ -33,7 +33,12 @@ var loadState = {
         // menu
         MQ.game.load.image('bg-menu', 'img/assets/Menu/bg.png');
         MQ.game.load.image('bg-play', 'img/assets/Play/bg-play.png');
-
+        MQ.sound = new Howl({
+            src: ['./img/assets/mp3Song/edm.mp3'],
+            onload: ()=>{
+                console.log('Load done!');
+            }
+        });
     },
     create: function () {
         showConsole('Load Screen');
