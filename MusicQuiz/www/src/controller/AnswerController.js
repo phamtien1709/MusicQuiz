@@ -13,7 +13,7 @@ class AnswerController {
             // console.log(this.answer);
             if ((this.answer == MQ.songChoiced.AnswerSong) || (this.answer == MQ.songChoiced.AnswerSinger)) {
                 this.answerText.addColor("#30FF77", 0);
-                console.log(MQ.practiceModeScore);
+                // console.log(MQ.practiceModeScore);
                 if(MQ.indexSongChoiced.length-1 > MQ.practiceModeScore){
                     const obj = MQ.achievementPractice.filter( ele => ele.answer == MQ.indexSongChoiced.length);
                     MQ.practiceModeScore = MQ.indexSongChoiced.length;
@@ -34,7 +34,6 @@ class AnswerController {
             }
             // console.log(MQ.indexSongChoiced);
             setTimeout(() => {
-                MQ.songChoicedPlay.stop();
                 getSongToPractice(() => {
                     MQ.inThisQuiz= false;
                     practiceState.startLoad();
@@ -46,7 +45,7 @@ class AnswerController {
         });
         if (this.configs.answer.typeAnswer == "song") {
             this.answerText = MQ.game.add.text(0, 0, `${this.configs.answer.song}`, {
-                font: `60px Roboto`,
+                font: `${150/MQ.configs.DPR}px Roboto`,
                 fill: "black",
                 boundsAlignH: "center",
                 boundsAlignV: "middle"
@@ -56,7 +55,7 @@ class AnswerController {
             this.answer = this.configs.answer.song;
         } else {
             this.answerText = MQ.game.add.text(0, 0, `${this.configs.answer.singer}`, {
-                font: `60px Roboto`,
+                font: `${150/MQ.configs.DPR}px Roboto`,
                 fill: "black",
                 boundsAlignH: "center",
                 boundsAlignV: "middle"

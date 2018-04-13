@@ -21,7 +21,7 @@ var practiceState = {
         // mask ava in front  of ava sprite 
         var maskAva = MQ.game.add.graphics(0, 0);
         maskAva.beginFill(0xffffff);
-        maskAva.drawCircle(MQ.game.width / 2, 182 * MQ.configs.SCALE, Math.floor(232 * MQ.configs.SCALE));
+        maskAva.drawCircle(MQ.game.width / 2, 182 * MQ.configs.SCALE, 200 * MQ.configs.SCALE);
         maskAva.anchor.set(0.5);
         //fsf
         var ava = MQ.game.add.button(MQ.game.width / 2, 182 * MQ.configs.SCALE, 'ava_fb');
@@ -30,7 +30,7 @@ var practiceState = {
         ava.mask = maskAva;
         //
         var nameFB = MQ.game.add.text(MQ.game.width / 2, 340 * MQ.configs.SCALE, `${MQ.nameFB}`, {
-            font: `${60 * MQ.configs.SCALE}px Roboto`,
+            font: `${70/MQ.configs.DPR}px Roboto`,
             fill: "white",
             boundsAlignH: "center",
             boundsAlignV: "middle"
@@ -38,10 +38,11 @@ var practiceState = {
         nameFB.anchor.set(0.5);
         var map = MQ.game.add.sprite(MQ.game.world.centerX, 693.5 * MQ.configs.SCALE, 'map-practice');
         map.anchor.set(0.5);
+        map.scale.set(MQ.configs.SCALE);
         var btn_home = MQ.game.add.button(142 * MQ.configs.SCALE, 112 * MQ.configs.SCALE, 'btn-home');
         btn_home.anchor.set(0.5);
         btn_home.scale.set(MQ.configs.SCALE);
-        btn_home.events.onInputDown.add(()=>{
+        btn_home.events.onInputDown.add(() => {
             alert('You really want to come Menu. OK to confirm!');
             MQ.indexSongChoiced = [];
             MQ.songChoicedPlay.stop();
@@ -140,10 +141,11 @@ var practiceState = {
         showConsole(`File Complete: ${progress}% - ${totalLoaded} out of ${totalFiles}`);
     },
     loadComplete: function () {
+        MQ.songChoicedPlay.stop();
         MQ.game.state.restart();
     },
     CreateAnswerAndDiamondText: function (answerPosX, answerPosY, diamondPosX, diamondPosY, valAnswer, valReward, posCircleX, posCircleY) {
-        const diamond = MQ.game.add.sprite((diamondPosX + 10) * MQ.configs.SCALE, diamondPosY * MQ.configs.SCALE, 'diamond');
+        const diamond = MQ.game.add.sprite((diamondPosX + 10) * MQ.configs.SCALE, (diamondPosY-10) * MQ.configs.SCALE, 'diamond');
         diamond.anchor.set(0, 0.5);
         diamond.scale.set(MQ.configs.SCALE);
         const txt_diamond = MQ.game.add.text((diamondPosX) * MQ.configs.SCALE, diamondPosY * MQ.configs.SCALE, `${valReward}`, {

@@ -26,14 +26,14 @@ var playState = {
             ava.anchor.set(0.5);
             ava.scale.set(MQ.configs.SCALE);
             var nameFB = MQ.game.add.text(260*MQ.configs.SCALE, 400*MQ.configs.SCALE, `You`, {
-                font: "40px Roboto",
+                font: `${120/MQ.configs.DPR}px Roboto`,
                 fill: "white",
                 boundsAlignH: "center",
                 boundsAlignV: "middle"
             });
             nameFB.anchor.set(0.5);
             MQ.scoreText = MQ.game.add.text(MQ.game.width / 2, 490*MQ.configs.SCALE, `${MQ.score}`, {
-                font: "30px Roboto",
+                font: `${90/MQ.configs.DPR}px Roboto`,
                 fill: "yellow",
                 boundsAlignH: "center",
                 boundsAlignV: "middle"
@@ -44,7 +44,7 @@ var playState = {
             avaOpp.anchor.set(0.5);
             avaOpp.scale.set(MQ.configs.SCALE);
             var nameFBOpp = MQ.game.add.text(MQ.game.width - 260*MQ.configs.SCALE, 400*MQ.configs.SCALE, `${MQ.nameFriendChallenge}`, {
-                font: "40px Roboto",
+                font: `${120/MQ.configs.DPR}px Roboto`,
                 fill: "white",
                 boundsAlignH: "center",
                 boundsAlignV: "middle"
@@ -125,14 +125,14 @@ var playState = {
             ava.anchor.set(0.5);
             ava.scale.set(MQ.configs.SCALE);
             var nameFB = MQ.game.add.text(260*MQ.configs.SCALE, 400*MQ.configs.SCALE, `You`, {
-                font: "40px Roboto",
+                font: `${120/MQ.configs.DPR}px Roboto`,
                 fill: "white",
                 boundsAlignH: "center",
                 boundsAlignV: "middle"
             });
             nameFB.anchor.set(0.5);
             MQ.scoreText = MQ.game.add.text(MQ.game.width / 2, 490*MQ.configs.SCALE, `${MQ.score}`, {
-                font: "30px Roboto",
+                font: `${90/MQ.configs.DPR}px Roboto`,
                 fill: "yellow",
                 boundsAlignH: "center",
                 boundsAlignV: "middle"
@@ -143,14 +143,14 @@ var playState = {
             avaOpp.anchor.set(0.5);
             avaOpp.scale.set(MQ.configs.SCALE);
             var nameFBOpp = MQ.game.add.text(MQ.game.width - 260*MQ.configs.SCALE, 400*MQ.configs.SCALE, `${MQ.nameFriendChallenge}`, {
-                font: "40px Roboto",
+                font: `${120/MQ.configs.DPR}px Roboto`,
                 fill: "white",
                 boundsAlignH: "center",
                 boundsAlignV: "middle"
             });
             nameFBOpp.anchor.set(0.5);
             MQ.scoreTextOpp = MQ.game.add.text(MQ.game.width - 260*MQ.configs.SCALE, 460*MQ.configs.SCALE, `${MQ.scoreOpp}`, {
-                font: "30px Roboto",
+                font: `${90/MQ.configs.DPR}px Roboto`,
                 fill: "white",
                 boundsAlignH: "center",
                 boundsAlignV: "middle"
@@ -289,7 +289,7 @@ var playState = {
         // console.log(MQ.songRandomChoicedList[MQ.countQuiz][index]);
         if (typeAnswer == "song") {
             MQ.answerTextA = MQ.game.add.text(0, 0, `${MQ.songRandomChoicedList[MQ.countQuiz][index].song}`, {
-                font: `60px Roboto`,
+                font: `${180/MQ.configs.DPR}px Roboto`,
                 fill: "black",
                 boundsAlignH: "center",
                 boundsAlignV: "middle"
@@ -301,7 +301,7 @@ var playState = {
         }
         else if (typeAnswer == "singer") {
             MQ.answerTextA = MQ.game.add.text(0, 0, `${MQ.songRandomChoicedList[MQ.countQuiz][index].singer}`, {
-                font: `60px Roboto`,
+                font: `${180/MQ.configs.DPR}px Roboto`,
                 fill: "black",
                 boundsAlignH: "center",
                 boundsAlignV: "middle"
@@ -386,7 +386,7 @@ var playState = {
         );
         if (typeAnswer == "song") {
             MQ.answerTextB = MQ.game.add.text(0, 0, `${MQ.songRandomChoicedList[MQ.countQuiz][index].song}`, {
-                font: `60px Roboto`,
+                font: `${180/MQ.configs.DPR}px Roboto`,
                 fill: "black",
                 boundsAlignH: "center",
                 boundsAlignV: "middle"
@@ -398,7 +398,7 @@ var playState = {
         }
         else if (typeAnswer == "singer") {
             MQ.answerTextB = MQ.game.add.text(0, 0, `${MQ.songRandomChoicedList[MQ.countQuiz][index].singer}`, {
-                font: `60px Roboto`,
+                font: `${180/MQ.configs.DPR}px Roboto`,
                 fill: "black",
                 boundsAlignH: "center",
                 boundsAlignV: "middle"
@@ -481,7 +481,7 @@ var playState = {
         );
         if (typeAnswer == "song") {
             MQ.answerTextC = MQ.game.add.text(0, 0, `${MQ.songRandomChoicedList[MQ.countQuiz][index].song}`, {
-                font: `60px Roboto`,
+                font: `${180/MQ.configs.DPR}px Roboto`,
                 fill: "black",
                 boundsAlignH: "center",
                 boundsAlignV: "middle"
@@ -493,7 +493,7 @@ var playState = {
         }
         else if (typeAnswer == "singer") {
             MQ.answerTextC = MQ.game.add.text(0, 0, `${MQ.songRandomChoicedList[MQ.countQuiz][index].singer}`, {
-                font: `60px Roboto`,
+                font: `${180/MQ.configs.DPR}px Roboto`,
                 fill: "black",
                 boundsAlignH: "center",
                 boundsAlignV: "middle"
@@ -575,7 +575,7 @@ var playState = {
         );
         if (typeAnswer == "song") {
             MQ.answerTextD = MQ.game.add.text(0, 0, `${MQ.songRandomChoicedList[MQ.countQuiz][index].song}`, {
-                font: `60px Roboto`,
+                font: `${180/MQ.configs.DPR}px Roboto`,
                 fill: "black",
                 boundsAlignH: "center",
                 boundsAlignV: "middle"
@@ -587,7 +587,7 @@ var playState = {
         }
         else if (typeAnswer == "singer") {
             MQ.answerTextD = MQ.game.add.text(0, 0, `${MQ.songRandomChoicedList[MQ.countQuiz][index].singer}`, {
-                font: `60px Roboto`,
+                font: `${180/MQ.configs.DPR}px Roboto`,
                 fill: "black",
                 boundsAlignH: "center",
                 boundsAlignV: "middle"
@@ -624,7 +624,7 @@ var playState = {
         });
         if (typeAnswer == "song") {
             var answerText = MQ.game.add.text(0, 0, `${MQ.songRandomChoicedList[MQ.countQuiz][index].song}`, {
-                font: `60px Roboto`,
+                font: `${180/MQ.configs.DPR}px Roboto`,
                 fill: "black",
                 boundsAlignH: "center",
                 boundsAlignV: "middle"
@@ -637,7 +637,7 @@ var playState = {
         }
         else if (typeAnswer == "singer") {
             var answerText = MQ.game.add.text(0, 0, `${MQ.songRandomChoicedList[MQ.countQuiz][index].singer}`, {
-                font: `60px Roboto`,
+                font: `${180/MQ.configs.DPR}px Roboto`,
                 fill: "black",
                 boundsAlignH: "center",
                 boundsAlignV: "middle"
@@ -656,7 +656,7 @@ var playState = {
         MQ.score += Math.floor((11 - timeAnswerToSecond) * 100 * (Math.pow(11 - timeAnswerToSecond, (MQ.streak - 1) / 4)));
         MQ.streak++;
         var textTimeAnswer = MQ.game.add.text(MQ.game.width / 2, MQ.game.height * (120 / 128), `${timeAnswerToSecond}s`, {
-            font: `60px Roboto`,
+            font: `${180/MQ.configs.DPR}px Roboto`,
             fill: "black",
             boundsAlignH: "center",
             boundsAlignV: "middle"

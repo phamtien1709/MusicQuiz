@@ -1,5 +1,11 @@
 // Initialise Phaser
 var width;
+var dpr;
+if(window.devicePixelRatio == 1){
+    dpr = 2.2;
+} else {
+    dpr = 1;
+}
 if(screen.width>1080){
     width = 1080;
 }else{
@@ -12,7 +18,8 @@ MQ.configs = {
     GAME_WIDTH: width,
     GAME_HEIGHT: width/9*16,
     SCALE: width/1080,
-    SONG_NUMBER : 51
+    SONG_NUMBER : 51,
+    DPR: window.devicePixelRatio * dpr
 };
 window.onload = function () {
     MQ.game = new Phaser.Game(MQ.configs.GAME_WIDTH, MQ.configs.GAME_HEIGHT, Phaser.CANVAS, '', null, false, false);

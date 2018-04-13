@@ -2,7 +2,7 @@ var menuState = {
     preload: function () {
         MQ.game.load.image('tab-friend', 'img/assets/tab-friend.png');
         for (i = 0; i < MQ.installed_friend.length; i++) {
-            MQ.game.load.image(`'friend${i}'`, `https://graph.facebook.com/${MQ.installed_friend[i].id}/picture?width=${Math.floor(150 * MQ.configs.SCALE)}`);
+            MQ.game.load.image(`'friend${i}'`, `https://graph.facebook.com/${MQ.installed_friend[i].id}/picture?width=150`);
         };
         if (MQ.responseChallen !== undefined) {
             for (i = 0; i < MQ.responseChallen.length; i++) {
@@ -35,7 +35,7 @@ var menuState = {
         // mask ava in front  of ava sprite 
         var maskAva = MQ.game.add.graphics(0, 0);
         maskAva.beginFill(0xffffff);
-        maskAva.drawCircle(200 * MQ.configs.SCALE, 182 * MQ.configs.SCALE, Math.floor(232 * MQ.configs.SCALE));
+        maskAva.drawCircle(200 * MQ.configs.SCALE, 182 * MQ.configs.SCALE, 200 * MQ.configs.SCALE);
         maskAva.anchor.set(0.5);
         //fsf
         var ava = MQ.game.add.button(200 * MQ.configs.SCALE, 182 * MQ.configs.SCALE, 'ava_fb');
@@ -44,7 +44,7 @@ var menuState = {
         ava.mask = maskAva;
         //
         var nameFB = MQ.game.add.text(400 * MQ.configs.SCALE, 120 * MQ.configs.SCALE, `${MQ.nameFB}`, {
-            font: `${60 * MQ.configs.SCALE}px Roboto`,
+            font: `${105 / MQ.configs.DPR}px Roboto`,
             fill: "black",
             boundsAlignH: "center",
             boundsAlignV: "middle"
@@ -55,28 +55,28 @@ var menuState = {
         heart.anchor.set(0.5, 1);
         heart.scale.set(MQ.configs.SCALE);
         var diamond = MQ.game.add.sprite(647 * MQ.configs.SCALE, 280 * MQ.configs.SCALE, 'diamond');
-        diamond.anchor.set(0.5, 1);
+        diamond.anchor.set(0, 1);
         diamond.scale.set(MQ.configs.SCALE);
         var ticket = MQ.game.add.sprite(855 * MQ.configs.SCALE, 280 * MQ.configs.SCALE, 'ticket');
         ticket.anchor.set(0.5, 1);
         ticket.scale.set(MQ.configs.SCALE);
         // text reward
         MQ.txt_heart = MQ.game.add.text(490 * MQ.configs.SCALE, 270 * MQ.configs.SCALE, `${MQ.heart}/20`, {
-            font: `${35 * MQ.configs.SCALE}px Roboto`,
+            font: `${45 / MQ.configs.DPR}px Roboto`,
             fill: "pink",
             boundsAlignH: "center",
             boundsAlignV: "middle"
         });
         MQ.txt_heart.anchor.set(0, 0.5);
         MQ.txt_diamond = MQ.game.add.text(700 * MQ.configs.SCALE, 270 * MQ.configs.SCALE, `${MQ.diamond}`, {
-            font: `${35 * MQ.configs.SCALE}px Roboto`,
+            font: `${45 / MQ.configs.DPR}px Roboto`,
             fill: "orange",
             boundsAlignH: "center",
             boundsAlignV: "middle"
         });
         MQ.txt_diamond.anchor.set(0, 0.5);
         MQ.txt_ticket = MQ.game.add.text(920 * MQ.configs.SCALE, 270 * MQ.configs.SCALE, `${MQ.ticket}`, {
-            font: `${35 * MQ.configs.SCALE}px Roboto`,
+            font: `${45 / MQ.configs.DPR}px Roboto`,
             fill: "green",
             boundsAlignH: "center",
             boundsAlignV: "middle"
@@ -84,14 +84,14 @@ var menuState = {
         MQ.txt_ticket.anchor.set(0, 0.5);
         //text turn
         var txt_yourTurn = MQ.game.add.text(110 * MQ.configs.SCALE, 810 * MQ.configs.SCALE, 'LƯỢT CỦA BẠN', {
-            font: `${30 * MQ.configs.SCALE}px Roboto`,
+            font: `${45 / MQ.configs.DPR}px Roboto`,
             fill: "#8a8a8a",
             boundsAlignH: "center",
             boundsAlignV: "middle"
         });
         txt_yourTurn.anchor.set(0, 0.5);
         var txt_theirTurn = MQ.game.add.text(110 * MQ.configs.SCALE, 1310 * MQ.configs.SCALE, 'CHỌN ĐỐI THỦ', {
-            font: `${30 * MQ.configs.SCALE}px Roboto`,
+            font: `${45 / MQ.configs.DPR}px Roboto`,
             fill: "#8a8a8a",
             boundsAlignH: "center",
             boundsAlignV: "middle"
@@ -177,21 +177,22 @@ var menuState = {
         for (i = 0; i < MQ.installed_friend.length; i++) {
             // this.createTabFriennd();
             let testMaskInstalled = MQ.game.add.sprite(0, (i * 200) * (MQ.configs.SCALE), 'tab-friend');
-            let friend_avaInstalled = MQ.game.add.sprite(150 * MQ.configs.SCALE, 100 * MQ.configs.SCALE, `'friend${i}'`);
+            testMaskInstalled.scale.set(MQ.configs.SCALE);
+            let friend_avaInstalled = MQ.game.add.sprite(150, 100, `'friend${i}'`);
             friend_avaInstalled.anchor.set(0.5);
-            friend_avaInstalled.scale.set(MQ.configs.SCALE);
+            // friend_avaInstalled.scale.set(MQ.configs.SCALE);
             testMaskInstalled.addChild(friend_avaInstalled);
-            let nameFriendInstalled = MQ.game.add.text(300 * MQ.configs.SCALE, 100 * MQ.configs.SCALE, `${MQ.installed_friend[i].name}`, {
-                font: `${40 * MQ.configs.SCALE}px Roboto`,
+            let nameFriendInstalled = MQ.game.add.text(300, 100, `${MQ.installed_friend[i].name}`, {
+                font: `${105 / MQ.configs.DPR}px Roboto`,
                 fill: "black",
                 boundsAlignH: "center",
                 boundsAlignV: "middle"
             });
             nameFriendInstalled.anchor.set(0, 0.5);
             // console.log(nameFriendInstalled);
-            let btn_play = MQ.game.add.button(950 * MQ.configs.SCALE, 100 * MQ.configs.SCALE, 'btn-playing');
+            let btn_play = MQ.game.add.button(950, 100, 'btn-playing');
             btn_play.anchor.set(0.5);
-            btn_play.scale.set(MQ.configs.SCALE);
+            // btn_play.scale.set(MQ.configs.SCALE);
             testMaskInstalled.addChild(btn_play);
             testMaskInstalled.addChild(nameFriendInstalled);
             MQ.grapInstalled.addChild(testMaskInstalled);
@@ -250,7 +251,7 @@ var menuState = {
                 // friend_avaChallenge.scale.set(1/MQ.configs.SCALE);
                 testMaskChallenge.addChild(friend_avaChallenge);
                 let nameFriendChallenge = MQ.game.add.text(300 * MQ.configs.SCALE, 50 * MQ.configs.SCALE, `${MQ.responseChallen[i].from.name}`, {
-                    font: `${40 * MQ.configs.SCALE}px Roboto`,
+                    font: `${40 / MQ.configs.DPR}px Roboto`,
                     fill: "black",
                     boundsAlignH: "center",
                     boundsAlignV: "middle"
@@ -262,7 +263,7 @@ var menuState = {
                 btn_play.scale.set(MQ.configs.SCALE);
                 testMaskChallenge.addChild(btn_play);
                 let textScore = MQ.game.add.text(700 * MQ.configs.SCALE, 50 * MQ.configs.SCALE, `${MQ.responseChallen[i].data.scoreTheir} : ${MQ.responseChallen[i].data.scoreYour}`, {
-                    font: `${40 * MQ.configs.SCALE}px Roboto`,
+                    font: `${40 / MQ.configs.DPR}px Roboto`,
                     fill: "black",
                     boundsAlignH: "center",
                     boundsAlignV: "middle"

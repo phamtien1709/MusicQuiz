@@ -4,7 +4,7 @@ var loadState = {
         MQ.game.time.advancedTiming = true;
         MQ.game.stage.disableVisibilityChange = true;
         MQ.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-        MQ.game.load.image('ava_fb', `https://graph.facebook.com/${MQ.checkId}/picture?width=${Math.floor(232*MQ.configs.SCALE)}`);
+        MQ.game.load.image('ava_fb', `https://graph.facebook.com/${MQ.checkId}/picture?width=200`);
         MQ.game.load.image('ava_default', 'img/assets/ava-default.png');
         MQ.game.load.image('ava_150', 'img/assets/ava-default150x150.png');
         MQ.game.load.image('ava_70', 'img/assets/ava-default70x70.png');
@@ -41,7 +41,7 @@ var loadState = {
         console.log(MQ.checkId);
         console.log(MQ.accessToken);
         var loading = MQ.game.add.text(MQ.game.width / 2, MQ.game.height / 2 - 100, 'Loading...',{
-            font: `${120 * MQ.configs.SCALE}px Roboto`,
+            font: `${150/MQ.configs.DPR}px Roboto`,
             fill: "black",
             boundsAlignH: "center",
             boundsAlignV: "middle"
