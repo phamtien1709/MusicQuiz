@@ -46,22 +46,24 @@ class AnswerController {
         });
         if (this.configs.answer.typeAnswer == "song") {
             this.answerText = MQ.game.add.text(0, 0, `${this.configs.answer.song}`, {
-                font: `${150 / MQ.configs.DPR}px Roboto`,
+                font: `${70 / MQ.configs.DPR}px Roboto`,
                 fill: "black",
                 boundsAlignH: "center",
                 boundsAlignV: "middle"
             });
             this.answerText.anchor.set(0.5);
+            this.answerText.scale.set(1/MQ.configs.SCALE);
             this.sprite.addChild(this.answerText);
             this.answer = this.configs.answer.song;
         } else {
             this.answerText = MQ.game.add.text(0, 0, `${this.configs.answer.singer}`, {
-                font: `${150 / MQ.configs.DPR}px Roboto`,
+                font: `${70 / MQ.configs.DPR}px Roboto`,
                 fill: "black",
                 boundsAlignH: "center",
                 boundsAlignV: "middle"
             });
             this.answerText.anchor.set(0.5);
+            this.answerText.scale.set(1/MQ.configs.SCALE);
             this.sprite.addChild(this.answerText);
             this.answer = this.configs.answer.singer;
         }

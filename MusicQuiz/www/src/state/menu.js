@@ -1,13 +1,18 @@
 var menuState = {
     preload: function () {
-        MQ.game.load.image('tab-friend', 'img/assets/tab-friend.png');
-        for (i = 0; i < MQ.installed_friend.length; i++) {
-            MQ.game.load.image(`'friend${i}'`, `https://graph.facebook.com/${MQ.installed_friend[i].id}/picture?width=150`);
-        };
-        if (MQ.responseChallen !== undefined) {
-            for (i = 0; i < MQ.responseChallen.length; i++) {
-                // console.log(MQ.responseChallen[i].from.id);
-                MQ.game.load.image(`'friend${MQ.installed_friend.length + i}'`, `https://graph.facebook.com/${MQ.responseChallen[i].from.id}/picture?width=${Math.floor(150 * MQ.configs.SCALE)}`)
+        MQ.game.load.onLoadStart.removeAll();
+        MQ.game.load.onFileComplete.removeAll();
+        MQ.game.load.onLoadComplete.removeAll();
+        if (MQ.loadFirst == undefined) {
+            MQ.game.load.image('tab-friend', 'img/assets/tab-friend.png');
+            for (i = 0; i < MQ.installed_friend.length; i++) {
+                MQ.game.load.image(`'friend${i}'`, `https://graph.facebook.com/${MQ.installed_friend[i].id}/picture?width=150`);
+            };
+            if (MQ.responseChallen !== undefined) {
+                for (i = 0; i < MQ.responseChallen.length; i++) {
+                    // console.log(MQ.responseChallen[i].from.id);
+                    MQ.game.load.image(`'friend${MQ.installed_friend.length + i}'`, `https://graph.facebook.com/${MQ.responseChallen[i].from.id}/picture?width=150`)
+                }
             }
         }
     },
@@ -28,9 +33,9 @@ var menuState = {
         bg.height = MQ.game.height;
         //load
         MQ.loadVar = false;
-        MQ.game.load.onLoadStart.add(this.loadStart, this);
-        MQ.game.load.onFileComplete.add(this.fileComplete, this);
-        MQ.game.load.onLoadComplete.add(this.loadComplete, this);
+        menuState.load.onLoadStart.add(this.loadStart, this);
+        menuState.load.onFileComplete.add(this.fileComplete, this);
+        menuState.load.onLoadComplete.add(this.loadComplete, this);
         //
         // mask ava in front  of ava sprite 
         var maskAva = MQ.game.add.graphics(0, 0);
@@ -189,7 +194,7 @@ var menuState = {
                 boundsAlignV: "middle"
             });
             nameFriendInstalled.anchor.set(0, 0.5);
-            nameFriendInstalled.scale.set(1/MQ.configs.SCALE);
+            nameFriendInstalled.scale.set(1 / MQ.configs.SCALE);
             // console.log(nameFriendInstalled);
             let btn_play = MQ.game.add.button(950, 100, 'btn-playing');
             btn_play.anchor.set(0.5);
@@ -200,7 +205,6 @@ var menuState = {
             MQ.testMaskInstalled += testMaskInstalled.height;
             let idFriend = MQ.installed_friend[i].id;
             btn_play.events.onInputDown.add(() => {
-                btn_play.input.enabled = false;
                 MQ.score = 0;
                 MQ.correctList = [];
                 MQ.wrongList = [];
@@ -211,23 +215,12 @@ var menuState = {
                     "time": [],
                     "score": 0
                 };
-                MQ.sound.stop(MQ.id1);
                 MQ.idFriendChallenge = idFriend;
                 MQ.nameFriendChallenge = nameFriendInstalled._text;
-                MQ.scoreYour = 0;
-                MQ.scoreTheir = 0;
-                MQ.isChallenged = true;
-                getSongToQuiz(() => {
-                    getSongToQuiz(() => {
-                        getSongToQuiz(() => {
-                            getSongToQuiz(() => {
-                                getSongToQuiz(() => {
-                                    this.startLoad();
-                                })
-                            })
-                        })
-                    })
-                });
+                var tween_challPlaylist = MQ.game.add.tween(this.challPlaylistGroup).to({
+                    x: 0
+                }, 500, "Linear");
+                tween_challPlaylist.start();
             });
         }
         // MQ.grapInstalled.kill();
@@ -279,7 +272,7 @@ var menuState = {
                 testMaskChallenge.addChild(textScore);
                 // var indexOfData = i;
                 btn_play.events.onInputDown.add(() => {
-                    btn_play.input.enabled = false;
+                    // btn_play.input.enabled = false;
                     MQ.idFriendChallenge = btn_play.value.data.from.id;
                     MQ.nameFriendChallenge = btn_play.value.data.from.name;
                     MQ.linkDB = btn_play.value.linkDB;
@@ -295,7 +288,7 @@ var menuState = {
                         "time": [],
                         "score": 0
                     };
-                    MQ.sound.stop(MQ.id1);
+                    MQ.sound.stop();
                     MQ.dataChooseToChall = MQ.dataChallenge[btn_play.value.value];
                     getSongToChallenge(() => {
                         getSongToChallenge(() => {
@@ -352,20 +345,201 @@ var menuState = {
         // practice btn input
         btn_practice.events.onInputDown.add(() => {
             if (MQ.heart > 0) {
-                MQ.sound.stop(MQ.id1);
-                getSongToPractice(() => {
-                    MQ.practiceMode = true;
-                    this.startLoad();
-                    subHeartOnPractice();
-                    // MQ.game.state.start('practice');
-                });
+                btn_practice.inputEnabled = false;
+                btn_findgame.inputEnabled = false;
+                btn_party.inputEnabled = false;
+                this.popupPlaylist.revive();
+                // MQ.sound.stop();
+                // getSongToPractice(() => {
+                //     MQ.practiceMode = true;
+                //     this.startLoad();
+                //     subHeartOnPractice();
+                //     // MQ.game.state.start('practice');
+                // });
             } else {
                 alert('Not enough heart! Wait for 3 minutes.');
             }
         });
-        MQ.id1 = MQ.sound.play();
-        MQ.sound.fade(0, 0.7, 10000, MQ.id1);
+        MQ.sound.play();
+        MQ.sound.fade(0, 0.7, 10000);
+        // console.log(MQ.sound);
         // var id2 = MQ.sound.play();
+        // popup popup
+        this.popupPlaylist = MQ.game.add.sprite(MQ.game.world.centerX, MQ.game.world.centerY, 'popup-playlist');
+        this.popupPlaylist.anchor.set(0.5);
+        this.popupPlaylist.scale.set(MQ.configs.SCALE);
+        for (playList in MQ.playListFree) {
+            this.createButtonPlaylist(playList, MQ.playListFree[playList]);
+        }
+        var btn_x = MQ.game.add.button(410, -270, 'x-button');
+        btn_x.anchor.set(0.5);
+        btn_x.events.onInputDown.add(() => {
+            btn_practice.inputEnabled = true;
+            btn_findgame.inputEnabled = true;
+            btn_party.inputEnabled = true;
+            this.popupPlaylist.kill();
+        });
+        this.popupPlaylist.addChild(btn_x);
+        this.popupPlaylist.kill();
+        // this is state playlist after challenge into menu
+        //
+        //
+        this.challPlaylistGroup = MQ.game.add.group();
+        // position of challplaylist
+        this.challPlaylistGroup.position.x = MQ.game.width;
+        const bg_challPlaylist = MQ.game.add.button(0, 0, 'bg-playlist');
+        bg_challPlaylist.scale.set(MQ.configs.SCALE);
+        this.challPlaylistGroup.add(bg_challPlaylist);
+        // tab-chon-playlist
+        const tab_chonplaylist = MQ.game.add.sprite(MQ.game.world.centerX, 0, 'tab-playlist');
+        tab_chonplaylist.anchor.set(0.5, 0);
+        tab_chonplaylist.scale.set(MQ.configs.SCALE);
+        this.challPlaylistGroup.add(tab_chonplaylist);
+        //87
+        const txt_chonplaylist = MQ.game.add.text(0, 87, 'CHỌN 1 PLAYLIST',
+            {
+                font: `${50 / MQ.configs.DPR}px Roboto`,
+                fill: "white",
+                boundsAlignH: "center",
+                boundsAlignV: "middle",
+                fontWeight: 'Bold'
+            });
+        txt_chonplaylist.scale.set(1 / MQ.configs.SCALE);
+        txt_chonplaylist.anchor.set(0.5);
+        tab_chonplaylist.addChild(txt_chonplaylist);
+        //74
+        const arrow_chonplaylist = MQ.game.add.button(-(540 - 74), 87, 'arrow-playlist');
+        arrow_chonplaylist.anchor.set(0.5);
+        tab_chonplaylist.addChild(arrow_chonplaylist);
+        arrow_chonplaylist.events.onInputDown.add(() => {
+            var tween_challPlaylistReturn = MQ.game.add.tween(this.challPlaylistGroup).to({
+                x: MQ.game.width
+            }, 500, "Linear");
+            tween_challPlaylistReturn.start();
+        });
+        // 990
+        const gem_playlist = MQ.game.add.sprite((990 - 540), 80, 'gem-playlist');
+        gem_playlist.anchor.set(0.5);
+        tab_chonplaylist.addChild(gem_playlist);
+        txt_gem_playlist = MQ.game.add.text((940 - 540), 87, `${MQ.diamond}`, {
+            font: `${45 / MQ.configs.DPR}px Roboto`,
+            fill: "#93909d",
+            boundsAlignH: "center",
+            boundsAlignV: "middle",
+            fontWeight: 'Bold'
+        });
+        txt_gem_playlist.anchor.set(1, 0.5);
+        txt_gem_playlist.scale.set(1 / MQ.configs.SCALE);
+        tab_chonplaylist.addChild(txt_gem_playlist);
+        // end <-- tab chon playlist -->
+        //change btn plts
+        //1776
+        var btn_change_playlist = MQ.game.add.button(MQ.game.world.centerX, 1776 * MQ.configs.SCALE, 'change-btn');
+        btn_change_playlist.scale.set(MQ.configs.SCALE);
+        btn_change_playlist.anchor.set(0.5);
+        this.challPlaylistGroup.add(btn_change_playlist);
+        //110
+        const txt_change_playlist = MQ.game.add.text(-430, 0, 'CHANGE SUGGEST PLAYLIST', {
+            font: `${50 / MQ.configs.DPR}px Roboto`,
+            fill: "white",
+            boundsAlignH: "center",
+            boundsAlignV: "middle",
+            fontWeight: 'Bold'
+        });
+        txt_change_playlist.anchor.set(0, 0.5);
+        txt_change_playlist.scale.set(1 / MQ.configs.SCALE)
+        btn_change_playlist.addChild(txt_change_playlist);
+        //959
+        const gem_change_playlist = MQ.game.add.sprite(419, -10, 'gem-playlist');
+        gem_change_playlist.anchor.set(0.5);
+        btn_change_playlist.addChild(gem_change_playlist);
+        // end change btn plts
+        // console.log(this.challPlaylistGroup);
+        //545
+        const txt_recent_playlist = MQ.game.add.text(60 * MQ.configs.SCALE, 545 * MQ.configs.SCALE, 'Recent Playlist', {
+            font: `${50 / MQ.configs.DPR}px Roboto`,
+            fill: "#93909d",
+            boundsAlignH: "center",
+            boundsAlignV: "middle"
+        });
+        txt_recent_playlist.anchor.set(0, 0.5);
+        this.challPlaylistGroup.add(txt_recent_playlist);
+        //1335
+        const txt_type_playlist = MQ.game.add.text(60 * MQ.configs.SCALE, 1335 * MQ.configs.SCALE, 'Thể loại âm nhạc', {
+            font: `${50 / MQ.configs.DPR}px Roboto`,
+            fill: "#93909d",
+            boundsAlignH: "center",
+            boundsAlignV: "middle"
+        });
+        txt_type_playlist.anchor.set(0, 0.5);
+        this.challPlaylistGroup.add(txt_type_playlist);
+        //vn-muzik (293, 1526)
+        var btn_vn_muzik = MQ.game.add.button(293 * MQ.configs.SCALE, 1526 * MQ.configs.SCALE, 'vn-muzik');
+        btn_vn_muzik.anchor.set(0.5);
+        btn_vn_muzik.scale.set(MQ.configs.SCALE);
+        this.challPlaylistGroup.add(btn_vn_muzik);
+        // w-muzik (808, 1526)
+        var btn_w_muzik = MQ.game.add.button(808 * MQ.configs.SCALE, 1526 * MQ.configs.SCALE, 'w-muzik');
+        btn_w_muzik.anchor.set(0.5);
+        btn_w_muzik.scale.set(MQ.configs.SCALE);
+        this.challPlaylistGroup.add(btn_w_muzik);
+        // this.challPlaylistGroup.position.x = MQ.game.width/2;
+        //683.5
+        var recent_playlist_list = MQ.game.add.button(MQ.game.world.centerX, 683.5 * MQ.configs.SCALE, 'tab-recent');
+        recent_playlist_list.anchor.set(0.5);
+        recent_playlist_list.scale.set(MQ.configs.SCALE);
+        this.challPlaylistGroup.add(recent_playlist_list);
+        var bop = MQ.game.add.sprite(-(540 - 60), 0, 'bop');
+        bop.anchor.set(0, 0.5);
+        recent_playlist_list.addChild(bop);
+        var txt_bop = MQ.game.add.text(-(540 - 275), -20, 'Best Of Playlist', {
+            font: `${45 / MQ.configs.DPR}px Roboto`,
+            fill: "white",
+            boundsAlignH: "center",
+            boundsAlignV: "middle"
+        });
+        txt_bop.anchor.set(0, 0.5);
+        txt_bop.scale.set(1 / MQ.configs.SCALE);
+        recent_playlist_list.addChild(txt_bop);
+        //318
+        var best_of_buy = MQ.game.add.sprite(MQ.game.world.centerX, 318 * MQ.configs.SCALE, 'tab-recent');
+        best_of_buy.anchor.set(0.5);
+        best_of_buy.scale.set(MQ.configs.SCALE);
+        this.challPlaylistGroup.add(best_of_buy);
+        var txt_bob = MQ.game.add.text(-(540 - 275), 0, 'Best Of Mua', {
+            font: `${45 / MQ.configs.DPR}px Roboto`,
+            fill: "white",
+            boundsAlignH: "center",
+            boundsAlignV: "middle"
+        });
+        txt_bob.anchor.set(0, 0.5);
+        txt_bob.scale.set(1 / MQ.configs.SCALE);
+        best_of_buy.addChild(txt_bob);
+        var bob = MQ.game.add.sprite(-480, 0, 'bop');
+        bob.anchor.set(0, 0.5);
+        best_of_buy.addChild(bob);
+        var tab_of_buy = MQ.game.add.button((906 - 540), 0, 'tab-gem');
+        tab_of_buy.anchor.set(0.5);
+        best_of_buy.addChild(tab_of_buy);
+        //
+        //
+        recent_playlist_list.events.onInputDown.add(() => {
+            MQ.sound.stop();
+            MQ.scoreYour = 0;
+            MQ.scoreTheir = 0;
+            MQ.isChallenged = true;
+            getSongToQuiz(() => {
+                getSongToQuiz(() => {
+                    getSongToQuiz(() => {
+                        getSongToQuiz(() => {
+                            getSongToQuiz(() => {
+                                this.startLoad();
+                            })
+                        })
+                    })
+                })
+            });
+        });
     },
     update: function () {
 
@@ -388,7 +562,7 @@ var menuState = {
             }
         }
         // console.log(MQ.idFriendChallenge)
-        MQ.game.load.start();
+        menuState.load.start();
     },
     loadStart: function () {
         showConsole('Loading...');
@@ -402,6 +576,7 @@ var menuState = {
         if (!MQ.loadVar) {
             MQ.loadVar = true;
             if (MQ.practiceMode) {
+                // console.log('run prac');
                 MQ.game.state.start('practice');
             } else {
                 MQ.game.state.start('play');
@@ -409,5 +584,28 @@ var menuState = {
             // MQ.game.load.stop();
         }
         // MQ.game.state.start('play');
+    },
+    createButtonPlaylist(index, namePlaylist) {
+        var spritePlaylist = MQ.game.add.button(-286 + 286 * index, 0, 'sprite-playlist');
+        spritePlaylist.anchor.set(0.5);
+        spritePlaylist.value = namePlaylist;
+        var textPlaylist = MQ.game.add.text(-286 + 286 * index, 200, `${namePlaylist}`, {
+            font: `${45}px Roboto`,
+            fill: "black",
+            boundsAlignH: "center",
+            boundsAlignV: "middle"
+        });
+        textPlaylist.anchor.set(0.5);
+        this.popupPlaylist.addChild(spritePlaylist);
+        this.popupPlaylist.addChild(textPlaylist);
+        spritePlaylist.events.onInputDown.add(() => {
+            MQ.sound.stop();
+            getSongToPractice(() => {
+                MQ.practiceMode = true;
+                this.startLoad();
+                subHeartOnPractice();
+                // MQ.game.state.start('practice');
+            });
+        })
     }
 }

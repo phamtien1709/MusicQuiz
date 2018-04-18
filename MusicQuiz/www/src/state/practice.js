@@ -5,7 +5,7 @@ var practiceState = {
     create: function () {
         showConsole('Practice Screen');
         // sprite ava tween to number of answer
-
+        MQ.practiceLoadDone = false;
         //
         // console.log(MQ.indexSongChoiced);
         // console.log(MQ.countQuiz);
@@ -30,7 +30,7 @@ var practiceState = {
         ava.mask = maskAva;
         //
         var nameFB = MQ.game.add.text(MQ.game.width / 2, 340 * MQ.configs.SCALE, `${MQ.nameFB}`, {
-            font: `${70/MQ.configs.DPR}px Roboto`,
+            font: `${70 / MQ.configs.DPR}px Roboto`,
             fill: "white",
             boundsAlignH: "center",
             boundsAlignV: "middle"
@@ -43,10 +43,10 @@ var practiceState = {
         btn_home.anchor.set(0.5);
         btn_home.scale.set(MQ.configs.SCALE);
         btn_home.events.onInputDown.add(() => {
-            alert('You really want to come Menu. OK to confirm!');
-            MQ.indexSongChoiced = [];
+            // alert('You really want to come Menu. OK to confirm!');
             MQ.songChoicedPlay.stop();
-            MQ.game.state.start('menu');
+            MQ.loadFirst = true;
+            MQ.game.state.start('win');
         });
         //create answer and diamond text
         for (obj in MQ.posAchievementPractice) {
@@ -106,9 +106,9 @@ var practiceState = {
         //     boundsAlignH: "center",
         //     boundsAlignV: "middle"
         // });
-        MQ.game.load.onLoadStart.add(this.loadStart, this);
-        MQ.game.load.onFileComplete.add(this.fileComplete, this);
-        MQ.game.load.onLoadComplete.add(this.loadComplete, this);
+        practiceState.load.onLoadStart.add(this.loadStart, this);
+        practiceState.load.onFileComplete.add(this.fileComplete, this);
+        practiceState.load.onLoadComplete.add(this.loadComplete, this);
         MQ.songChoicedPlay = MQ.game.add.audio('songChoiced');
         MQ.songChoicedPlay.play();
         tweenSpriteTime.onComplete.add(() => {
@@ -132,7 +132,7 @@ var practiceState = {
         if (MQ.practiceMode) {
             MQ.game.load.audio('songChoiced', `./img/assets/mp3Song/${MQ.songChoiced.Namefile}`);
         }
-        MQ.game.load.start();
+        practiceState.load.start();
     },
     loadStart: function () {
         showConsole('Loading...');
@@ -141,11 +141,14 @@ var practiceState = {
         showConsole(`File Complete: ${progress}% - ${totalLoaded} out of ${totalFiles}`);
     },
     loadComplete: function () {
-        MQ.songChoicedPlay.stop();
-        MQ.game.state.restart();
+        if (!MQ.practiceLoadDone) {
+            MQ.practiceLoadDone = true;
+            MQ.songChoicedPlay.stop();
+            MQ.game.state.restart();
+        }
     },
     CreateAnswerAndDiamondText: function (answerPosX, answerPosY, diamondPosX, diamondPosY, valAnswer, valReward, posCircleX, posCircleY) {
-        const diamond = MQ.game.add.sprite((diamondPosX + 10) * MQ.configs.SCALE, (diamondPosY-10) * MQ.configs.SCALE, 'diamond');
+        const diamond = MQ.game.add.sprite((diamondPosX + 10) * MQ.configs.SCALE, (diamondPosY - 10) * MQ.configs.SCALE, 'diamond');
         diamond.anchor.set(0, 0.5);
         diamond.scale.set(MQ.configs.SCALE);
         const txt_diamond = MQ.game.add.text((diamondPosX) * MQ.configs.SCALE, diamondPosY * MQ.configs.SCALE, `${valReward}`, {

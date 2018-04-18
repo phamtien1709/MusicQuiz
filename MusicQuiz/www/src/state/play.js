@@ -2,7 +2,7 @@ var playState = {
     preload: function () {
         // showConsole('Load Song');
         if (MQ.isChallenged) {
-            MQ.game.load.image('ava_fb_friend', `https://graph.facebook.com/${MQ.idFriendChallenge}/picture?width=${Math.floor(232*MQ.configs.SCALE)}`)
+            MQ.game.load.image('ava_fb_friend', `https://graph.facebook.com/${MQ.idFriendChallenge}/picture?width=200`)
         } else {
             
         }
@@ -26,14 +26,14 @@ var playState = {
             ava.anchor.set(0.5);
             ava.scale.set(MQ.configs.SCALE);
             var nameFB = MQ.game.add.text(260*MQ.configs.SCALE, 400*MQ.configs.SCALE, `You`, {
-                font: `${120/MQ.configs.DPR}px Roboto`,
+                font: `${65/MQ.configs.DPR}px Roboto`,
                 fill: "white",
                 boundsAlignH: "center",
                 boundsAlignV: "middle"
             });
             nameFB.anchor.set(0.5);
             MQ.scoreText = MQ.game.add.text(MQ.game.width / 2, 490*MQ.configs.SCALE, `${MQ.score}`, {
-                font: `${90/MQ.configs.DPR}px Roboto`,
+                font: `${60/MQ.configs.DPR}px Roboto`,
                 fill: "yellow",
                 boundsAlignH: "center",
                 boundsAlignV: "middle"
@@ -44,7 +44,7 @@ var playState = {
             avaOpp.anchor.set(0.5);
             avaOpp.scale.set(MQ.configs.SCALE);
             var nameFBOpp = MQ.game.add.text(MQ.game.width - 260*MQ.configs.SCALE, 400*MQ.configs.SCALE, `${MQ.nameFriendChallenge}`, {
-                font: `${120/MQ.configs.DPR}px Roboto`,
+                font: `${65/MQ.configs.DPR}px Roboto`,
                 fill: "white",
                 boundsAlignH: "center",
                 boundsAlignV: "middle"
@@ -125,14 +125,14 @@ var playState = {
             ava.anchor.set(0.5);
             ava.scale.set(MQ.configs.SCALE);
             var nameFB = MQ.game.add.text(260*MQ.configs.SCALE, 400*MQ.configs.SCALE, `You`, {
-                font: `${120/MQ.configs.DPR}px Roboto`,
+                font: `${65/MQ.configs.DPR}px Roboto`,
                 fill: "white",
                 boundsAlignH: "center",
                 boundsAlignV: "middle"
             });
             nameFB.anchor.set(0.5);
             MQ.scoreText = MQ.game.add.text(MQ.game.width / 2, 490*MQ.configs.SCALE, `${MQ.score}`, {
-                font: `${90/MQ.configs.DPR}px Roboto`,
+                font: `${60/MQ.configs.DPR}px Roboto`,
                 fill: "yellow",
                 boundsAlignH: "center",
                 boundsAlignV: "middle"
@@ -143,14 +143,14 @@ var playState = {
             avaOpp.anchor.set(0.5);
             avaOpp.scale.set(MQ.configs.SCALE);
             var nameFBOpp = MQ.game.add.text(MQ.game.width - 260*MQ.configs.SCALE, 400*MQ.configs.SCALE, `${MQ.nameFriendChallenge}`, {
-                font: `${120/MQ.configs.DPR}px Roboto`,
+                font: `${65/MQ.configs.DPR}px Roboto`,
                 fill: "white",
                 boundsAlignH: "center",
                 boundsAlignV: "middle"
             });
             nameFBOpp.anchor.set(0.5);
             MQ.scoreTextOpp = MQ.game.add.text(MQ.game.width - 260*MQ.configs.SCALE, 460*MQ.configs.SCALE, `${MQ.scoreOpp}`, {
-                font: `${90/MQ.configs.DPR}px Roboto`,
+                font: `${60/MQ.configs.DPR}px Roboto`,
                 fill: "white",
                 boundsAlignH: "center",
                 boundsAlignV: "middle"
@@ -289,24 +289,26 @@ var playState = {
         // console.log(MQ.songRandomChoicedList[MQ.countQuiz][index]);
         if (typeAnswer == "song") {
             MQ.answerTextA = MQ.game.add.text(0, 0, `${MQ.songRandomChoicedList[MQ.countQuiz][index].song}`, {
-                font: `${180/MQ.configs.DPR}px Roboto`,
+                font: `${65/MQ.configs.DPR}px Roboto`,
                 fill: "black",
                 boundsAlignH: "center",
                 boundsAlignV: "middle"
             });
             MQ.answerTextA.anchor.set(0.5);
+            MQ.answerTextA.scale.set(1/MQ.configs.SCALE);
             MQ.answerA.value = MQ.songRandomChoicedList[MQ.countQuiz][index].song;
             MQ.answerA.addChild(MQ.answerTextA);
             // MQ.songRandomChoiced.splice(0, 1);
         }
         else if (typeAnswer == "singer") {
             MQ.answerTextA = MQ.game.add.text(0, 0, `${MQ.songRandomChoicedList[MQ.countQuiz][index].singer}`, {
-                font: `${180/MQ.configs.DPR}px Roboto`,
+                font: `${65/MQ.configs.DPR}px Roboto`,
                 fill: "black",
                 boundsAlignH: "center",
                 boundsAlignV: "middle"
             });
             MQ.answerTextA.anchor.set(0.5);
+            MQ.answerTextA.scale.set(1/MQ.configs.SCALE);
             MQ.answerA.value = MQ.songRandomChoicedList[MQ.countQuiz][index].singer;
             MQ.answerA.addChild(MQ.answerTextA);
             // MQ.songRandomChoiced.splice(0, 1);
@@ -386,24 +388,26 @@ var playState = {
         );
         if (typeAnswer == "song") {
             MQ.answerTextB = MQ.game.add.text(0, 0, `${MQ.songRandomChoicedList[MQ.countQuiz][index].song}`, {
-                font: `${180/MQ.configs.DPR}px Roboto`,
+                font: `${65/MQ.configs.DPR}px Roboto`,
                 fill: "black",
                 boundsAlignH: "center",
                 boundsAlignV: "middle"
             });
             MQ.answerTextB.anchor.set(0.5);
+            MQ.answerTextB.scale.set(1/MQ.configs.SCALE);
             MQ.answerB.value = MQ.songRandomChoicedList[MQ.countQuiz][index].song;
             MQ.answerB.addChild(MQ.answerTextB);
             // MQ.songRandomChoiced.splice(0, 1);
         }
         else if (typeAnswer == "singer") {
             MQ.answerTextB = MQ.game.add.text(0, 0, `${MQ.songRandomChoicedList[MQ.countQuiz][index].singer}`, {
-                font: `${180/MQ.configs.DPR}px Roboto`,
+                font: `${65/MQ.configs.DPR}px Roboto`,
                 fill: "black",
                 boundsAlignH: "center",
                 boundsAlignV: "middle"
             });
             MQ.answerTextB.anchor.set(0.5);
+            MQ.answerTextB.scale.set(1/MQ.configs.SCALE);
             MQ.answerB.value = MQ.songRandomChoicedList[MQ.countQuiz][index].singer;
             MQ.answerB.addChild(MQ.answerTextB);
             // MQ.songRandomChoiced.splice(0, 1);
@@ -481,24 +485,26 @@ var playState = {
         );
         if (typeAnswer == "song") {
             MQ.answerTextC = MQ.game.add.text(0, 0, `${MQ.songRandomChoicedList[MQ.countQuiz][index].song}`, {
-                font: `${180/MQ.configs.DPR}px Roboto`,
+                font: `${65/MQ.configs.DPR}px Roboto`,
                 fill: "black",
                 boundsAlignH: "center",
                 boundsAlignV: "middle"
             });
             MQ.answerTextC.anchor.set(0.5);
+            MQ.answerTextC.scale.set(1/MQ.configs.SCALE);
             MQ.answerC.value = MQ.songRandomChoicedList[MQ.countQuiz][index].song;
             MQ.answerC.addChild(MQ.answerTextC);
             // MQ.songRandomChoiced.splice(0, 1);
         }
         else if (typeAnswer == "singer") {
             MQ.answerTextC = MQ.game.add.text(0, 0, `${MQ.songRandomChoicedList[MQ.countQuiz][index].singer}`, {
-                font: `${180/MQ.configs.DPR}px Roboto`,
+                font: `${65/MQ.configs.DPR}px Roboto`,
                 fill: "black",
                 boundsAlignH: "center",
                 boundsAlignV: "middle"
             });
             MQ.answerTextC.anchor.set(0.5);
+            MQ.answerTextC.scale.set(1/MQ.configs.SCALE);
             MQ.answerC.value = MQ.songRandomChoicedList[MQ.countQuiz][index].singer;
             MQ.answerC.addChild(MQ.answerTextC);
             // MQ.songRandomChoiced.splice(0, 1);
@@ -575,24 +581,26 @@ var playState = {
         );
         if (typeAnswer == "song") {
             MQ.answerTextD = MQ.game.add.text(0, 0, `${MQ.songRandomChoicedList[MQ.countQuiz][index].song}`, {
-                font: `${180/MQ.configs.DPR}px Roboto`,
+                font: `${65/MQ.configs.DPR}px Roboto`,
                 fill: "black",
                 boundsAlignH: "center",
                 boundsAlignV: "middle"
             });
             MQ.answerTextD.anchor.set(0.5);
+            MQ.answerTextD.scale.set(1/MQ.configs.SCALE);
             MQ.answerD.value = MQ.songRandomChoicedList[MQ.countQuiz][index].song;
             MQ.answerD.addChild(MQ.answerTextD);
             // MQ.songRandomChoiced.splice(0, 1);
         }
         else if (typeAnswer == "singer") {
             MQ.answerTextD = MQ.game.add.text(0, 0, `${MQ.songRandomChoicedList[MQ.countQuiz][index].singer}`, {
-                font: `${180/MQ.configs.DPR}px Roboto`,
+                font: `${65/MQ.configs.DPR}px Roboto`,
                 fill: "black",
                 boundsAlignH: "center",
                 boundsAlignV: "middle"
             });
             MQ.answerTextD.anchor.set(0.5);
+            MQ.answerTextD.scale.set(1/MQ.configs.SCALE);
             MQ.answerD.value = MQ.songRandomChoicedList[MQ.countQuiz][index].singer;
             MQ.answerD.addChild(MQ.answerTextD);
             // MQ.songRandomChoiced.splice(0, 1);
@@ -609,44 +617,6 @@ var playState = {
                 }
             });
             MQ.answerD.addChild(ava_friend_challenge);
-        }
-    },
-    createAnswerTab: function (typeAnswer, index) {
-        var answerTab = MQ.game.add.button(MQ.game.width / 2, 610 * MQ.configs.SCALE + (index * 1120 * MQ.configs.SCALE), 'answer-tab');
-        answerTab.scale.set(MQ.configs.SCALE);
-        answerTab.anchor.set(0.5);
-        answerTab.events.onInputDown.add(() => {
-            if (answerTab.value == MQ.songChoicedList[MQ.countQuiz].Song1 || answerTab.value == MQ.songChoicedList[MQ.countQuiz].Singer1) {
-                // console.log(answerTab.value);
-            } else {
-                // console.log('not true');
-            }
-        });
-        if (typeAnswer == "song") {
-            var answerText = MQ.game.add.text(0, 0, `${MQ.songRandomChoicedList[MQ.countQuiz][index].song}`, {
-                font: `${180/MQ.configs.DPR}px Roboto`,
-                fill: "black",
-                boundsAlignH: "center",
-                boundsAlignV: "middle"
-            });
-            answerText.anchor.set(0.5);
-            answerTab.answer = false;
-            answerTab.value = MQ.songRandomChoicedList[MQ.countQuiz][index].song;
-            answerTab.addChild(answerText);
-            // MQ.songRandomChoiced.splice(0, 1);
-        }
-        else if (typeAnswer == "singer") {
-            var answerText = MQ.game.add.text(0, 0, `${MQ.songRandomChoicedList[MQ.countQuiz][index].singer}`, {
-                font: `${180/MQ.configs.DPR}px Roboto`,
-                fill: "black",
-                boundsAlignH: "center",
-                boundsAlignV: "middle"
-            });
-            answerText.anchor.set(0.5);
-            answerTab.answer = false;
-            answerTab.value = MQ.songRandomChoicedList[MQ.countQuiz][index].singer;
-            answerTab.addChild(answerText);
-            // MQ.songRandomChoiced.splice(0, 1);
         }
     },
     showTimeAnswerAndCalculatorScore: function (timeAnswer) {

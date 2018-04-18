@@ -143,6 +143,7 @@ var bootState = {
         "answerPosY": 960
       },
     ];
+    MQ.playListFree = ['Playlist 1', 'Playlist 2', 'Playlist 3'];
     MQ.game.stage.backgroundColor = "#ffffff";
     var bg = MQ.game.add.sprite(0, 0, 'bg');
     bg.width = MQ.game.width;

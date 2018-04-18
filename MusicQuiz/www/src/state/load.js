@@ -21,6 +21,8 @@ var loadState = {
         MQ.game.load.image('btn-noti', 'img/assets/btn-noti.png');
         MQ.game.load.image('heart', 'img/assets/heart.png');
         MQ.game.load.image('diamond', 'img/assets/diamond.png');
+        MQ.game.load.image('wrong-mini', 'img/assets/wrong-mini.png');
+        MQ.game.load.image('correct-mini', 'img/assets/correct-mini.png');
         MQ.game.load.image('ticket', 'img/assets/ticket.png');
         MQ.game.load.image('btn-invite', 'img/assets/btn-invite.png');
         MQ.game.load.image('screen-dim', 'img/assets/screen-dim.png');
@@ -30,15 +32,29 @@ var loadState = {
         MQ.game.load.image('circle-active','img/assets/Practice/Circle_active.png');
         MQ.game.load.image('map-practice','img/assets/Practice/Map.png');
         MQ.game.load.image('btn-home', 'img/assets/Practice/btn_home.png');
+        MQ.game.load.image('bg-playlist', 'img/assets/playlist/bg-playlist.png');
+        MQ.game.load.image('arrow-playlist', 'img/assets/playlist/Arrow.png');
+        MQ.game.load.image('change-btn', 'img/assets/playlist/Change_Button.png');
+        MQ.game.load.image('gem-playlist', 'img/assets/playlist/gem-playlist.png');
+        MQ.game.load.image('tab-playlist', 'img/assets/playlist/Tab_chonplaylist.png');
+        MQ.game.load.image('tab-gem', 'img/assets/playlist/Tab_gem.png');
+        MQ.game.load.image('vn-muzik', 'img/assets/playlist/VietNam_Muzik.png');
+        MQ.game.load.image('w-muzik', 'img/assets/playlist/Word_Muzik.png');
+        MQ.game.load.image('tab-recent', 'img/assets/playlist/tab_recent.png');
+        MQ.game.load.image('bop', 'img/assets/playlist/best-of-playlist.png');
         // menu
         MQ.game.load.image('bg-menu', 'img/assets/Menu/bg.png');
         MQ.game.load.image('bg-play', 'img/assets/Play/bg-play.png');
+        MQ.game.load.image('popup-playlist', 'img/assets/popup/popup-playlist.png');
+        MQ.game.load.image('sprite-playlist', 'img/assets/popup/sprite-playlist.png');
+        MQ.game.load.image('x-button', 'img/assets/popup/x-button.png');
         MQ.sound = new Howl({
             src: ['./img/assets/mp3Song/edm.mp3'],
             onload: ()=>{
-                console.log('Load done!');
+                // console.log('Load done!');
             }
         });
+        MQ.game.load.script('webfont', 'https://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
     },
     create: function () {
         showConsole('Load Screen');
