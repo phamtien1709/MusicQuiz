@@ -14,7 +14,6 @@ var winState = {
             boundsAlignV: "middle"
         });
         nameFB.anchor.set(0, 0.5);
-
         //
         if (MQ.responseChallen !== undefined) {
             console.log(MQ.responseChallen);
@@ -23,8 +22,6 @@ var winState = {
             })
             MQ.idRequest = MQ.responseChallen[objFilter].id;
         }
-        // console.log(MQ.responseChallen[objFilter].data.scoreYour);
-        // console.log(MQ.responseChallen[objFilter].data.scoreTheir);
         //********************************************** */
         //********************************************* */
         if (MQ.practiceMode) {

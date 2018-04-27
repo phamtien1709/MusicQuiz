@@ -9,6 +9,7 @@ var bootState = {
   },
   create: function () {
     showConsole("Boot screen");
+    MQ.game.stage.smoothed = true;
     MQ.achievementPractice = [
       {
         "answer": 2,

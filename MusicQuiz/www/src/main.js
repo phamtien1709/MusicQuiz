@@ -21,18 +21,6 @@ MQ.configs = {
     SONG_NUMBER: 51,
     DPR: window.devicePixelRatio * dpr
 };
-//  The Google WebFont Loader will look for this object, so create it before loading the script.
-WebFontConfig = {
-
-    //  'active' means all requested fonts have finished loading
-    //  We set a 1 second delay before calling 'createText'.
-    //  For some reason if we don't the browser cannot render the text the first time it's created.
-
-    //  The Google Fonts we want to load (specify as many as you like in the array)
-    google: {
-        families: ['Montserrat', 'Source Sans Pro']
-    }
-};
 window.onload = function () {
     MQ.game = new Phaser.Game(MQ.configs.GAME_WIDTH, MQ.configs.GAME_HEIGHT, Phaser.CANVAS, '', null, false, false);
     // Add all the states
@@ -49,10 +37,10 @@ window.onload = function () {
 // preparations before game starts
 var preload = function () {
     MQ.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-    MQ.game.scale.minWidth = MQ.configs.GAME_WIDTH / 2;
-    MQ.game.scale.minHeight = MQ.configs.GAME_HEIGHT / 2;
-    MQ.game.scale.maxWidth = MQ.configs.GAME_WIDTH;
-    MQ.game.scale.maxHeight = MQ.configs.GAME_HEIGHT;
+    // MQ.game.scale.minWidth = MQ.configs.GAME_WIDTH / 2;
+    // MQ.game.scale.minHeight = MQ.configs.GAME_HEIGHT / 2;
+    // MQ.game.scale.maxWidth = MQ.configs.GAME_WIDTH;
+    // MQ.game.scale.maxHeight = MQ.configs.GAME_HEIGHT;
     MQ.game.scale.pageAlignHorizontally = true;
     MQ.game.time.advancedTiming = true;
     MQ.game.stage.disableVisibilityChange = true;

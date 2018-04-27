@@ -55,9 +55,11 @@ var loadState = {
             }
         });
         MQ.game.load.script('webfont', 'https://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
+        MQ.game.load.onFileComplete.add(this.fileComplete, this);
     },
     create: function () {
         showConsole('Load Screen');
+        MQ.game.stage.smoothed = true;
         console.log(MQ.nameFB);
         console.log(MQ.checkId);
         console.log(MQ.accessToken);
@@ -86,5 +88,8 @@ var loadState = {
     },
     render: function () {
 
+    },
+    fileComplete: function (progress, cacheKey, success, totalLoaded, totalFiles) {
+        showConsole(`Loading... ${progress}%`);
     }
 }

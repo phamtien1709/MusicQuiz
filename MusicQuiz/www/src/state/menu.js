@@ -19,6 +19,7 @@ var menuState = {
     create: function () {
         // variable
         showConsole('Menu Screen');
+        MQ.game.stage.smoothed = true;
         MQ.idFriendChallenge = 0;
         MQ.nameFriendChallenge = "";
         MQ.songChoiced = [];
