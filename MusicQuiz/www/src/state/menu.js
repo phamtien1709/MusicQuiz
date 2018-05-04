@@ -1,16 +1,17 @@
 var menuState = {
     preload: function () {
+        this.game.sound.context.resume();
         MQ.game.load.onLoadStart.removeAll();
         MQ.game.load.onFileComplete.removeAll();
         MQ.game.load.onLoadComplete.removeAll();
         if (MQ.loadFirst == undefined) {
             MQ.game.load.image('tab-friend', 'img/assets/tab-friend.png');
             for (i = 0; i < MQ.installed_friend.length; i++) {
-                MQ.game.load.image(`'friend${i}'`, `https://graph.facebook.com/${MQ.installed_friend[i].id}/picture?width=150`);
+                MQ.game.load.image(`'friend${i}'`, `https://graph.facebook.com/${MQ.installed_friend[i].id}/picture?width=120`);
             };
             if (MQ.responseChallen !== undefined) {
                 for (i = 0; i < MQ.responseChallen.length; i++) {
-                    MQ.game.load.image(`'friend${MQ.installed_friend.length + i}'`, `https://graph.facebook.com/${MQ.responseChallen[i].from.id}/picture?width=150`)
+                    MQ.game.load.image(`'friend${MQ.installed_friend.length + i}'`, `https://graph.facebook.com/${MQ.responseChallen[i].from.id}/picture?width=120`)
                 }
             }
         }
@@ -31,6 +32,8 @@ var menuState = {
         var bg = MQ.game.add.sprite(0, 0, 'bg-menu');
         bg.width = MQ.game.width;
         bg.height = MQ.game.height;
+        var line_top = MQ.game.add.sprite(0, 0, 'line-top');
+        // line_top.anchor()
         //load
         MQ.loadVar = false;
         menuState.load.onLoadStart.add(this.loadStart, this);
@@ -40,74 +43,87 @@ var menuState = {
         // mask ava in front  of ava sprite 
         var maskAva = MQ.game.add.graphics(0, 0);
         maskAva.beginFill(0xffffff);
-        maskAva.drawCircle(200 * MQ.configs.SCALE, 182 * MQ.configs.SCALE, 200 * MQ.configs.SCALE);
+        maskAva.drawCircle(179 * MQ.configs.SCALE, 190 * MQ.configs.SCALE, 241 * MQ.configs.SCALE);
         maskAva.anchor.set(0.5);
         //fsf
-        var ava = MQ.game.add.button(200 * MQ.configs.SCALE, 182 * MQ.configs.SCALE, 'ava_fb');
+        var ava = MQ.game.add.button(179 * MQ.configs.SCALE, 190 * MQ.configs.SCALE, 'ava_fb');
         ava.anchor.set(0.5);
         // ava.scale.set(MQ.configs.SCALE);
         ava.mask = maskAva;
         //
-        var nameFB = MQ.game.add.text(400 * MQ.configs.SCALE, 120 * MQ.configs.SCALE, `${MQ.nameFB}`, {
+        var nameFB = MQ.game.add.text(340 * MQ.configs.SCALE, 122 * MQ.configs.SCALE, `${MQ.nameFB}`, {
             font: `80px Roboto`,
-            fill: "black",
+            fill: "white",
             boundsAlignH: "center",
             boundsAlignV: "middle"
         });
         nameFB.anchor.set(0, 0.5);
-        //reward 
-        var heart = MQ.game.add.sprite(447 * MQ.configs.SCALE, 280 * MQ.configs.SCALE, 'heart');
-        heart.anchor.set(0.5, 1);
-        // heart.scale.set(MQ.configs.SCALE);
-        var diamond = MQ.game.add.sprite(647 * MQ.configs.SCALE, 280 * MQ.configs.SCALE, 'diamond');
-        diamond.anchor.set(0, 1);
-        // diamond.scale.set(MQ.configs.SCALE);
-        var ticket = MQ.game.add.sprite(855 * MQ.configs.SCALE, 280 * MQ.configs.SCALE, 'ticket');
-        ticket.anchor.set(0.5, 1);
-        // ticket.scale.set(MQ.configs.SCALE);
-        // text reward
-        MQ.txt_heart = MQ.game.add.text(490 * MQ.configs.SCALE, 270 * MQ.configs.SCALE, `${MQ.heart}/20`, {
-            font: `45px Roboto`,
-            fill: "pink",
-            boundsAlignH: "center",
-            boundsAlignV: "middle"
-        });
-        MQ.txt_heart.anchor.set(0, 0.5);
-        MQ.txt_diamond = MQ.game.add.text(700 * MQ.configs.SCALE, 270 * MQ.configs.SCALE, `${MQ.diamond}`, {
+        //level
+        var u_level = MQ.game.add.text(340, 200, 'LV 1 - Tập sự', {
             font: `45px Roboto`,
             fill: "orange",
             boundsAlignH: "center",
             boundsAlignV: "middle"
         });
-        MQ.txt_diamond.anchor.set(0, 0.5);
-        MQ.txt_ticket = MQ.game.add.text(920 * MQ.configs.SCALE, 270 * MQ.configs.SCALE, `${MQ.ticket}`, {
+        u_level.anchor.set(0, 0.5);
+        u_level.addColor("#ffffff", 6);
+        //reward 
+        var heart = MQ.game.add.sprite(371 * MQ.configs.SCALE, 280 * MQ.configs.SCALE, 'heart');
+        heart.anchor.set(0.5);
+        // heart.scale.set(MQ.configs.SCALE);
+        var diamond = MQ.game.add.sprite(608 * MQ.configs.SCALE, 280 * MQ.configs.SCALE, 'diamond');
+        diamond.anchor.set(0.5);
+        // diamond.scale.set(MQ.configs.SCALE);
+        var ticket = MQ.game.add.sprite(832 * MQ.configs.SCALE, 280 * MQ.configs.SCALE, 'ticket');
+        ticket.anchor.set(0.5);
+        // ticket.scale.set(MQ.configs.SCALE);
+        // text reward
+        MQ.txt_heart = MQ.game.add.text(420 * MQ.configs.SCALE, 280 * MQ.configs.SCALE, `${MQ.heart}/20`, {
             font: `45px Roboto`,
-            fill: "green",
+            fill: "white",
+            boundsAlignH: "center",
+            boundsAlignV: "middle"
+        });
+        MQ.txt_heart.anchor.set(0, 0.5);
+        MQ.txt_diamond = MQ.game.add.text(658 * MQ.configs.SCALE, 280 * MQ.configs.SCALE, `${MQ.diamond}`, {
+            font: `45px Roboto`,
+            fill: "white",
+            boundsAlignH: "center",
+            boundsAlignV: "middle"
+        });
+        MQ.txt_diamond.anchor.set(0, 0.5);
+        MQ.txt_ticket = MQ.game.add.text(890 * MQ.configs.SCALE, 280 * MQ.configs.SCALE, `${MQ.ticket}`, {
+            font: `45px Roboto`,
+            fill: "white",
             boundsAlignH: "center",
             boundsAlignV: "middle"
         });
         MQ.txt_ticket.anchor.set(0, 0.5);
         //text turn
-        var txt_yourTurn = MQ.game.add.text(110 * MQ.configs.SCALE, 810 * MQ.configs.SCALE, 'LƯỢT CỦA BẠN', {
+        var txt_yourTurn = MQ.game.add.text(61 * MQ.configs.SCALE, 763 * MQ.configs.SCALE, 'Lượt của bạn', {
             font: `45px Roboto`,
             fill: "#8a8a8a",
             boundsAlignH: "center",
             boundsAlignV: "middle"
         });
         txt_yourTurn.anchor.set(0, 0.5);
-        var txt_theirTurn = MQ.game.add.text(110 * MQ.configs.SCALE, 1310 * MQ.configs.SCALE, 'LƯỢT CỦA ĐỐI THỦ', {
+        var line_under_yourTurn = MQ.game.add.sprite(MQ.game.world.centerX, 812, 'line-under');
+        line_under_yourTurn.anchor.set(0.5);
+        var txt_theirTurn = MQ.game.add.text(61 * MQ.configs.SCALE, 1430 * MQ.configs.SCALE, 'Lượt của đối thủ', {
             font: `45px Roboto`,
             fill: "#8a8a8a",
             boundsAlignH: "center",
             boundsAlignV: "middle"
         });
         txt_theirTurn.anchor.set(0, 0.5);
+        var line_under_theirTurn = MQ.game.add.sprite(MQ.game.world.centerX, 1480, 'line-under');
+        line_under_theirTurn.anchor.set(0.5);
         //btn-invite
-        MQ.btn_invite = MQ.game.add.button(930 * MQ.configs.SCALE, 800 * MQ.configs.SCALE, 'btn-invite');
-        MQ.btn_invite.anchor.set(0.5);
+        MQ.btn_invite = MQ.game.add.button(1020 * MQ.configs.SCALE, 763 * MQ.configs.SCALE, 'btn-invite');
+        MQ.btn_invite.anchor.set(1, 0.5);
         // MQ.btn_invite.scale.set(MQ.configs.SCALE);
         MQ.btn_invite.events.onInputDown.add(() => {
-            // MQ.button_sound.play();
+            MQ.button_sound.play();
             FB.ui({
                 method: 'apprequests',
                 message: 'Come and play MusicQuiz with me!'
@@ -115,51 +131,17 @@ var menuState = {
                 console.log(response);
             })
         })
-        // scroll mask
-        MQ.scrollMaskChall = MQ.game.add.graphics(0, MQ.configs.SCALE * 850);
-        MQ.scrollMaskChall.beginFill();
-        MQ.scrollMaskChall.drawRect(0, 0, MQ.game.width, MQ.configs.SCALE * 400);
+        // TODO: SCROLL MASK
+        MQ.scrollMaskChall = MQ.game.add.graphics(0, MQ.configs.SCALE * 820);
+        MQ.scrollMaskChall.beginFill(0x190d35);
+        MQ.scrollMaskChall.drawRect(0, 0, MQ.game.width, MQ.configs.SCALE * 550);
         MQ.scrollMaskChall.endFill();
-        MQ.scrollMaskPoke = MQ.game.add.graphics(0, MQ.configs.SCALE * 1350);
-        MQ.scrollMaskPoke.beginFill();
-        MQ.scrollMaskPoke.drawRect(0, 0, MQ.game.width, MQ.configs.SCALE * 450);
+        MQ.scrollMaskPoke = MQ.game.add.graphics(0, MQ.configs.SCALE * 1480);
+        MQ.scrollMaskPoke.beginFill(0x190d35);
+        MQ.scrollMaskPoke.drawRect(0, 0, MQ.game.width, MQ.configs.SCALE * 230);
         MQ.scrollMaskPoke.endFill();
-        MQ.grap = MQ.game.add.graphics(0, MQ.configs.SCALE * 350);
-        MQ.grap.drawRect(0, 0, MQ.game.width, MQ.game.height * ((110 / 128) - (40 / 128)));
-        MQ.grap.inputEnabled = true;
-        MQ.grap.input.enableDrag();
-        MQ.grap.input.allowHorizontalDrag = false;
-        MQ.grap.events.onDragStop.add(() => {
-            if (MQ.taggable_friend.length > 4) {
-                if (MQ.grap.position.y > MQ.configs.SCALE * 400) {
-                    var tweenGrap = MQ.game.add.tween(MQ.grap).to({ y: MQ.configs.SCALE * 400 }, 250, "Linear");
-                    tweenGrap.start();
-                }
-                if (MQ.grap.position.y < -(MQ.testMask - MQ.testMask / MQ.taggable_friend.length * 4 - MQ.configs.SCALE * 400)) {
-                    var tweenGrap = MQ.game.add.tween(MQ.grap).to({ y: -(MQ.testMask - MQ.testMask / 5 - MQ.configs.SCALE * 400) }, 250, "Linear");
-                    tweenGrap.start();
-                }
-            }
-        });
-        MQ.grapInstalled = MQ.game.add.graphics(0, MQ.configs.SCALE * 1350);
-        MQ.grapInstalled.drawRect(0, 0, MQ.game.width, MQ.configs.SCALE * 450);
-        MQ.grapInstalled.inputEnabled = true;
-        MQ.grapInstalled.input.enableDrag();
-        MQ.grapInstalled.input.allowHorizontalDrag = false;
-        MQ.grapInstalled.events.onDragStop.add(() => {
-            if (MQ.installed_friend.length > 1) {
-                if (MQ.grapInstalled.position.y > MQ.configs.SCALE * 1350) {
-                    var tweengrapInstalled = MQ.game.add.tween(MQ.grapInstalled).to({ y: MQ.configs.SCALE * 1350 }, 250, "Linear");
-                    tweengrapInstalled.start();
-                }
-                if (MQ.grapInstalled.position.y < -(MQ.testMaskInstalled - MQ.testMaskInstalled / MQ.installed_friend.length - MQ.configs.SCALE * 1350)) {
-                    var tweengrapInstalled = MQ.game.add.tween(MQ.grapInstalled).to({ y: -(MQ.testMaskInstalled - MQ.testMaskInstalled / MQ.installed_friend.length - MQ.configs.SCALE * 1350) }, 250, "Linear");
-                    tweengrapInstalled.start();
-                }
-            }
-        });
-        MQ.grapChallenge = MQ.game.add.graphics(0, MQ.configs.SCALE * 850);
-        MQ.grapChallenge.drawRect(0, 100, MQ.game.width, MQ.configs.SCALE * 400);
+        MQ.grapChallenge = MQ.game.add.graphics(0, MQ.configs.SCALE * 820);
+        MQ.grapChallenge.drawRect(0, 100, MQ.game.width, MQ.configs.SCALE * 550);
         MQ.grapChallenge.inputEnabled = true;
         MQ.grapChallenge.input.enableDrag();
         MQ.grapChallenge.input.allowHorizontalDrag = false;
@@ -179,45 +161,39 @@ var menuState = {
         // btn_playing.scale.set(MQ.configs.SCALE - 0.1);
         btn_playing.anchor.set(0.5);
         btn_playing.kill();
-        //
-
-        // MQ.grapInstalled.kill();
-        MQ.grap.kill();
-        //////////
-        MQ.grapInstalled.mask = MQ.scrollMaskPoke;
         MQ.grapChallenge.mask = MQ.scrollMaskChall;
-        //TEST TODO
+        //TEST TODO:
         // console.log(MQ.responseChallen);
         //
         btn_playing.events.onInputDown.add(() => {
-            // MQ.button_sound.play();
+            MQ.button_sound.play();
         });
         // challenged
         // try to catch more friend challenge
         if (MQ.responseChallen !== undefined) {
             for (i = 0; i < MQ.responseChallen.length; i++) {
-                let testMaskChallenge = MQ.game.add.sprite(0, i * 200, 'tab-friend');
+                let testMaskChallenge = MQ.game.add.sprite(0, i * 180, 'tab-friend');
                 // testMaskChallenge.scale.set(MQ.configs.SCALE);
-                let friend_avaChallenge = MQ.game.add.sprite(150 * MQ.configs.SCALE, 50 * MQ.configs.SCALE, `'friend${MQ.installed_friend.length + i}'`);
+                let friend_avaChallenge = MQ.game.add.sprite(125 * MQ.configs.SCALE, 90, `'friend${MQ.installed_friend.length + i}'`);
                 friend_avaChallenge.anchor.set(0.5);
                 // friend_avaChallenge.scale.set(MQ.configs.SCALE);
                 // friend_avaChallenge.scale.set(1/MQ.configs.SCALE);
                 testMaskChallenge.addChild(friend_avaChallenge);
-                let nameFriendChallenge = MQ.game.add.text(300 * MQ.configs.SCALE, 50 * MQ.configs.SCALE, `${MQ.responseChallen[i].from.name}`, {
+                let nameFriendChallenge = MQ.game.add.text(220 * MQ.configs.SCALE, 90, `${MQ.responseChallen[i].from.name}`, {
                     font: `40px Roboto`,
-                    fill: "black",
+                    fill: "white",
                     boundsAlignH: "center",
                     boundsAlignV: "middle"
                 });
                 nameFriendChallenge.anchor.set(0, 0.5);
                 testMaskChallenge.addChild(nameFriendChallenge);
-                let btn_play = MQ.game.add.button(950 * MQ.configs.SCALE, 50 * MQ.configs.SCALE, 'btn-play');
+                let btn_play = MQ.game.add.button(933 * MQ.configs.SCALE, 90, 'btn-accept');
                 btn_play.anchor.set(0.5);
                 // btn_play.scale.set(MQ.configs.SCALE);
                 testMaskChallenge.addChild(btn_play);
-                let textScore = MQ.game.add.text(700 * MQ.configs.SCALE, 50 * MQ.configs.SCALE, `${MQ.responseChallen[i].data.scoreTheir} : ${MQ.responseChallen[i].data.scoreYour}`, {
+                let textScore = MQ.game.add.text(670 * MQ.configs.SCALE, 90, `${MQ.responseChallen[i].data.scoreTheir} : ${MQ.responseChallen[i].data.scoreYour}`, {
                     font: `40px Roboto`,
-                    fill: "black",
+                    fill: "white",
                     boundsAlignH: "center",
                     boundsAlignV: "middle"
                 });
@@ -230,7 +206,7 @@ var menuState = {
                 testMaskChallenge.addChild(textScore);
                 // var indexOfData = i;
                 btn_play.events.onInputDown.add(() => {
-                    // MQ.button_sound.play();
+                    MQ.button_sound.play();
                     // btn_play.input.enabled = false;
                     MQ.idFriendChallenge = btn_play.value.data.from.id;
                     MQ.nameFriendChallenge = btn_play.value.data.from.name;
@@ -267,42 +243,29 @@ var menuState = {
             }
         }
         // button TODO
-        var btn_findgame = MQ.game.add.button(191 * MQ.configs.SCALE, 555 * MQ.configs.SCALE, 'btn-findgame');
+        var btn_findgame = MQ.game.add.button(191 * MQ.configs.SCALE, 518 * MQ.configs.SCALE, 'btn-findgame');
         btn_findgame.anchor.set(0.5);
         // btn_findgame.scale.set(MQ.configs.SCALE);
         btn_findgame.events.onInputDown.add(() => {
-            // MQ.button_sound.play();
+            MQ.button_sound.play();
             var tween_findgame = MQ.game.add.tween(this.findgameGroup).to({
                 x: 0
             }, 500, "Linear");
             tween_findgame.start();
         })
         // btn_findgame.alpha = 0.5;
-        var btn_party = MQ.game.add.button(540 * MQ.configs.SCALE, 555 * MQ.configs.SCALE, 'btn-party');
+        var btn_party = MQ.game.add.button(540 * MQ.configs.SCALE, 518 * MQ.configs.SCALE, 'btn-party');
         btn_party.anchor.set(0.5);
         // btn_party.scale.set(MQ.configs.SCALE)
         // btn_party.alpha = 0.5;
-        var btn_practice = MQ.game.add.button(890 * MQ.configs.SCALE, 555 * MQ.configs.SCALE, 'btn-practice');
+        var btn_practice = MQ.game.add.button(890 * MQ.configs.SCALE, 518 * MQ.configs.SCALE, 'btn-practice');
         btn_practice.anchor.set(0.5);
-        // btn_practice.scale.set(MQ.configs.SCALE);
-        // btn_practice.alpha = 0.5;
-        var btn_noti = MQ.game.add.button((1080 - 50) * MQ.configs.SCALE, 50 * MQ.configs.SCALE, 'btn-noti');
-        btn_noti.anchor.set(0.5);
-        // btn_noti.scale.set(MQ.configs.SCALE);
-        var btn_setting = MQ.game.add.button(50 * MQ.configs.SCALE, 50 * MQ.configs.SCALE, 'btn-setting');
-        btn_setting.anchor.set(0.5);
-        // btn_setting.scale.set(MQ.configs.SCALE);
-        // screen dim
-        MQ.screen_dim = MQ.game.add.sprite(0, 0, 'screen-dim');
-        MQ.screen_dim.width = MQ.game.width;
-        MQ.screen_dim.height = MQ.game.height;
-        MQ.screen_dim.kill();
         ava.events.onInputDown.add(() => {
-            // MQ.button_sound.play();
+            MQ.button_sound.play();
         });
         // practice btn input
         btn_practice.events.onInputDown.add(() => {
-            // MQ.button_sound.play();
+            MQ.button_sound.play();
             if (MQ.heart > 0) {
                 btn_practice.inputEnabled = false;
                 btn_findgame.inputEnabled = false;
@@ -312,10 +275,6 @@ var menuState = {
                 alert('Not enough heart! Wait for 3 minutes.');
             }
         });
-        // MQ.sound.play();
-        // MQ.sound.fade(0, 0.7, 10000);
-        // console.log(MQ.sound);
-        // var id2 = MQ.sound.play();
         // popup popup
         this.popupPlaylist = MQ.game.add.sprite(MQ.game.world.centerX, MQ.game.world.centerY, 'popup-playlist');
         this.popupPlaylist.anchor.set(0.5);
@@ -326,7 +285,7 @@ var menuState = {
         var btn_x = MQ.game.add.button(410, -270, 'x-button');
         btn_x.anchor.set(0.5);
         btn_x.events.onInputDown.add(() => {
-            // MQ.button_sound.play();
+            MQ.button_sound.play();
             btn_practice.inputEnabled = true;
             btn_findgame.inputEnabled = true;
             btn_party.inputEnabled = true;
@@ -334,6 +293,28 @@ var menuState = {
         });
         this.popupPlaylist.addChild(btn_x);
         this.popupPlaylist.kill();
+        // FIXME: menu_BG
+        var bot_shadow = MQ.game.add.sprite(MQ.game.world.centerX, 1756, 'bot-shadow');
+        bot_shadow.anchor.set(0.5);
+        var menu_BG = MQ.game.add.button(MQ.game.world.centerX, 1815, 'menu-bg');
+        menu_BG.anchor.set(0.5);
+        var btn_mail = MQ.game.add.button(3 / 8 * MQ.game.width - MQ.game.width / 2, 0, 'btn-mail');
+        btn_mail.anchor.set(0.5);
+        // btn_noti.scale.set(MQ.configs.SCALE);
+        var btn_setting = MQ.game.add.button(3 / 8 * MQ.game.width, 0, 'btn-setting');
+        btn_setting.anchor.set(0.5);
+        var btn_home = MQ.game.add.button(1 / 8 * MQ.game.width - MQ.game.width / 2, 0, 'btn-home');
+        btn_home.anchor.set(0.5);
+        btn_home.kill();
+        var btn_home_active = MQ.game.add.button(1 / 8 * MQ.game.width - MQ.game.width / 2, 0, 'btn-home-active');
+        btn_home_active.anchor.set(0.5);
+        var btn_shop = MQ.game.add.button(1 / 8 * MQ.game.width, 0, 'btn-shop');
+        btn_shop.anchor.set(0.5);
+        menu_BG.addChild(btn_home);
+        menu_BG.addChild(btn_mail);
+        menu_BG.addChild(btn_setting);
+        menu_BG.addChild(btn_shop);
+        menu_BG.addChild(btn_home_active);
         // this is state playlist after challenge into menu
         //
         //
@@ -367,7 +348,7 @@ var menuState = {
         arrow_chonplaylist.anchor.set(0.5);
         tab_chonplaylist.addChild(arrow_chonplaylist);
         arrow_chonplaylist.events.onInputDown.add(() => {
-            // MQ.button_sound.play();
+            MQ.button_sound.play();
             var tween_challPlaylistReturn = MQ.game.add.tween(this.challPlaylistGroup).to({
                 x: -MQ.game.width
             }, 500, "Linear");
@@ -480,7 +461,7 @@ var menuState = {
         //
         //
         recent_playlist_list.events.onInputDown.add(() => {
-            // MQ.button_sound.play();
+            MQ.button_sound.play();
             // MQ.sound.stop();
             MQ.scoreYour = 0;
             MQ.scoreTheir = 0;
@@ -491,10 +472,10 @@ var menuState = {
                         getSongToQuiz(() => {
                             getSongToQuiz(() => {
                                 this.startLoad();
-                            })
-                        })
-                    })
-                })
+                            });
+                        });
+                    });
+                });
             });
         });
     },
@@ -554,7 +535,7 @@ var menuState = {
         this.popupPlaylist.addChild(spritePlaylist);
         this.popupPlaylist.addChild(textPlaylist);
         spritePlaylist.events.onInputDown.add(() => {
-            // MQ.button_sound.play();
+            MQ.button_sound.play();
             // MQ.sound.stop();
             getSongToPractice(() => {
                 MQ.practiceMode = true;
@@ -570,31 +551,6 @@ var menuState = {
         const bg_findgame = MQ.game.add.button(0, 0, 'bg-playlist');
         // bg_findgame.scale.set(MQ.configs.SCALE);
         this.findgameGroup.add(bg_findgame);
-        const tab_chonplaylist = MQ.game.add.sprite(MQ.game.world.centerX, 0, 'tab-playlist');
-        tab_chonplaylist.anchor.set(0.5, 0);
-        // tab_chonplaylist.scale.set(MQ.configs.SCALE);
-        this.findgameGroup.add(tab_chonplaylist);
-        const txt_chonplaylist = MQ.game.add.text(0, 87, 'CHỌN 1 ĐỐI THỦ',
-            {
-                font: `50px Roboto`,
-                fill: "white",
-                boundsAlignH: "center",
-                boundsAlignV: "middle",
-                fontWeight: 'Bold'
-            });
-        // txt_chonplaylist.scale.set(1 / MQ.configs.SCALE);
-        txt_chonplaylist.anchor.set(0.5);
-        tab_chonplaylist.addChild(txt_chonplaylist);
-        const arrow_chonplaylist = MQ.game.add.button(-(540 - 74), 87, 'arrow-playlist');
-        arrow_chonplaylist.anchor.set(0.5);
-        tab_chonplaylist.addChild(arrow_chonplaylist);
-        arrow_chonplaylist.events.onInputDown.add(() => {
-            // MQ.button_sound.play();
-            var tween_findgameReturn = MQ.game.add.tween(this.findgameGroup).to({
-                x: -MQ.game.width
-            }, 300, "Linear");
-            tween_findgameReturn.start();
-        });
         const txt_chooseCompetitor = MQ.game.add.text(110 * MQ.configs.SCALE, 350 * MQ.configs.SCALE, 'CHỌN ĐỐI THỦ', {
             font: `45px Roboto`,
             fill: "#8a8a8a",
@@ -629,20 +585,20 @@ var menuState = {
             // this.createTabFriennd();
             let testMaskInstalled = MQ.game.add.sprite(0, (i * 200) * (MQ.configs.SCALE), 'tab-friend');
             // testMaskInstalled.scale.set(MQ.configs.SCALE);
-            let friend_avaInstalled = MQ.game.add.sprite(150, 100, `'friend${i}'`);
+            let friend_avaInstalled = MQ.game.add.sprite(150, 90, `'friend${i}'`);
             friend_avaInstalled.anchor.set(0.5);
             // friend_avaInstalled.scale.set(MQ.configs.SCALE);
             testMaskInstalled.addChild(friend_avaInstalled);
-            let nameFriendInstalled = MQ.game.add.text(300, 100, `${MQ.installed_friend[i].name}`, {
+            let nameFriendInstalled = MQ.game.add.text(300, 90, `${MQ.installed_friend[i].name}`, {
                 font: `45px Roboto`,
-                fill: "black",
+                fill: "white",
                 boundsAlignH: "center",
                 boundsAlignV: "middle"
             });
             nameFriendInstalled.anchor.set(0, 0.5);
             // nameFriendInstalled.scale.set(1 / MQ.configs.SCALE);
             // console.log(nameFriendInstalled);
-            let btn_play = MQ.game.add.button(950, 100, 'btn-playing');
+            let btn_play = MQ.game.add.button(950, 90, 'btn-playing');
             btn_play.anchor.set(0.5);
             // btn_play.scale.set(MQ.configs.SCALE);
             testMaskInstalled.addChild(btn_play);
@@ -651,7 +607,7 @@ var menuState = {
             this.testMaskInstalled += testMaskInstalled.height;
             let idFriend = MQ.installed_friend[i].id;
             btn_play.events.onInputDown.add(() => {
-                // MQ.button_sound.play();
+                MQ.button_sound.play();
                 MQ.score = 0;
                 MQ.correctList = [];
                 MQ.wrongList = [];
@@ -672,5 +628,30 @@ var menuState = {
             this.grapFriendInstalled.addChild(testMaskInstalled);
             this.findgameGroup.add(this.grapFriendInstalled);
         }
+        const tab_chonplaylist = MQ.game.add.sprite(MQ.game.world.centerX, 0, 'tab-playlist');
+        tab_chonplaylist.anchor.set(0.5, 0);
+        // tab_chonplaylist.scale.set(MQ.configs.SCALE);
+        this.findgameGroup.add(tab_chonplaylist);
+        const txt_chonplaylist = MQ.game.add.text(0, 87, 'CHỌN 1 ĐỐI THỦ',
+            {
+                font: `50px Roboto`,
+                fill: "white",
+                boundsAlignH: "center",
+                boundsAlignV: "middle",
+                fontWeight: 'Bold'
+            });
+        // txt_chonplaylist.scale.set(1 / MQ.configs.SCALE);
+        txt_chonplaylist.anchor.set(0.5);
+        tab_chonplaylist.addChild(txt_chonplaylist);
+        const arrow_chonplaylist = MQ.game.add.button(-(540 - 74), 87, 'arrow-playlist');
+        arrow_chonplaylist.anchor.set(0.5);
+        tab_chonplaylist.addChild(arrow_chonplaylist);
+        arrow_chonplaylist.events.onInputDown.add(() => {
+            MQ.button_sound.play();
+            var tween_findgameReturn = MQ.game.add.tween(this.findgameGroup).to({
+                x: -MQ.game.width
+            }, 300, "Linear");
+            tween_findgameReturn.start();
+        });
     }
 }

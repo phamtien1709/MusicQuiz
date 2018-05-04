@@ -1,5 +1,6 @@
 var loadState = {
     preload: function () {
+        this.game.sound.context.resume();
         MQ.game.scale.pageAlignHorizontally = true;
         MQ.game.time.advancedTiming = true;
         MQ.game.stage.disableVisibilityChange = true;
@@ -46,34 +47,27 @@ var loadState = {
         this.txt_loading.anchor.set(0.5);
         // this.game.stage.background.width = MQ.game.width;
         // this.game.stage.background.height = MQ.game.height;
-        MQ.game.load.image('ava_fb', `https://graph.facebook.com/${MQ.checkId}/picture?width=200`);
+        MQ.game.load.image('ava_fb', `https://graph.facebook.com/${MQ.checkId}/picture?width=241`);
         MQ.game.load.image('ava_default', 'img/assets/ava-default.png');
         MQ.game.load.image('ava_150', 'img/assets/ava-default150x150.png');
         MQ.game.load.image('ava_70', 'img/assets/ava-default70x70.png');
         MQ.game.load.image('btn-next', 'img/assets/btn-next.png');
         // MQ.game.load.image('btn-home', 'img/assets/btn-home.png');
         MQ.game.load.image('btn-playing', 'img/assets/btn-playing.png');
+        //play state
+        MQ.game.load.image('bg-play', 'img/assets/Play/BG_GamePlay.png');
         MQ.game.load.image('tween-time', 'img/assets/tween-time.png');
-        MQ.game.load.image('answer-tab', 'img/assets/answer.png');
+        MQ.game.load.image('answer-tab', 'img/assets/Play/Button_Cautraloi_01.png');
         MQ.game.load.image('circle', 'img/assets/circle.png');
-        MQ.game.load.image('btn-play', 'img/assets/btn-play.png');
-        MQ.game.load.image('btn-findgame', 'img/assets/btn-findgame.png');
-        MQ.game.load.image('btn-party', 'img/assets/btn-party.png');
-        MQ.game.load.image('btn-practice', 'img/assets/btn-practice.png');
-        MQ.game.load.image('btn-noti', 'img/assets/btn-noti.png');
-        MQ.game.load.image('heart', 'img/assets/heart.png');
-        MQ.game.load.image('diamond', 'img/assets/diamond.png');
+        MQ.game.load.image('btn-remove-answer', 'img/assets/Play/Button_Bo2DapAn.png');
+        // MQ.game.load.image('btn-play', 'img/assets/btn-play.png');;
+        MQ.game.load.image('btn-playing', 'img/assets/btn-playing.png');
         MQ.game.load.image('wrong-mini', 'img/assets/wrong-mini.png');
         MQ.game.load.image('correct-mini', 'img/assets/correct-mini.png');
-        MQ.game.load.image('ticket', 'img/assets/ticket.png');
         MQ.game.load.image('btn-invite', 'img/assets/btn-invite.png');
-        MQ.game.load.image('screen-dim', 'img/assets/screen-dim.png');
-        MQ.game.load.image('btn-setting', 'img/assets/Menu/btn-setting.png');
-        MQ.game.load.image('popup-profile', 'img/assets/Menu/popup-profile.png');
-        MQ.game.load.image('bg-practice', 'img/assets/Practice/bg-practice.png');
         MQ.game.load.image('circle-active', 'img/assets/Practice/Circle_active.png');
         MQ.game.load.image('map-practice', 'img/assets/Practice/Map.png');
-        MQ.game.load.image('btn-home', 'img/assets/Practice/btn_home.png');
+        MQ.game.load.image('btn-rehome', 'img/assets/Practice/btn_home.png');
         MQ.game.load.image('bg-playlist', 'img/assets/playlist/bg-playlist.png');
         MQ.game.load.image('arrow-playlist', 'img/assets/playlist/Arrow.png');
         MQ.game.load.image('change-btn', 'img/assets/playlist/Change_Button.png');
@@ -84,13 +78,32 @@ var loadState = {
         MQ.game.load.image('w-muzik', 'img/assets/playlist/Word_Muzik.png');
         MQ.game.load.image('tab-recent', 'img/assets/playlist/tab_recent.png');
         MQ.game.load.image('bop', 'img/assets/playlist/best-of-playlist.png');
-        // menu
-        MQ.game.load.image('bg-menu', 'img/assets/Menu/bg.png');
-        MQ.game.load.image('bg-play', 'img/assets/Play/bg-play.png');
+        //popup playlist
         MQ.game.load.image('popup-playlist', 'img/assets/popup/popup-playlist.png');
         MQ.game.load.image('sprite-playlist', 'img/assets/popup/sprite-playlist.png');
         MQ.game.load.image('x-button', 'img/assets/popup/x-button.png');
-        MQ.game.load.script('webfont', 'https://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
+        // menu
+        MQ.game.load.image('bg-menu', 'img/assets/Menu/BG_main.png');
+        MQ.game.load.image('heart', 'img/assets/Menu/Heart_Icon.png');
+        MQ.game.load.image('ticket', 'img/assets/Menu/Ticket_Icon.png');
+        MQ.game.load.image('diamond', 'img/assets/Menu/Diamond_Icon.png');
+        MQ.game.load.image('btn-findgame', 'img/assets/Menu/Find game_Button.png');
+        MQ.game.load.image('btn-party', 'img/assets/Menu/Party_Button.png');
+        MQ.game.load.image('btn-practice', 'img/assets/Menu/Practice_Button.png');
+        MQ.game.load.image('line-top', 'img/assets/Menu/Line_Top.png');
+        MQ.game.load.image('bot-shadow', 'img/assets/Menu/Shadow.png');
+        MQ.game.load.image('menu-bg', 'img/assets/Menu/Menu_BG.png');
+        MQ.game.load.image('btn-home', 'img/assets/Menu/IconMenu_Home.png');
+        MQ.game.load.image('btn-home-active', 'img/assets/Menu/IconMenu_Home_active.png');
+        MQ.game.load.image('btn-mail', 'img/assets/Menu/IconMenu_Mail.png');
+        MQ.game.load.image('btn-mail-active', 'img/assets/Menu/IconMenu_Mail_active.png');
+        MQ.game.load.image('btn-setting', 'img/assets/Menu/IconMenu_Setting.png');
+        MQ.game.load.image('btn-setting-active', 'img/assets/Menu/IconMenu_Setting_active.png');
+        MQ.game.load.image('btn-shop', 'img/assets/Menu/IconMenu_Shop.png');
+        MQ.game.load.image('btn-shop-active', 'img/assets/Menu/IconMenu_Shop_active.png');
+        MQ.game.load.image('line-under', 'img/assets/Menu/line-under.png');
+        MQ.game.load.image('btn-accept', 'img/assets/Menu/btn-accept.png');
+        //
         MQ.game.load.onFileComplete.add(this.fileComplete, this);
     },
     create: function () {

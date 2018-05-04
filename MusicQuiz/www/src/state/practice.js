@@ -1,6 +1,6 @@
 var practiceState = {
     preload: function () {
-
+        this.game.sound.context.resume();
     },
     create: function () {
         // showConsole('Practice Screen');
@@ -39,7 +39,7 @@ var practiceState = {
         var map = MQ.game.add.sprite(MQ.game.world.centerX, 693.5 * MQ.configs.SCALE, 'map-practice');
         map.anchor.set(0.5);
         // map.scale.set(MQ.configs.SCALE);
-        var btn_home = MQ.game.add.button(142 * MQ.configs.SCALE, 112 * MQ.configs.SCALE, 'btn-home');
+        var btn_home = MQ.game.add.button(142 * MQ.configs.SCALE, 112 * MQ.configs.SCALE, 'btn-rehome');
         btn_home.anchor.set(0.5);
         // btn_home.scale.set(MQ.configs.SCALE);
         btn_home.events.onInputDown.add(() => {

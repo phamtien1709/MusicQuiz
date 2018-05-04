@@ -1,19 +1,24 @@
 var playState = {
     preload: function () {
+        this.game.sound.context.resume();
         // showConsole('Load Song');
         if (MQ.isChallenged) {
             MQ.game.load.image('ava_fb_friend', `https://graph.facebook.com/${MQ.idFriendChallenge}/picture?width=200`)
         } else {
-            
+
         }
         // console.log(MQ.songChoiced.Namefile);
     },
     create: function () {
+        //TODO: 102px each circle distance, 656.5
         // showConsole('Play Screen');
         // console.log(MQ.countQuiz);
-        var bg = MQ.game.add.sprite(0,0,'bg-play');
+        var bg = MQ.game.add.sprite(0, 0, 'bg-play');
         bg.width = MQ.game.width;
         bg.height = MQ.game.height;
+        var line_top = MQ.game.add.sprite(0, 0, 'line-top');
+        var btn_remove_answer = MQ.game.add.button(MQ.game.world.centerX, 1815, 'btn-remove-answer');
+        btn_remove_answer.anchor.set(0.5);
         // console.log('before if')
         if (MQ.isChallenged) {
             MQ.choosed = false;
@@ -22,17 +27,22 @@ var playState = {
             var randomTypeAnswer = Math.floor(Math.random() * 1.9999);
             // console.log(typeAnswer[randomTypeAnswer]);
             // console.log(correctIndex);
-            var ava = MQ.game.add.sprite(260*MQ.configs.SCALE, 200*MQ.configs.SCALE, 'ava_fb');
+            var maskAva = MQ.game.add.graphics(0, 0);
+            maskAva.beginFill(0xffffff);
+            maskAva.drawCircle(290 * MQ.configs.SCALE, 210 * MQ.configs.SCALE, 241 * MQ.configs.SCALE);
+            maskAva.anchor.set(0.5);
+            var ava = MQ.game.add.sprite(290 * MQ.configs.SCALE, 210 * MQ.configs.SCALE, 'ava_fb');
             ava.anchor.set(0.5);
+            ava.mask = maskAva;
             // ava.scale.set(MQ.configs.SCALE);
-            var nameFB = MQ.game.add.text(260*MQ.configs.SCALE, 400*MQ.configs.SCALE, `You`, {
-                font: `65px Roboto`,
+            var nameFB = MQ.game.add.text(290 * MQ.configs.SCALE, 400 * MQ.configs.SCALE, `You`, {
+                font: `50px Roboto`,
                 fill: "white",
                 boundsAlignH: "center",
                 boundsAlignV: "middle"
             });
             nameFB.anchor.set(0.5);
-            MQ.scoreText = MQ.game.add.text(MQ.game.width / 2, 490*MQ.configs.SCALE, `${MQ.score}`, {
+            MQ.scoreText = MQ.game.add.text(290, 490 * MQ.configs.SCALE, `${MQ.score}`, {
                 font: `60px Roboto`,
                 fill: "yellow",
                 boundsAlignH: "center",
@@ -40,11 +50,16 @@ var playState = {
             });
             MQ.scoreText.anchor.set(0.5);
             // opp
-            var avaOpp = MQ.game.add.sprite(MQ.game.width - 260*MQ.configs.SCALE, 200*MQ.configs.SCALE, 'ava_fb_friend');
+            var maskAvaOpp = MQ.game.add.graphics(0, 0);
+            maskAvaOpp.beginFill(0xffffff);
+            maskAvaOpp.drawCircle(800 * MQ.configs.SCALE, 210 * MQ.configs.SCALE, 241 * MQ.configs.SCALE);
+            maskAvaOpp.anchor.set(0.5);
+            var avaOpp = MQ.game.add.sprite(800 * MQ.configs.SCALE, 210 * MQ.configs.SCALE, 'ava_fb_friend');
             avaOpp.anchor.set(0.5);
+            avaOpp.mask = maskAvaOpp;
             // avaOpp.scale.set(MQ.configs.SCALE);
-            var nameFBOpp = MQ.game.add.text(MQ.game.width - 260*MQ.configs.SCALE, 400*MQ.configs.SCALE, `${MQ.nameFriendChallenge}`, {
-                font: `65px Roboto`,
+            var nameFBOpp = MQ.game.add.text(800 * MQ.configs.SCALE, 400 * MQ.configs.SCALE, `${MQ.nameFriendChallenge}`, {
+                font: `50px Roboto`,
                 fill: "white",
                 boundsAlignH: "center",
                 boundsAlignV: "middle"
@@ -55,7 +70,7 @@ var playState = {
             MQ.songChoicedPlay.play();
             // console.log(MQ.songChoiced);
             // console.log(MQ.songRandomChoiced);
-            var spriteTime = MQ.game.add.sprite(0, 654 * MQ.configs.SCALE, 'tween-time');
+            var spriteTime = MQ.game.add.sprite(0, 755 * MQ.configs.SCALE, 'tween-time');
             // spriteTime.scale.set(MQ.configs.SCALE);
             spriteTime.anchor.set(0, 0.5);
             var tweenSpriteTime = MQ.game.add.tween(spriteTime.scale).to({ x: MQ.configs.SCALE * 60, y: MQ.configs.SCALE }, 10000, "Linear");
@@ -100,11 +115,11 @@ var playState = {
                     if (!MQ.choosed) {
                         // MQ.songRandomChoiced = [];
                         // getSongToChallenge(() => {
-                            MQ.streak = 1;
-                            this.addTimeAnswerToData(11, false, "", typeAnswer[randomTypeAnswer]);
-                            MQ.songChoicedPlay.stop();
-                            MQ.countQuiz += 1;
-                            MQ.game.state.restart();
+                        MQ.streak = 1;
+                        this.addTimeAnswerToData(11, false, "", typeAnswer[randomTypeAnswer]);
+                        MQ.songChoicedPlay.stop();
+                        MQ.countQuiz += 1;
+                        MQ.game.state.restart();
                         // });
                     }
                 }
@@ -121,17 +136,22 @@ var playState = {
             MQ.choosed = false;
             var correctIndex = Math.floor(Math.random() * 3.9999);
             //your
-            var ava = MQ.game.add.sprite(260*MQ.configs.SCALE, 200*MQ.configs.SCALE, 'ava_fb');
+            var maskAva = MQ.game.add.graphics(0, 0);
+            maskAva.beginFill(0xffffff);
+            maskAva.drawCircle(290 * MQ.configs.SCALE, 210 * MQ.configs.SCALE, 241 * MQ.configs.SCALE);
+            maskAva.anchor.set(0.5);
+            var ava = MQ.game.add.sprite(290 * MQ.configs.SCALE, 210 * MQ.configs.SCALE, 'ava_fb');
             ava.anchor.set(0.5);
+            ava.mask = maskAva;
             // ava.scale.set(MQ.configs.SCALE);
-            var nameFB = MQ.game.add.text(260*MQ.configs.SCALE, 400*MQ.configs.SCALE, `You`, {
-                font: `65px Roboto`,
+            var nameFB = MQ.game.add.text(290 * MQ.configs.SCALE, 400 * MQ.configs.SCALE, `You`, {
+                font: `50px Roboto`,
                 fill: "white",
                 boundsAlignH: "center",
                 boundsAlignV: "middle"
             });
             nameFB.anchor.set(0.5);
-            MQ.scoreText = MQ.game.add.text(MQ.game.width / 2, 490*MQ.configs.SCALE, `${MQ.score}`, {
+            MQ.scoreText = MQ.game.add.text(290, 490 * MQ.configs.SCALE, `${MQ.score}`, {
                 font: `60px Roboto`,
                 fill: "yellow",
                 boundsAlignH: "center",
@@ -139,17 +159,22 @@ var playState = {
             });
             MQ.scoreText.anchor.set(0.5);
             //oppo
-            var avaOpp = MQ.game.add.sprite(MQ.game.width - 260*MQ.configs.SCALE, 200*MQ.configs.SCALE, 'ava_fb_friend');
+            var maskAvaOpp = MQ.game.add.graphics(0, 0);
+            maskAvaOpp.beginFill(0xffffff);
+            maskAvaOpp.drawCircle(800 * MQ.configs.SCALE, 210 * MQ.configs.SCALE, 241 * MQ.configs.SCALE);
+            maskAvaOpp.anchor.set(0.5);
+            var avaOpp = MQ.game.add.sprite(800 * MQ.configs.SCALE, 210 * MQ.configs.SCALE, 'ava_fb_friend');
             avaOpp.anchor.set(0.5);
+            avaOpp.mask = maskAvaOpp;
             // avaOpp.scale.set(MQ.configs.SCALE);
-            var nameFBOpp = MQ.game.add.text(MQ.game.width - 260*MQ.configs.SCALE, 400*MQ.configs.SCALE, `${MQ.nameFriendChallenge}`, {
-                font: `65px Roboto`,
+            var nameFBOpp = MQ.game.add.text(800 * MQ.configs.SCALE, 400 * MQ.configs.SCALE, `${MQ.nameFriendChallenge}`, {
+                font: `50px Roboto`,
                 fill: "white",
                 boundsAlignH: "center",
                 boundsAlignV: "middle"
             });
             nameFBOpp.anchor.set(0.5);
-            MQ.scoreTextOpp = MQ.game.add.text(MQ.game.width - 260*MQ.configs.SCALE, 460*MQ.configs.SCALE, `${MQ.scoreOpp}`, {
+            MQ.scoreTextOpp = MQ.game.add.text(800 * MQ.configs.SCALE, 490 * MQ.configs.SCALE, `${MQ.scoreOpp}`, {
                 font: `60px Roboto`,
                 fill: "white",
                 boundsAlignH: "center",
@@ -161,7 +186,7 @@ var playState = {
             MQ.songChoicedPlay.play();
             // console.log(MQ.songChoiced);
             // console.log(MQ.songRandomChoiced);
-            var spriteTime = MQ.game.add.sprite(0, 654 * MQ.configs.SCALE, 'tween-time');
+            var spriteTime = MQ.game.add.sprite(0, 755 * MQ.configs.SCALE, 'tween-time');
             // spriteTime.scale.set(MQ.configs.SCALE);
             spriteTime.anchor.set(0, 0.5);
             var tweenSpriteTime = MQ.game.add.tween(spriteTime.scale).to({ x: MQ.configs.SCALE * 60, y: MQ.configs.SCALE }, 10000, "Linear");
@@ -204,11 +229,11 @@ var playState = {
                     if (!MQ.choosed) {
                         // MQ.songRandomChoiced = [];
                         // getSongToChallenge(() => {
-                            MQ.streak = 1;
-                            this.addTimeAnswerToData(11, false, "", MQ.songChoicedList[MQ.countQuiz].typeAnswer);
-                            MQ.songChoicedPlay.stop();
-                            MQ.countQuiz += 1;
-                            MQ.game.state.restart();
+                        MQ.streak = 1;
+                        this.addTimeAnswerToData(11, false, "", MQ.songChoicedList[MQ.countQuiz].typeAnswer);
+                        MQ.songChoicedPlay.stop();
+                        MQ.countQuiz += 1;
+                        MQ.game.state.restart();
                         // });
                     }
                 }
@@ -230,7 +255,7 @@ var playState = {
         MQ.game.debug.text(MQ.game.time.fps || '--', 10, 35, "#00ff00");
     },
     createAnswerTabA: function (typeAnswer, index) {
-        MQ.answerA = MQ.game.add.button(MQ.game.width / 2, 800 * MQ.configs.SCALE + (index * 255 * MQ.configs.SCALE), 'answer-tab');
+        MQ.answerA = MQ.game.add.button(MQ.game.width / 2, 898 * MQ.configs.SCALE + (index * 209 * MQ.configs.SCALE), 'answer-tab');
         // MQ.answerA.scale.set(MQ.configs.SCALE);
         MQ.answerA.anchor.set(0.5);
         MQ.answerA.events.onInputDown.add(() => {
@@ -266,16 +291,16 @@ var playState = {
                 if (MQ.countQuiz < 4) {
                     if (MQ.isChallenged) {
                         // getSongToQuiz(() => {
-                            // MQ.songRandomChoiced = [[],[],[]];
-                            MQ.songChoicedPlay.stop();
-                            MQ.countQuiz += 1;
-                            MQ.game.state.restart();
+                        // MQ.songRandomChoiced = [[],[],[]];
+                        MQ.songChoicedPlay.stop();
+                        MQ.countQuiz += 1;
+                        MQ.game.state.restart();
                         // });
                     } else {
                         // getSongToChallenge(() => {
-                            MQ.songChoicedPlay.stop();
-                            MQ.countQuiz += 1;
-                            MQ.game.state.restart();
+                        MQ.songChoicedPlay.stop();
+                        MQ.countQuiz += 1;
+                        MQ.game.state.restart();
                         // });
                     }
                 } else {
@@ -289,7 +314,7 @@ var playState = {
         // console.log(MQ.songRandomChoicedList[MQ.countQuiz][index]);
         if (typeAnswer == "song") {
             MQ.answerTextA = MQ.game.add.text(0, 0, `${MQ.songRandomChoicedList[MQ.countQuiz][index].song}`, {
-                font: `65px Roboto`,
+                font: `55px Roboto`,
                 fill: "black",
                 boundsAlignH: "center",
                 boundsAlignV: "middle"
@@ -302,7 +327,7 @@ var playState = {
         }
         else if (typeAnswer == "singer") {
             MQ.answerTextA = MQ.game.add.text(0, 0, `${MQ.songRandomChoicedList[MQ.countQuiz][index].singer}`, {
-                font: `65px Roboto`,
+                font: `55px Roboto`,
                 fill: "black",
                 boundsAlignH: "center",
                 boundsAlignV: "middle"
@@ -316,13 +341,13 @@ var playState = {
         // console.log(MQ.answerA.value);
         // console.log(MQ.songChoicedList);
         if (MQ.answerA.value == MQ.songChoicedList[MQ.countQuiz].answer) {
-            var ava_friend_challenge = MQ.game.add.sprite(-400, 0, 'ava_70');
+            var ava_friend_challenge = MQ.game.add.sprite(-400, 0, 'friend-challenge-mini');
             ava_friend_challenge.anchor.set(0.5);
             ava_friend_challenge.kill();
             MQ.game.time.events.add(Phaser.Timer.SECOND * MQ.songChoicedList[MQ.countQuiz].timingFriendChallenged, () => {
                 // console.log('events');
                 // console.log('fuck');
-                if(!MQ.isChallenged){
+                if (!MQ.isChallenged) {
                     ava_friend_challenge.revive();
                 }
             });
@@ -330,7 +355,7 @@ var playState = {
         }
     },
     createAnswerTabB: function (typeAnswer, index) {
-        MQ.answerB = MQ.game.add.button(MQ.game.width / 2, 800 * MQ.configs.SCALE + (index * 255 * MQ.configs.SCALE), 'answer-tab');
+        MQ.answerB = MQ.game.add.button(MQ.game.width / 2, 898 * MQ.configs.SCALE + (index * 209 * MQ.configs.SCALE), 'answer-tab');
         // MQ.answerB.scale.set(MQ.configs.SCALE);
         MQ.answerB.anchor.set(0.5);
         MQ.answerB.events.onInputDown.add(() => {
@@ -366,16 +391,16 @@ var playState = {
                 if (MQ.countQuiz < 4) {
                     if (MQ.isChallenged) {
                         // getSongToQuiz(() => {
-                            // MQ.songRandomChoiced = [[],[],[]];
-                            MQ.songChoicedPlay.stop();
-                            MQ.countQuiz += 1;
-                            MQ.game.state.restart();
+                        // MQ.songRandomChoiced = [[],[],[]];
+                        MQ.songChoicedPlay.stop();
+                        MQ.countQuiz += 1;
+                        MQ.game.state.restart();
                         // });
                     } else {
                         // getSongToChallenge(() => {
-                            MQ.songChoicedPlay.stop();
-                            MQ.countQuiz += 1;
-                            MQ.game.state.restart();
+                        MQ.songChoicedPlay.stop();
+                        MQ.countQuiz += 1;
+                        MQ.game.state.restart();
                         // });
                     }
                 } else {
@@ -388,7 +413,7 @@ var playState = {
         );
         if (typeAnswer == "song") {
             MQ.answerTextB = MQ.game.add.text(0, 0, `${MQ.songRandomChoicedList[MQ.countQuiz][index].song}`, {
-                font: `65px Roboto`,
+                font: `55px Roboto`,
                 fill: "black",
                 boundsAlignH: "center",
                 boundsAlignV: "middle"
@@ -401,7 +426,7 @@ var playState = {
         }
         else if (typeAnswer == "singer") {
             MQ.answerTextB = MQ.game.add.text(0, 0, `${MQ.songRandomChoicedList[MQ.countQuiz][index].singer}`, {
-                font: `65px Roboto`,
+                font: `55px Roboto`,
                 fill: "black",
                 boundsAlignH: "center",
                 boundsAlignV: "middle"
@@ -413,13 +438,13 @@ var playState = {
             // MQ.songRandomChoiced.splice(0, 1);
         }
         if (MQ.answerB.value == MQ.songChoicedList[MQ.countQuiz].answer) {
-            var ava_friend_challenge = MQ.game.add.sprite(-400, 0, 'ava_70');
+            var ava_friend_challenge = MQ.game.add.sprite(-400, 0, 'friend-challenge-mini');
             ava_friend_challenge.anchor.set(0.5);
             ava_friend_challenge.kill();
             MQ.game.time.events.add(Phaser.Timer.SECOND * MQ.songChoicedList[MQ.countQuiz].timingFriendChallenged, () => {
                 // console.log('events');
                 // console.log('fuck');
-                if(!MQ.isChallenged){
+                if (!MQ.isChallenged) {
                     ava_friend_challenge.revive();
                 }
             });
@@ -427,7 +452,7 @@ var playState = {
         }
     },
     createAnswerTabC: function (typeAnswer, index) {
-        MQ.answerC = MQ.game.add.button(MQ.game.width / 2, 800 * MQ.configs.SCALE + (index * 255 * MQ.configs.SCALE), 'answer-tab');
+        MQ.answerC = MQ.game.add.button(MQ.game.width / 2, 898 * MQ.configs.SCALE + (index * 209 * MQ.configs.SCALE), 'answer-tab');
         // MQ.answerC.scale.set(MQ.configs.SCALE);
         MQ.answerC.anchor.set(0.5);
         MQ.answerC.events.onInputDown.add(() => {
@@ -463,16 +488,16 @@ var playState = {
                 if (MQ.countQuiz < 4) {
                     if (MQ.isChallenged) {
                         // getSongToQuiz(() => {
-                            // MQ.songRandomChoiced = [[],[],[]];
-                            MQ.songChoicedPlay.stop();
-                            MQ.countQuiz += 1;
-                            MQ.game.state.restart();
+                        // MQ.songRandomChoiced = [[],[],[]];
+                        MQ.songChoicedPlay.stop();
+                        MQ.countQuiz += 1;
+                        MQ.game.state.restart();
                         // });
                     } else {
                         // getSongToChallenge(() => {
-                            MQ.songChoicedPlay.stop();
-                            MQ.countQuiz += 1;
-                            MQ.game.state.restart();
+                        MQ.songChoicedPlay.stop();
+                        MQ.countQuiz += 1;
+                        MQ.game.state.restart();
                         // });
                     }
                 } else {
@@ -485,7 +510,7 @@ var playState = {
         );
         if (typeAnswer == "song") {
             MQ.answerTextC = MQ.game.add.text(0, 0, `${MQ.songRandomChoicedList[MQ.countQuiz][index].song}`, {
-                font: `65px Roboto`,
+                font: `55px Roboto`,
                 fill: "black",
                 boundsAlignH: "center",
                 boundsAlignV: "middle"
@@ -498,7 +523,7 @@ var playState = {
         }
         else if (typeAnswer == "singer") {
             MQ.answerTextC = MQ.game.add.text(0, 0, `${MQ.songRandomChoicedList[MQ.countQuiz][index].singer}`, {
-                font: `65px Roboto`,
+                font: `55px Roboto`,
                 fill: "black",
                 boundsAlignH: "center",
                 boundsAlignV: "middle"
@@ -510,13 +535,13 @@ var playState = {
             // MQ.songRandomChoiced.splice(0, 1);
         }
         if (MQ.answerC.value == MQ.songChoicedList[MQ.countQuiz].answer) {
-            var ava_friend_challenge = MQ.game.add.sprite(-400, 0, 'ava_70');
+            var ava_friend_challenge = MQ.game.add.sprite(-400, 0, 'friend-challenge-mini');
             ava_friend_challenge.anchor.set(0.5);
             ava_friend_challenge.kill();
             MQ.game.time.events.add(Phaser.Timer.SECOND * MQ.songChoicedList[MQ.countQuiz].timingFriendChallenged, () => {
                 // console.log('events');
                 // console.log('fuck');
-                if(!MQ.isChallenged){
+                if (!MQ.isChallenged) {
                     ava_friend_challenge.revive();
                 }
             });
@@ -524,7 +549,7 @@ var playState = {
         }
     },
     createAnswerTabD: function (typeAnswer, index) {
-        MQ.answerD = MQ.game.add.button(MQ.game.width / 2, 800 * MQ.configs.SCALE + (index * 255 * MQ.configs.SCALE), 'answer-tab');
+        MQ.answerD = MQ.game.add.button(MQ.game.width / 2, 898 * MQ.configs.SCALE + (index * 209 * MQ.configs.SCALE), 'answer-tab');
         // MQ.answerD.scale.set(MQ.configs.SCALE);
         MQ.answerD.anchor.set(0.5);
         MQ.answerD.events.onInputDown.add(() => {
@@ -559,16 +584,16 @@ var playState = {
                 if (MQ.countQuiz < 4) {
                     if (MQ.isChallenged) {
                         // getSongToQuiz(() => {
-                            // MQ.songRandomChoiced = [[],[],[]];
-                            MQ.songChoicedPlay.stop();
-                            MQ.countQuiz += 1;
-                            MQ.game.state.restart();
+                        // MQ.songRandomChoiced = [[],[],[]];
+                        MQ.songChoicedPlay.stop();
+                        MQ.countQuiz += 1;
+                        MQ.game.state.restart();
                         // });
                     } else {
                         // getSongToChallenge(() => {
-                            MQ.songChoicedPlay.stop();
-                            MQ.countQuiz += 1;
-                            MQ.game.state.restart();
+                        MQ.songChoicedPlay.stop();
+                        MQ.countQuiz += 1;
+                        MQ.game.state.restart();
                         // });
                     }
                 } else {
@@ -581,7 +606,7 @@ var playState = {
         );
         if (typeAnswer == "song") {
             MQ.answerTextD = MQ.game.add.text(0, 0, `${MQ.songRandomChoicedList[MQ.countQuiz][index].song}`, {
-                font: `65px Roboto`,
+                font: `55px Roboto`,
                 fill: "black",
                 boundsAlignH: "center",
                 boundsAlignV: "middle"
@@ -594,7 +619,7 @@ var playState = {
         }
         else if (typeAnswer == "singer") {
             MQ.answerTextD = MQ.game.add.text(0, 0, `${MQ.songRandomChoicedList[MQ.countQuiz][index].singer}`, {
-                font: `65px Roboto`,
+                font: `55px Roboto`,
                 fill: "black",
                 boundsAlignH: "center",
                 boundsAlignV: "middle"
@@ -606,13 +631,13 @@ var playState = {
             // MQ.songRandomChoiced.splice(0, 1);
         }
         if (MQ.answerD.value == MQ.songChoicedList[MQ.countQuiz].answer) {
-            var ava_friend_challenge = MQ.game.add.sprite(-400, 0, 'ava_70');
+            var ava_friend_challenge = MQ.game.add.sprite(-400, 0, 'friend-challenge-mini');
             ava_friend_challenge.anchor.set(0.5);
             ava_friend_challenge.kill();
             MQ.game.time.events.add(Phaser.Timer.SECOND * MQ.songChoicedList[MQ.countQuiz].timingFriendChallenged, () => {
                 // console.log('events');
                 // console.log('fuck');
-                if(!MQ.isChallenged){
+                if (!MQ.isChallenged) {
                     ava_friend_challenge.revive();
                 }
             });
@@ -625,9 +650,9 @@ var playState = {
         // console.log(timeAnswerToSecond);
         MQ.score += Math.floor((11 - timeAnswerToSecond) * 100 * (Math.pow(11 - timeAnswerToSecond, (MQ.streak - 1) / 4)));
         MQ.streak++;
-        var textTimeAnswer = MQ.game.add.text(MQ.game.width / 2, MQ.game.height * (120 / 128), `${timeAnswerToSecond}s`, {
-            font: `180px Roboto`,
-            fill: "black",
+        var textTimeAnswer = MQ.game.add.text(MQ.game.width / 2, 1815, `${timeAnswerToSecond}s`, {
+            font: `110px Roboto`,
+            fill: "white",
             boundsAlignH: "center",
             boundsAlignV: "middle"
         });
@@ -649,7 +674,7 @@ var playState = {
         if (MQ.countQuiz <= 4) {
             if (!MQ.isChallenged) {
                 // console.log(MQ.dataChallenge.time[MQ.countQuiz - 1].trueORfalse);
-                if(MQ.dataChooseToChall.time[MQ.countQuiz].trueORfalse){
+                if (MQ.dataChooseToChall.time[MQ.countQuiz].trueORfalse) {
                     // console.log(MQ.dataChallenge.time[MQ.countQuiz - 1].timeAnswer);
                     // console.log(MQ.dataChallenge.time[MQ.countQuiz - 1].streak);
                     var scoreOpp = Math.floor((11 - MQ.dataChooseToChall.time[MQ.countQuiz].timeAnswer) * 100 * (Math.pow(11 - MQ.dataChooseToChall.time[MQ.countQuiz].timeAnswer, ((MQ.dataChooseToChall.time[MQ.countQuiz].streak - 2) / 4))));
@@ -659,20 +684,20 @@ var playState = {
             }
         }
     },
-    showCorrectAnswer: function(){
-        if (MQ.answerA.value == MQ.songChoicedList[MQ.countQuiz].Song1 || MQ.answerA.value == MQ.songChoicedList[MQ.countQuiz].Singer1){
+    showCorrectAnswer: function () {
+        if (MQ.answerA.value == MQ.songChoicedList[MQ.countQuiz].Song1 || MQ.answerA.value == MQ.songChoicedList[MQ.countQuiz].Singer1) {
             MQ.answerA.alpha = 1;
             MQ.answerTextA.addColor('#30FF77', 0);
         }
-        if (MQ.answerB.value == MQ.songChoicedList[MQ.countQuiz].Song1 || MQ.answerB.value == MQ.songChoicedList[MQ.countQuiz].Singer1){
+        if (MQ.answerB.value == MQ.songChoicedList[MQ.countQuiz].Song1 || MQ.answerB.value == MQ.songChoicedList[MQ.countQuiz].Singer1) {
             MQ.answerB.alpha = 1;
             MQ.answerTextB.addColor('#30FF77', 0);
         }
-        if (MQ.answerC.value == MQ.songChoicedList[MQ.countQuiz].Song1 || MQ.answerC.value == MQ.songChoicedList[MQ.countQuiz].Singer1){
+        if (MQ.answerC.value == MQ.songChoicedList[MQ.countQuiz].Song1 || MQ.answerC.value == MQ.songChoicedList[MQ.countQuiz].Singer1) {
             MQ.answerC.alpha = 1;
             MQ.answerTextC.addColor('#30FF77', 0);
         }
-        if (MQ.answerD.value == MQ.songChoicedList[MQ.countQuiz].Song1 || MQ.answerD.value == MQ.songChoicedList[MQ.countQuiz].Singer1){
+        if (MQ.answerD.value == MQ.songChoicedList[MQ.countQuiz].Song1 || MQ.answerD.value == MQ.songChoicedList[MQ.countQuiz].Singer1) {
             MQ.answerD.alpha = 1;
             MQ.answerTextD.addColor('#30FF77', 0);
         }

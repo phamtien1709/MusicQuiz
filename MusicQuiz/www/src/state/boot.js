@@ -1,5 +1,6 @@
 var bootState = {
   preload: function () {
+    this.game.sound.context.resume();
     MQ.game.scale.pageAlignHorizontally = true;
     MQ.game.time.advancedTiming = true;
     MQ.game.stage.disableVisibilityChange = true;
@@ -12,6 +13,7 @@ var bootState = {
     MQ.game.load.image('c-orange', 'img/assets/Loading/Circle_Orange.png');
     MQ.game.load.image('c-pink', 'img/assets/Loading/Circle_Pink.png');
     MQ.game.load.image('c-violet', 'img/assets/Loading/Circle_Violet.png');
+    createSoundDefault();
   },
   create: function () {
     this.game.stage.background = MQ.game.add.sprite(0, 0, 'bg-load');

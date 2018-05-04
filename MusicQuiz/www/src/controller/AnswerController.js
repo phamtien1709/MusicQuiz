@@ -46,7 +46,7 @@ class AnswerController {
         });
         if (this.configs.answer.typeAnswer == "song") {
             this.answerText = MQ.game.add.text(0, 0, `${this.configs.answer.song}`, {
-                font: `70px Roboto`,
+                font: `65px Roboto`,
                 fill: "black",
                 boundsAlignH: "center",
                 boundsAlignV: "middle"
@@ -57,7 +57,7 @@ class AnswerController {
             this.answer = this.configs.answer.song;
         } else {
             this.answerText = MQ.game.add.text(0, 0, `${this.configs.answer.singer}`, {
-                font: `70px Roboto`,
+                font: `65px Roboto`,
                 fill: "black",
                 boundsAlignH: "center",
                 boundsAlignV: "middle"

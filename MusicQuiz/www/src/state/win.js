@@ -1,6 +1,6 @@
 var winState = {
     preload: function () {
-
+        this.game.sound.context.resume();
     },
     create: function () {
         // showConsole('Win Screen');
@@ -16,7 +16,7 @@ var winState = {
         nameFB.anchor.set(0, 0.5);
         //
         if (MQ.responseChallen !== undefined) {
-            console.log(MQ.responseChallen);
+            // console.log(MQ.responseChallen);
             var objFilter = MQ.responseChallen.findIndex((ele) => {
                 return ele.data.idData == MQ.linkDB;
             })
@@ -94,7 +94,7 @@ var winState = {
             }
         }
         //
-        var btn_home = MQ.game.add.button(MQ.game.width / 2, MQ.game.height / 2, 'btn-home');
+        var btn_home = MQ.game.add.button(MQ.game.width / 2, MQ.game.height / 2, 'btn-rehome');
         btn_home.scale.set(MQ.configs.SCALE - 0.1);
         btn_home.anchor.set(0.5);
         btn_home.events.onInputDown.add(() => {

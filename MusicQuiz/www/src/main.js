@@ -36,6 +36,7 @@ window.onload = function () {
 }
 // preparations before game starts
 var preload = function () {
+    Howler._autoResume();
     MQ.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
     // MQ.game.scale.minWidth = MQ.configs.GAME_WIDTH / 2;
     // MQ.game.scale.minHeight = MQ.configs.GAME_HEIGHT / 2;
