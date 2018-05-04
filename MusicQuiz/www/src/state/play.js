@@ -9,7 +9,7 @@ var playState = {
         // console.log(MQ.songChoiced.Namefile);
     },
     create: function () {
-        showConsole('Play Screen');
+        // showConsole('Play Screen');
         // console.log(MQ.countQuiz);
         var bg = MQ.game.add.sprite(0,0,'bg-play');
         bg.width = MQ.game.width;
@@ -24,16 +24,16 @@ var playState = {
             // console.log(correctIndex);
             var ava = MQ.game.add.sprite(260*MQ.configs.SCALE, 200*MQ.configs.SCALE, 'ava_fb');
             ava.anchor.set(0.5);
-            ava.scale.set(MQ.configs.SCALE);
+            // ava.scale.set(MQ.configs.SCALE);
             var nameFB = MQ.game.add.text(260*MQ.configs.SCALE, 400*MQ.configs.SCALE, `You`, {
-                font: `${65/MQ.configs.DPR}px Roboto`,
+                font: `65px Roboto`,
                 fill: "white",
                 boundsAlignH: "center",
                 boundsAlignV: "middle"
             });
             nameFB.anchor.set(0.5);
             MQ.scoreText = MQ.game.add.text(MQ.game.width / 2, 490*MQ.configs.SCALE, `${MQ.score}`, {
-                font: `${60/MQ.configs.DPR}px Roboto`,
+                font: `60px Roboto`,
                 fill: "yellow",
                 boundsAlignH: "center",
                 boundsAlignV: "middle"
@@ -42,9 +42,9 @@ var playState = {
             // opp
             var avaOpp = MQ.game.add.sprite(MQ.game.width - 260*MQ.configs.SCALE, 200*MQ.configs.SCALE, 'ava_fb_friend');
             avaOpp.anchor.set(0.5);
-            avaOpp.scale.set(MQ.configs.SCALE);
+            // avaOpp.scale.set(MQ.configs.SCALE);
             var nameFBOpp = MQ.game.add.text(MQ.game.width - 260*MQ.configs.SCALE, 400*MQ.configs.SCALE, `${MQ.nameFriendChallenge}`, {
-                font: `${65/MQ.configs.DPR}px Roboto`,
+                font: `65px Roboto`,
                 fill: "white",
                 boundsAlignH: "center",
                 boundsAlignV: "middle"
@@ -56,7 +56,7 @@ var playState = {
             // console.log(MQ.songChoiced);
             // console.log(MQ.songRandomChoiced);
             var spriteTime = MQ.game.add.sprite(0, 654 * MQ.configs.SCALE, 'tween-time');
-            spriteTime.scale.set(MQ.configs.SCALE);
+            // spriteTime.scale.set(MQ.configs.SCALE);
             spriteTime.anchor.set(0, 0.5);
             var tweenSpriteTime = MQ.game.add.tween(spriteTime.scale).to({ x: MQ.configs.SCALE * 60, y: MQ.configs.SCALE }, 10000, "Linear");
             tweenSpriteTime.start();
@@ -67,7 +67,7 @@ var playState = {
                     (323 + MQ.correctList[i] * 107.5) * MQ.configs.SCALE,
                     580.5 * MQ.configs.SCALE,
                     'correct-mini');
-                correctMini.scale.set(MQ.configs.SCALE);
+                // correctMini.scale.set(MQ.configs.SCALE);
                 correctMini.anchor.set(0.5);
             }
             for (i = 0; i < MQ.wrongList.length; i++) {
@@ -75,7 +75,7 @@ var playState = {
                     (323 + MQ.wrongList[i] * 107.5) * MQ.configs.SCALE,
                     580.5 * MQ.configs.SCALE,
                     'wrong-mini');
-                wrongMini.scale.set(MQ.configs.SCALE);
+                // wrongMini.scale.set(MQ.configs.SCALE);
                 wrongMini.anchor.set(0.5);
             }
             // create answer
@@ -123,16 +123,16 @@ var playState = {
             //your
             var ava = MQ.game.add.sprite(260*MQ.configs.SCALE, 200*MQ.configs.SCALE, 'ava_fb');
             ava.anchor.set(0.5);
-            ava.scale.set(MQ.configs.SCALE);
+            // ava.scale.set(MQ.configs.SCALE);
             var nameFB = MQ.game.add.text(260*MQ.configs.SCALE, 400*MQ.configs.SCALE, `You`, {
-                font: `${65/MQ.configs.DPR}px Roboto`,
+                font: `65px Roboto`,
                 fill: "white",
                 boundsAlignH: "center",
                 boundsAlignV: "middle"
             });
             nameFB.anchor.set(0.5);
             MQ.scoreText = MQ.game.add.text(MQ.game.width / 2, 490*MQ.configs.SCALE, `${MQ.score}`, {
-                font: `${60/MQ.configs.DPR}px Roboto`,
+                font: `60px Roboto`,
                 fill: "yellow",
                 boundsAlignH: "center",
                 boundsAlignV: "middle"
@@ -141,16 +141,16 @@ var playState = {
             //oppo
             var avaOpp = MQ.game.add.sprite(MQ.game.width - 260*MQ.configs.SCALE, 200*MQ.configs.SCALE, 'ava_fb_friend');
             avaOpp.anchor.set(0.5);
-            avaOpp.scale.set(MQ.configs.SCALE);
+            // avaOpp.scale.set(MQ.configs.SCALE);
             var nameFBOpp = MQ.game.add.text(MQ.game.width - 260*MQ.configs.SCALE, 400*MQ.configs.SCALE, `${MQ.nameFriendChallenge}`, {
-                font: `${65/MQ.configs.DPR}px Roboto`,
+                font: `65px Roboto`,
                 fill: "white",
                 boundsAlignH: "center",
                 boundsAlignV: "middle"
             });
             nameFBOpp.anchor.set(0.5);
             MQ.scoreTextOpp = MQ.game.add.text(MQ.game.width - 260*MQ.configs.SCALE, 460*MQ.configs.SCALE, `${MQ.scoreOpp}`, {
-                font: `${60/MQ.configs.DPR}px Roboto`,
+                font: `60px Roboto`,
                 fill: "white",
                 boundsAlignH: "center",
                 boundsAlignV: "middle"
@@ -162,7 +162,7 @@ var playState = {
             // console.log(MQ.songChoiced);
             // console.log(MQ.songRandomChoiced);
             var spriteTime = MQ.game.add.sprite(0, 654 * MQ.configs.SCALE, 'tween-time');
-            spriteTime.scale.set(MQ.configs.SCALE);
+            // spriteTime.scale.set(MQ.configs.SCALE);
             spriteTime.anchor.set(0, 0.5);
             var tweenSpriteTime = MQ.game.add.tween(spriteTime.scale).to({ x: MQ.configs.SCALE * 60, y: MQ.configs.SCALE }, 10000, "Linear");
             tweenSpriteTime.start();
@@ -172,7 +172,7 @@ var playState = {
                     (323 + MQ.correctList[i] * 107.5) * MQ.configs.SCALE,
                     580.5 * MQ.configs.SCALE,
                     'correct-mini');
-                correctMini.scale.set(MQ.configs.SCALE);
+                // correctMini.scale.set(MQ.configs.SCALE);
                 correctMini.anchor.set(0.5);
             }
             for (i = 0; i < MQ.wrongList.length; i++) {
@@ -180,7 +180,7 @@ var playState = {
                     (323 + MQ.wrongList[i] * 107.5) * MQ.configs.SCALE,
                     580.5 * MQ.configs.SCALE,
                     'wrong-mini');
-                wrongMini.scale.set(MQ.configs.SCALE);
+                // wrongMini.scale.set(MQ.configs.SCALE);
                 wrongMini.anchor.set(0.5);
             }
             // create answer
@@ -231,7 +231,7 @@ var playState = {
     },
     createAnswerTabA: function (typeAnswer, index) {
         MQ.answerA = MQ.game.add.button(MQ.game.width / 2, 800 * MQ.configs.SCALE + (index * 255 * MQ.configs.SCALE), 'answer-tab');
-        MQ.answerA.scale.set(MQ.configs.SCALE);
+        // MQ.answerA.scale.set(MQ.configs.SCALE);
         MQ.answerA.anchor.set(0.5);
         MQ.answerA.events.onInputDown.add(() => {
             MQ.choosed = true;
@@ -289,26 +289,26 @@ var playState = {
         // console.log(MQ.songRandomChoicedList[MQ.countQuiz][index]);
         if (typeAnswer == "song") {
             MQ.answerTextA = MQ.game.add.text(0, 0, `${MQ.songRandomChoicedList[MQ.countQuiz][index].song}`, {
-                font: `${65/MQ.configs.DPR}px Roboto`,
+                font: `65px Roboto`,
                 fill: "black",
                 boundsAlignH: "center",
                 boundsAlignV: "middle"
             });
             MQ.answerTextA.anchor.set(0.5);
-            MQ.answerTextA.scale.set(1/MQ.configs.SCALE);
+            // MQ.answerTextA.scale.set(1/MQ.configs.SCALE);
             MQ.answerA.value = MQ.songRandomChoicedList[MQ.countQuiz][index].song;
             MQ.answerA.addChild(MQ.answerTextA);
             // MQ.songRandomChoiced.splice(0, 1);
         }
         else if (typeAnswer == "singer") {
             MQ.answerTextA = MQ.game.add.text(0, 0, `${MQ.songRandomChoicedList[MQ.countQuiz][index].singer}`, {
-                font: `${65/MQ.configs.DPR}px Roboto`,
+                font: `65px Roboto`,
                 fill: "black",
                 boundsAlignH: "center",
                 boundsAlignV: "middle"
             });
             MQ.answerTextA.anchor.set(0.5);
-            MQ.answerTextA.scale.set(1/MQ.configs.SCALE);
+            // MQ.answerTextA.scale.set(1/MQ.configs.SCALE);
             MQ.answerA.value = MQ.songRandomChoicedList[MQ.countQuiz][index].singer;
             MQ.answerA.addChild(MQ.answerTextA);
             // MQ.songRandomChoiced.splice(0, 1);
@@ -331,7 +331,7 @@ var playState = {
     },
     createAnswerTabB: function (typeAnswer, index) {
         MQ.answerB = MQ.game.add.button(MQ.game.width / 2, 800 * MQ.configs.SCALE + (index * 255 * MQ.configs.SCALE), 'answer-tab');
-        MQ.answerB.scale.set(MQ.configs.SCALE);
+        // MQ.answerB.scale.set(MQ.configs.SCALE);
         MQ.answerB.anchor.set(0.5);
         MQ.answerB.events.onInputDown.add(() => {
             MQ.choosed = true;
@@ -388,26 +388,26 @@ var playState = {
         );
         if (typeAnswer == "song") {
             MQ.answerTextB = MQ.game.add.text(0, 0, `${MQ.songRandomChoicedList[MQ.countQuiz][index].song}`, {
-                font: `${65/MQ.configs.DPR}px Roboto`,
+                font: `65px Roboto`,
                 fill: "black",
                 boundsAlignH: "center",
                 boundsAlignV: "middle"
             });
             MQ.answerTextB.anchor.set(0.5);
-            MQ.answerTextB.scale.set(1/MQ.configs.SCALE);
+            // MQ.answerTextB.scale.set(1/MQ.configs.SCALE);
             MQ.answerB.value = MQ.songRandomChoicedList[MQ.countQuiz][index].song;
             MQ.answerB.addChild(MQ.answerTextB);
             // MQ.songRandomChoiced.splice(0, 1);
         }
         else if (typeAnswer == "singer") {
             MQ.answerTextB = MQ.game.add.text(0, 0, `${MQ.songRandomChoicedList[MQ.countQuiz][index].singer}`, {
-                font: `${65/MQ.configs.DPR}px Roboto`,
+                font: `65px Roboto`,
                 fill: "black",
                 boundsAlignH: "center",
                 boundsAlignV: "middle"
             });
             MQ.answerTextB.anchor.set(0.5);
-            MQ.answerTextB.scale.set(1/MQ.configs.SCALE);
+            // MQ.answerTextB.scale.set(1/MQ.configs.SCALE);
             MQ.answerB.value = MQ.songRandomChoicedList[MQ.countQuiz][index].singer;
             MQ.answerB.addChild(MQ.answerTextB);
             // MQ.songRandomChoiced.splice(0, 1);
@@ -428,7 +428,7 @@ var playState = {
     },
     createAnswerTabC: function (typeAnswer, index) {
         MQ.answerC = MQ.game.add.button(MQ.game.width / 2, 800 * MQ.configs.SCALE + (index * 255 * MQ.configs.SCALE), 'answer-tab');
-        MQ.answerC.scale.set(MQ.configs.SCALE);
+        // MQ.answerC.scale.set(MQ.configs.SCALE);
         MQ.answerC.anchor.set(0.5);
         MQ.answerC.events.onInputDown.add(() => {
             MQ.choosed = true;
@@ -485,26 +485,26 @@ var playState = {
         );
         if (typeAnswer == "song") {
             MQ.answerTextC = MQ.game.add.text(0, 0, `${MQ.songRandomChoicedList[MQ.countQuiz][index].song}`, {
-                font: `${65/MQ.configs.DPR}px Roboto`,
+                font: `65px Roboto`,
                 fill: "black",
                 boundsAlignH: "center",
                 boundsAlignV: "middle"
             });
             MQ.answerTextC.anchor.set(0.5);
-            MQ.answerTextC.scale.set(1/MQ.configs.SCALE);
+            // MQ.answerTextC.scale.set(1/MQ.configs.SCALE);
             MQ.answerC.value = MQ.songRandomChoicedList[MQ.countQuiz][index].song;
             MQ.answerC.addChild(MQ.answerTextC);
             // MQ.songRandomChoiced.splice(0, 1);
         }
         else if (typeAnswer == "singer") {
             MQ.answerTextC = MQ.game.add.text(0, 0, `${MQ.songRandomChoicedList[MQ.countQuiz][index].singer}`, {
-                font: `${65/MQ.configs.DPR}px Roboto`,
+                font: `65px Roboto`,
                 fill: "black",
                 boundsAlignH: "center",
                 boundsAlignV: "middle"
             });
             MQ.answerTextC.anchor.set(0.5);
-            MQ.answerTextC.scale.set(1/MQ.configs.SCALE);
+            // MQ.answerTextC.scale.set(1/MQ.configs.SCALE);
             MQ.answerC.value = MQ.songRandomChoicedList[MQ.countQuiz][index].singer;
             MQ.answerC.addChild(MQ.answerTextC);
             // MQ.songRandomChoiced.splice(0, 1);
@@ -525,7 +525,7 @@ var playState = {
     },
     createAnswerTabD: function (typeAnswer, index) {
         MQ.answerD = MQ.game.add.button(MQ.game.width / 2, 800 * MQ.configs.SCALE + (index * 255 * MQ.configs.SCALE), 'answer-tab');
-        MQ.answerD.scale.set(MQ.configs.SCALE);
+        // MQ.answerD.scale.set(MQ.configs.SCALE);
         MQ.answerD.anchor.set(0.5);
         MQ.answerD.events.onInputDown.add(() => {
             MQ.choosed = true;
@@ -581,26 +581,26 @@ var playState = {
         );
         if (typeAnswer == "song") {
             MQ.answerTextD = MQ.game.add.text(0, 0, `${MQ.songRandomChoicedList[MQ.countQuiz][index].song}`, {
-                font: `${65/MQ.configs.DPR}px Roboto`,
+                font: `65px Roboto`,
                 fill: "black",
                 boundsAlignH: "center",
                 boundsAlignV: "middle"
             });
             MQ.answerTextD.anchor.set(0.5);
-            MQ.answerTextD.scale.set(1/MQ.configs.SCALE);
+            // MQ.answerTextD.scale.set(1/MQ.configs.SCALE);
             MQ.answerD.value = MQ.songRandomChoicedList[MQ.countQuiz][index].song;
             MQ.answerD.addChild(MQ.answerTextD);
             // MQ.songRandomChoiced.splice(0, 1);
         }
         else if (typeAnswer == "singer") {
             MQ.answerTextD = MQ.game.add.text(0, 0, `${MQ.songRandomChoicedList[MQ.countQuiz][index].singer}`, {
-                font: `${65/MQ.configs.DPR}px Roboto`,
+                font: `65px Roboto`,
                 fill: "black",
                 boundsAlignH: "center",
                 boundsAlignV: "middle"
             });
             MQ.answerTextD.anchor.set(0.5);
-            MQ.answerTextD.scale.set(1/MQ.configs.SCALE);
+            // MQ.answerTextD.scale.set(1/MQ.configs.SCALE);
             MQ.answerD.value = MQ.songRandomChoicedList[MQ.countQuiz][index].singer;
             MQ.answerD.addChild(MQ.answerTextD);
             // MQ.songRandomChoiced.splice(0, 1);
@@ -626,7 +626,7 @@ var playState = {
         MQ.score += Math.floor((11 - timeAnswerToSecond) * 100 * (Math.pow(11 - timeAnswerToSecond, (MQ.streak - 1) / 4)));
         MQ.streak++;
         var textTimeAnswer = MQ.game.add.text(MQ.game.width / 2, MQ.game.height * (120 / 128), `${timeAnswerToSecond}s`, {
-            font: `${180/MQ.configs.DPR}px Roboto`,
+            font: `180px Roboto`,
             fill: "black",
             boundsAlignH: "center",
             boundsAlignV: "middle"

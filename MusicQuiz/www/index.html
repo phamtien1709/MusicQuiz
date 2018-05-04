@@ -31,7 +31,16 @@
         -->
     <meta name="format-detection" content="telephone=no">
     <meta name="msapplication-tap-highlight" content="no">
+    <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <style type="text/css">
+        canvas {
+            touch-action-delay: none;
+            touch-action: none;
+            -ms-touch-action: none;
+        }
+    </style>
     <link rel="stylesheet" type="text/css" href="css/index.css">
     <title>Music Quiz</title>
     <script src="https://connect.facebook.net/en_US/fbinstant.6.0.js"></script>
@@ -61,22 +70,16 @@
     <script src="./src/handle/handleDiamond.js"></script>
     <script src="./src/handle/handleHeart.js"></script>
     <script src="./src/handle/handleTicket.js"></script>
+    <script src="./src/handle/handleSound.js"></script>
 </head>
 
 <body>
-    <!-- <script>
-        console.log(window.devicePixelRatio);
-    </script> -->
-    <!-- <script>
-        
-        sound.play();
-    </script> -->
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
-    <div id="console">
+    <!-- <div id="console">
         Console.log div
     </div>
-    <script src="./src/showConsoleInScreen.js"></script>
+    <script src="./src/showConsoleInScreen.js"></script> -->
 </body>
 
 </html>

@@ -3,7 +3,7 @@ var practiceState = {
 
     },
     create: function () {
-        showConsole('Practice Screen');
+        // showConsole('Practice Screen');
         // sprite ava tween to number of answer
         MQ.practiceLoadDone = false;
         //
@@ -26,11 +26,11 @@ var practiceState = {
         //fsf
         var ava = MQ.game.add.button(MQ.game.width / 2, 182 * MQ.configs.SCALE, 'ava_fb');
         ava.anchor.set(0.5);
-        ava.scale.set(MQ.configs.SCALE);
+        // ava.scale.set(MQ.configs.SCALE);
         ava.mask = maskAva;
         //
         var nameFB = MQ.game.add.text(MQ.game.width / 2, 340 * MQ.configs.SCALE, `${MQ.nameFB}`, {
-            font: `${70 / MQ.configs.DPR}px Roboto`,
+            font: `70px Roboto`,
             fill: "white",
             boundsAlignH: "center",
             boundsAlignV: "middle"
@@ -38,10 +38,10 @@ var practiceState = {
         nameFB.anchor.set(0.5);
         var map = MQ.game.add.sprite(MQ.game.world.centerX, 693.5 * MQ.configs.SCALE, 'map-practice');
         map.anchor.set(0.5);
-        map.scale.set(MQ.configs.SCALE);
+        // map.scale.set(MQ.configs.SCALE);
         var btn_home = MQ.game.add.button(142 * MQ.configs.SCALE, 112 * MQ.configs.SCALE, 'btn-home');
         btn_home.anchor.set(0.5);
-        btn_home.scale.set(MQ.configs.SCALE);
+        // btn_home.scale.set(MQ.configs.SCALE);
         btn_home.events.onInputDown.add(() => {
             // alert('You really want to come Menu. OK to confirm!');
             MQ.songChoicedPlay.stop();
@@ -94,7 +94,7 @@ var practiceState = {
             }
         }
         var spriteTime = MQ.game.add.sprite(0, 1020 * MQ.configs.SCALE, 'tween-time');
-        spriteTime.scale.set(MQ.configs.SCALE);
+        // spriteTime.scale.set(MQ.configs.SCALE);
         spriteTime.anchor.set(0, 0.5);
         var tweenSpriteTime = MQ.game.add.tween(spriteTime.scale).to({ x: MQ.configs.SCALE * 60, y: MQ.configs.SCALE }, 10000, "Linear");
         tweenSpriteTime.start();
@@ -135,10 +135,10 @@ var practiceState = {
         practiceState.load.start();
     },
     loadStart: function () {
-        showConsole('Loading...');
+        // showConsole('Loading...');
     },
     fileComplete: function (progress, cacheKey, success, totalLoaded, totalFiles) {
-        showConsole(`File Complete: ${progress}% - ${totalLoaded} out of ${totalFiles}`);
+        // showConsole(`File Complete: ${progress}% - ${totalLoaded} out of ${totalFiles}`);
     },
     loadComplete: function () {
         if (!MQ.practiceLoadDone) {
@@ -150,7 +150,7 @@ var practiceState = {
     CreateAnswerAndDiamondText: function (answerPosX, answerPosY, diamondPosX, diamondPosY, valAnswer, valReward, posCircleX, posCircleY) {
         const diamond = MQ.game.add.sprite((diamondPosX + 10) * MQ.configs.SCALE, (diamondPosY - 10) * MQ.configs.SCALE, 'diamond');
         diamond.anchor.set(0, 0.5);
-        diamond.scale.set(MQ.configs.SCALE);
+        // diamond.scale.set(MQ.configs.SCALE);
         const txt_diamond = MQ.game.add.text((diamondPosX) * MQ.configs.SCALE, diamondPosY * MQ.configs.SCALE, `${valReward}`, {
             font: `${45 * MQ.configs.SCALE}px Roboto`,
             fill: "white",
@@ -170,7 +170,7 @@ var practiceState = {
             // if(MQ.indexSongChoiced.length - 1 == valAnswer){
             const circle = MQ.game.add.sprite(posCircleX * MQ.configs.SCALE, posCircleY * MQ.configs.SCALE, 'circle-active');
             circle.anchor.set(0.5);
-            circle.scale.set(MQ.configs.SCALE);
+            // circle.scale.set(MQ.configs.SCALE);
             // }
         } else {
             txt_answered.alpha = 0.5;

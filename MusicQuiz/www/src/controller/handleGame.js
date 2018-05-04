@@ -1,4 +1,5 @@
 function getSongToQuiz(callback) {
+    // console.log('Ge')
     var arr = [];
     // add new array of dataType
     for (i = 0; i < MQ.data.length; i++) {
@@ -94,7 +95,8 @@ function postRequestChallengeToFriend(callback) {
         data: {
             "idData": MQ.idDataChallenge.$oid,
             "scoreTheir": MQ.scoreYour,
-            "scoreYour": MQ.scoreTheir
+            "scoreYour": MQ.scoreTheir,
+            "isChallenge": true
         }
     }, function (response) {
         console.log(response);

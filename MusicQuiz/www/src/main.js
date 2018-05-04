@@ -2,7 +2,7 @@
 var width;
 var dpr;
 if (window.devicePixelRatio == 1) {
-    dpr = 1.2;
+    dpr = 1.0;
 } else {
     dpr = 1;
 }
@@ -15,14 +15,14 @@ var MQ = {};
 // configs
 // Define our 'global' variable
 MQ.configs = {
-    GAME_WIDTH: width,
-    GAME_HEIGHT: width / 9 * 16,
-    SCALE: width / 1080,
+    GAME_WIDTH: 1080,
+    GAME_HEIGHT: 1920,
+    SCALE: 1080 / 1080,
     SONG_NUMBER: 51,
     DPR: window.devicePixelRatio * dpr
 };
 window.onload = function () {
-    MQ.game = new Phaser.Game(MQ.configs.GAME_WIDTH, MQ.configs.GAME_HEIGHT, Phaser.CANVAS, '', null, false, false);
+    MQ.game = new Phaser.Game(1080, 1920, Phaser.CANVAS, '', null, false, false);
     // Add all the states
     MQ.game.state.add('boot', bootState);
     MQ.game.state.add('load', loadState);

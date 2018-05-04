@@ -2,7 +2,7 @@ class AnswerController {
     constructor(x, y, configs) {
         this.sprite = MQ.answerGroup.create(x, y, 'answer-tab');
         this.sprite.anchor = new Phaser.Point(0.5, 0.5);
-        this.sprite.scale.setTo(MQ.configs.SCALE);
+        // this.sprite.scale.setTo(MQ.configs.SCALE);
         this.sprite.update = this.update.bind(this);
         this.sprite.inputEnabled = true;
         this.configs = configs;
@@ -46,24 +46,24 @@ class AnswerController {
         });
         if (this.configs.answer.typeAnswer == "song") {
             this.answerText = MQ.game.add.text(0, 0, `${this.configs.answer.song}`, {
-                font: `${70 / MQ.configs.DPR}px Roboto`,
+                font: `70px Roboto`,
                 fill: "black",
                 boundsAlignH: "center",
                 boundsAlignV: "middle"
             });
             this.answerText.anchor.set(0.5);
-            this.answerText.scale.set(1/MQ.configs.SCALE);
+            // this.answerText.scale.set(1/MQ.configs.SCALE);
             this.sprite.addChild(this.answerText);
             this.answer = this.configs.answer.song;
         } else {
             this.answerText = MQ.game.add.text(0, 0, `${this.configs.answer.singer}`, {
-                font: `${70 / MQ.configs.DPR}px Roboto`,
+                font: `70px Roboto`,
                 fill: "black",
                 boundsAlignH: "center",
                 boundsAlignV: "middle"
             });
             this.answerText.anchor.set(0.5);
-            this.answerText.scale.set(1/MQ.configs.SCALE);
+            // this.answerText.scale.set(1/MQ.configs.SCALE);
             this.sprite.addChild(this.answerText);
             this.answer = this.configs.answer.singer;
         }

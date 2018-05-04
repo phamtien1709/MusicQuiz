@@ -6,10 +6,29 @@ var bootState = {
     MQ.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
     MQ.game.load.image('bg', 'img/assets/bg.png');
     MQ.game.load.image('btn-fb', 'img/assets/fb-login.png');
+    MQ.game.load.image('bg-load', 'img/assets/Loading/bg.png');
+    MQ.game.load.image('logo', 'img/assets/Loading/Logo.png');
+    MQ.game.load.image('disc', 'img/assets/Loading/Disc.png');
+    MQ.game.load.image('c-orange', 'img/assets/Loading/Circle_Orange.png');
+    MQ.game.load.image('c-pink', 'img/assets/Loading/Circle_Pink.png');
+    MQ.game.load.image('c-violet', 'img/assets/Loading/Circle_Violet.png');
   },
   create: function () {
-    showConsole("Boot screen");
-    MQ.game.stage.smoothed = true;
+    this.game.stage.background = MQ.game.add.sprite(0, 0, 'bg-load');
+    this.logo = MQ.game.add.sprite(MQ.game.world.centerX, 222, 'logo');
+    this.logo.anchor.set(0.5);
+    this.term_txt = MQ.game.add.text(MQ.game.world.centerX, 1848, 'Để bắt đầu game, bạn phải đồng ý với Điều khoản sử dụng', {
+      font: "40px Roboto",
+      fill: "white",
+      boundsAlignH: "center",
+      boundsAlignV: "middle"
+    });
+    this.term_txt.anchor.set(0.5);
+    // this.term_txt.addColor("#ffffff",0);
+    this.term_txt.addColor("#ffa33a", 37);
+    // showConsole("Boot screen");
+    // console.log(MQ.game.width, MQ.game.height);
+    // this.game.stage.smoothed = true;
     MQ.achievementPractice = [
       {
         "answer": 2,
@@ -146,13 +165,14 @@ var bootState = {
     ];
     MQ.playListFree = ['Playlist 1', 'Playlist 2', 'Playlist 3'];
     MQ.game.stage.backgroundColor = "#ffffff";
-    var bg = MQ.game.add.sprite(0, 0, 'bg');
-    bg.width = MQ.game.width;
-    bg.height = MQ.game.height;
-    MQ.btn_fb = MQ.game.add.button(MQ.game.width / 2, MQ.game.height / 2, 'btn-fb');
+    // var bg = MQ.game.add.sprite(0, 0, 'bg');
+    // bg.width = MQ.game.width;
+    // bg.height = MQ.game.height;
+    MQ.btn_fb = MQ.game.add.button(MQ.game.world.centerX, 613, 'btn-fb');
     MQ.btn_fb.anchor.set(0.5);
-    MQ.btn_fb.scale.set(MQ.configs.SCALE);
+    // MQ.btn_fb.scale.set(MQ.configs.SCALE);
     MQ.btn_fb.events.onInputDown.add(() => {
+      // MQ.button_sound.play();
       console.log('fb login');
       FB.login(function (response) {
         // console.log(response);
@@ -162,14 +182,19 @@ var bootState = {
         if (response.status == 'connected') {
           MQ.game.state.start('boot');
         }
-      }, { scope: 'user_likes,email, user_location, user_birthday, publish_actions, user_friends,read_custom_friendlists' });
+      }, { scope: 'user_likes,email, user_location, user_birthday, publish_actions, user_friends' });
     });
     checkLoginState(() => {
       getUserID(() => {
-        showConsole("Loading....");
+        // showConsole("Loading....");
+        // MQ.button_sound.stop();
         MQ.game.state.start('load');
       })
     });
+    // MQ.button_sound.on('end', () => {
+    //   // console.log('end btn');
+    //   MQ.button_sound.stop();
+    // });
   },
   update: function () {
     if (MQ.checkConnect == 'connected') {
