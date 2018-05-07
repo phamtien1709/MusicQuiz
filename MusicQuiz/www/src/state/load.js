@@ -54,16 +54,19 @@ var loadState = {
         MQ.game.load.image('btn-next', 'img/assets/btn-next.png');
         // MQ.game.load.image('btn-home', 'img/assets/btn-home.png');
         MQ.game.load.image('btn-playing', 'img/assets/btn-playing.png');
+        //practice
+        MQ.game.load.image('bg-practice', 'img/assets/Practice/BG_GamePlay.png');
         //play state
         MQ.game.load.image('bg-play', 'img/assets/Play/BG_GamePlay.png');
         MQ.game.load.image('tween-time', 'img/assets/tween-time.png');
         MQ.game.load.image('answer-tab', 'img/assets/Play/Button_Cautraloi_01.png');
         MQ.game.load.image('circle', 'img/assets/circle.png');
         MQ.game.load.image('btn-remove-answer', 'img/assets/Play/Button_Bo2DapAn.png');
+        MQ.game.load.image('wrong-mini', 'img/assets/Play/Sai.png');
+        MQ.game.load.image('correct-mini', 'img/assets/Play/Dung.png');
+        MQ.game.load.image('circle-white', 'img/assets/Play/Circle_01.png');
         // MQ.game.load.image('btn-play', 'img/assets/btn-play.png');;
         MQ.game.load.image('btn-playing', 'img/assets/btn-playing.png');
-        MQ.game.load.image('wrong-mini', 'img/assets/wrong-mini.png');
-        MQ.game.load.image('correct-mini', 'img/assets/correct-mini.png');
         MQ.game.load.image('btn-invite', 'img/assets/btn-invite.png');
         MQ.game.load.image('circle-active', 'img/assets/Practice/Circle_active.png');
         MQ.game.load.image('map-practice', 'img/assets/Practice/Map.png');
@@ -79,9 +82,7 @@ var loadState = {
         MQ.game.load.image('tab-recent', 'img/assets/playlist/tab_recent.png');
         MQ.game.load.image('bop', 'img/assets/playlist/best-of-playlist.png');
         //popup playlist
-        MQ.game.load.image('popup-playlist', 'img/assets/popup/popup-playlist.png');
-        MQ.game.load.image('sprite-playlist', 'img/assets/popup/sprite-playlist.png');
-        MQ.game.load.image('x-button', 'img/assets/popup/x-button.png');
+        
         // menu
         MQ.game.load.image('bg-menu', 'img/assets/Menu/BG_main.png');
         MQ.game.load.image('heart', 'img/assets/Menu/Heart_Icon.png');

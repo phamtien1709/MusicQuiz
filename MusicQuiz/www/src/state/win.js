@@ -15,13 +15,6 @@ var winState = {
         });
         nameFB.anchor.set(0, 0.5);
         //
-        if (MQ.responseChallen !== undefined) {
-            // console.log(MQ.responseChallen);
-            var objFilter = MQ.responseChallen.findIndex((ele) => {
-                return ele.data.idData == MQ.linkDB;
-            })
-            MQ.idRequest = MQ.responseChallen[objFilter].id;
-        }
         //********************************************** */
         //********************************************* */
         if (MQ.practiceMode) {
@@ -32,6 +25,13 @@ var winState = {
                 boundsAlignV: "middle"
             });
         } else {
+            if (MQ.responseChallen !== undefined) {
+                // console.log(MQ.responseChallen);
+                var objFilter = MQ.responseChallen.findIndex((ele) => {
+                    return ele.data.idData == MQ.linkDB;
+                })
+                MQ.idRequest = MQ.responseChallen[objFilter].id;
+            }
             var scoreText = MQ.game.add.text(MQ.game.width / 2, 300 * MQ.configs.SCALE, `${MQ.score}`, {
                 font: `50px Roboto`,
                 fill: "black",

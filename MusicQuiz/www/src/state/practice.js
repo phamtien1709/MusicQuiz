@@ -150,6 +150,7 @@ var practiceState = {
     CreateAnswerAndDiamondText: function (answerPosX, answerPosY, diamondPosX, diamondPosY, valAnswer, valReward, posCircleX, posCircleY) {
         const diamond = MQ.game.add.sprite((diamondPosX + 10) * MQ.configs.SCALE, (diamondPosY - 10) * MQ.configs.SCALE, 'diamond');
         diamond.anchor.set(0, 0.5);
+        diamond.scale.set(0.7);
         // diamond.scale.set(MQ.configs.SCALE);
         const txt_diamond = MQ.game.add.text((diamondPosX) * MQ.configs.SCALE, diamondPosY * MQ.configs.SCALE, `${valReward}`, {
             font: `${45 * MQ.configs.SCALE}px Roboto`,

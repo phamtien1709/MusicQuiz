@@ -151,23 +151,10 @@ var menuState = {
         MQ.testMaskChallenge = 0;
         MQ.testMask = 0;
         MQ.testMaskInstalled = 0;
-        //btn next
-        var btn_next = MQ.game.add.button(MQ.game.width / 3 * 2, MQ.game.height * (125 / 128), 'btn-next');
-        // btn_next.scale.set(MQ.configs.SCALE - 0.1);
-        btn_next.anchor.set(0.5);
-        btn_next.kill();
-        //btn playing
-        var btn_playing = MQ.game.add.button(MQ.game.width / 3, MQ.game.height * (125 / 128), 'btn-playing');
-        // btn_playing.scale.set(MQ.configs.SCALE - 0.1);
-        btn_playing.anchor.set(0.5);
-        btn_playing.kill();
         MQ.grapChallenge.mask = MQ.scrollMaskChall;
         //TEST TODO:
         // console.log(MQ.responseChallen);
         //
-        btn_playing.events.onInputDown.add(() => {
-            MQ.button_sound.play();
-        });
         // challenged
         // try to catch more friend challenge
         if (MQ.responseChallen !== undefined) {
@@ -242,6 +229,7 @@ var menuState = {
                 MQ.grapChallenge.addChild(testMaskChallenge);
             }
         }
+        //test poke challenge
         // button TODO
         var btn_findgame = MQ.game.add.button(191 * MQ.configs.SCALE, 518 * MQ.configs.SCALE, 'btn-findgame');
         btn_findgame.anchor.set(0.5);
@@ -250,7 +238,7 @@ var menuState = {
             MQ.button_sound.play();
             var tween_findgame = MQ.game.add.tween(this.findgameGroup).to({
                 x: 0
-            }, 500, "Linear");
+            }, 300, "Linear");
             tween_findgame.start();
         })
         // btn_findgame.alpha = 0.5;
@@ -266,33 +254,29 @@ var menuState = {
         // practice btn input
         btn_practice.events.onInputDown.add(() => {
             MQ.button_sound.play();
-            if (MQ.heart > 0) {
-                btn_practice.inputEnabled = false;
-                btn_findgame.inputEnabled = false;
-                btn_party.inputEnabled = false;
-                this.popupPlaylist.revive();
-            } else {
-                alert('Not enough heart! Wait for 3 minutes.');
-            }
+            var tween_practiceReturn = MQ.game.add.tween(this.practiceGroup).to({
+                x: 0
+            }, 300, "Linear");
+            tween_practiceReturn.start();
         });
         // popup popup
-        this.popupPlaylist = MQ.game.add.sprite(MQ.game.world.centerX, MQ.game.world.centerY, 'popup-playlist');
-        this.popupPlaylist.anchor.set(0.5);
-        // this.popupPlaylist.scale.set(MQ.configs.SCALE);
-        for (playList in MQ.playListFree) {
-            this.createButtonPlaylist(playList, MQ.playListFree[playList]);
-        }
-        var btn_x = MQ.game.add.button(410, -270, 'x-button');
-        btn_x.anchor.set(0.5);
-        btn_x.events.onInputDown.add(() => {
-            MQ.button_sound.play();
-            btn_practice.inputEnabled = true;
-            btn_findgame.inputEnabled = true;
-            btn_party.inputEnabled = true;
-            this.popupPlaylist.kill();
-        });
-        this.popupPlaylist.addChild(btn_x);
-        this.popupPlaylist.kill();
+        // this.popupPlaylist = MQ.game.add.sprite(MQ.game.world.centerX, MQ.game.world.centerY, 'popup-playlist');
+        // this.popupPlaylist.anchor.set(0.5);
+        // // this.popupPlaylist.scale.set(MQ.configs.SCALE);
+        // for (playList in MQ.playListFree) {
+        //     this.createButtonPlaylist(playList, MQ.playListFree[playList]);
+        // }
+        // var btn_x = MQ.game.add.button(410, -270, 'x-button');
+        // btn_x.anchor.set(0.5);
+        // btn_x.events.onInputDown.add(() => {
+        //     MQ.button_sound.play();
+        //     btn_practice.inputEnabled = true;
+        //     btn_findgame.inputEnabled = true;
+        //     btn_party.inputEnabled = true;
+        //     this.popupPlaylist.kill();
+        // });
+        // this.popupPlaylist.addChild(btn_x);
+        // this.popupPlaylist.kill();
         // FIXME: menu_BG
         var bot_shadow = MQ.game.add.sprite(MQ.game.world.centerX, 1756, 'bot-shadow');
         bot_shadow.anchor.set(0.5);
@@ -319,6 +303,7 @@ var menuState = {
         //
         //
         this.createFindgameGroup();
+        this.createPracticeGroup();
         this.challPlaylistGroup = MQ.game.add.group();
         // this.findgameGroup = MQ.game.add.group();
         // position of challplaylist
@@ -351,7 +336,7 @@ var menuState = {
             MQ.button_sound.play();
             var tween_challPlaylistReturn = MQ.game.add.tween(this.challPlaylistGroup).to({
                 x: -MQ.game.width
-            }, 500, "Linear");
+            }, 300, "Linear");
             tween_challPlaylistReturn.start();
         });
         // 990
@@ -622,7 +607,7 @@ var menuState = {
                 MQ.nameFriendChallenge = nameFriendInstalled._text;
                 var tween_challPlaylist = MQ.game.add.tween(this.challPlaylistGroup).to({
                     x: 0
-                }, 500, "Linear");
+                }, 300, "Linear");
                 tween_challPlaylist.start();
             });
             this.grapFriendInstalled.addChild(testMaskInstalled);
@@ -652,6 +637,159 @@ var menuState = {
                 x: -MQ.game.width
             }, 300, "Linear");
             tween_findgameReturn.start();
+        });
+    },
+    createPracticeGroup() {
+        this.practiceGroup = MQ.game.add.group();
+        // this.findgameGroup = MQ.game.add.group();
+        // position of challplaylist
+        this.practiceGroup.position.x = -MQ.game.width;
+        const bg_challPlaylist = MQ.game.add.button(0, 0, 'bg-playlist');
+        // bg_challPlaylist.scale.set(MQ.configs.SCALE);
+        this.practiceGroup.add(bg_challPlaylist);
+        // tab-chon-playlist
+        const tab_chonplaylist = MQ.game.add.sprite(MQ.game.world.centerX, 0, 'tab-playlist');
+        tab_chonplaylist.anchor.set(0.5, 0);
+        // tab_chonplaylist.scale.set(MQ.configs.SCALE);
+        this.practiceGroup.add(tab_chonplaylist);
+        //87
+        const txt_chonplaylist = MQ.game.add.text(0, 87, 'CHỌN 1 PLAYLIST',
+            {
+                font: `50px Roboto`,
+                fill: "white",
+                boundsAlignH: "center",
+                boundsAlignV: "middle",
+                fontWeight: 'Bold'
+            });
+        // txt_chonplaylist.scale.set(1 / MQ.configs.SCALE);
+        txt_chonplaylist.anchor.set(0.5);
+        tab_chonplaylist.addChild(txt_chonplaylist);
+        //74
+        const arrow_chonplaylist = MQ.game.add.button(-(540 - 74), 87, 'arrow-playlist');
+        arrow_chonplaylist.anchor.set(0.5);
+        tab_chonplaylist.addChild(arrow_chonplaylist);
+        arrow_chonplaylist.events.onInputDown.add(() => {
+            MQ.button_sound.play();
+            var tween_challPlaylistReturn = MQ.game.add.tween(this.practiceGroup).to({
+                x: -MQ.game.width
+            }, 300, "Linear");
+            tween_challPlaylistReturn.start();
+        });
+        // 990
+        const gem_playlist = MQ.game.add.sprite((990 - 540), 80, 'gem-playlist');
+        gem_playlist.anchor.set(0.5);
+        tab_chonplaylist.addChild(gem_playlist);
+        txt_gem_playlist = MQ.game.add.text((940 - 540), 87, `${MQ.diamond}`, {
+            font: `45px Roboto`,
+            fill: "#93909d",
+            boundsAlignH: "center",
+            boundsAlignV: "middle",
+            fontWeight: 'Bold'
+        });
+        txt_gem_playlist.anchor.set(1, 0.5);
+        // txt_gem_playlist.scale.set(1 / MQ.configs.SCALE);
+        tab_chonplaylist.addChild(txt_gem_playlist);
+        // end <-- tab chon playlist -->
+        //change btn plts
+        //1776
+        var btn_change_playlist = MQ.game.add.button(MQ.game.world.centerX, 1776 * MQ.configs.SCALE, 'change-btn');
+        // btn_change_playlist.scale.set(MQ.configs.SCALE);
+        btn_change_playlist.anchor.set(0.5);
+        this.practiceGroup.add(btn_change_playlist);
+        //110
+        const txt_change_playlist = MQ.game.add.text(-430, 0, 'CHANGE SUGGEST PLAYLIST', {
+            font: `50px Roboto`,
+            fill: "white",
+            boundsAlignH: "center",
+            boundsAlignV: "middle",
+            fontWeight: 'Bold'
+        });
+        txt_change_playlist.anchor.set(0, 0.5);
+        // txt_change_playlist.scale.set(1 / MQ.configs.SCALE)
+        btn_change_playlist.addChild(txt_change_playlist);
+        //959
+        const gem_change_playlist = MQ.game.add.sprite(419, -10, 'gem-playlist');
+        gem_change_playlist.anchor.set(0.5);
+        btn_change_playlist.addChild(gem_change_playlist);
+        // end change btn plts
+        // console.log(this.practiceGroup);
+        //545
+        const txt_recent_playlist = MQ.game.add.text(60 * MQ.configs.SCALE, 545 * MQ.configs.SCALE, 'Recent Playlist', {
+            font: `50px Roboto`,
+            fill: "#93909d",
+            boundsAlignH: "center",
+            boundsAlignV: "middle"
+        });
+        txt_recent_playlist.anchor.set(0, 0.5);
+        this.practiceGroup.add(txt_recent_playlist);
+        //1335
+        const txt_type_playlist = MQ.game.add.text(60 * MQ.configs.SCALE, 1335 * MQ.configs.SCALE, 'Thể loại âm nhạc', {
+            font: `50px Roboto`,
+            fill: "#93909d",
+            boundsAlignH: "center",
+            boundsAlignV: "middle"
+        });
+        txt_type_playlist.anchor.set(0, 0.5);
+        this.practiceGroup.add(txt_type_playlist);
+        //vn-muzik (293, 1526)
+        var btn_vn_muzik = MQ.game.add.button(293 * MQ.configs.SCALE, 1526 * MQ.configs.SCALE, 'vn-muzik');
+        btn_vn_muzik.anchor.set(0.5);
+        // btn_vn_muzik.scale.set(MQ.configs.SCALE);
+        this.practiceGroup.add(btn_vn_muzik);
+        // w-muzik (808, 1526)
+        var btn_w_muzik = MQ.game.add.button(808 * MQ.configs.SCALE, 1526 * MQ.configs.SCALE, 'w-muzik');
+        btn_w_muzik.anchor.set(0.5);
+        // btn_w_muzik.scale.set(MQ.configs.SCALE);
+        this.practiceGroup.add(btn_w_muzik);
+        // this.practiceGroup.position.x = MQ.game.width/2;
+        //683.5
+        var recent_playlist_list = MQ.game.add.button(MQ.game.world.centerX, 683.5 * MQ.configs.SCALE, 'tab-recent');
+        recent_playlist_list.anchor.set(0.5);
+        // recent_playlist_list.scale.set(MQ.configs.SCALE);
+        this.practiceGroup.add(recent_playlist_list);
+        var bop = MQ.game.add.sprite(-(540 - 60), 0, 'bop');
+        bop.anchor.set(0, 0.5);
+        recent_playlist_list.addChild(bop);
+        var txt_bop = MQ.game.add.text(-(540 - 275), -20, 'Best Of Playlist', {
+            font: `45px Roboto`,
+            fill: "white",
+            boundsAlignH: "center",
+            boundsAlignV: "middle"
+        });
+        txt_bop.anchor.set(0, 0.5);
+        // txt_bop.scale.set(1 / MQ.configs.SCALE);
+        recent_playlist_list.addChild(txt_bop);
+        //318
+        var best_of_buy = MQ.game.add.sprite(MQ.game.world.centerX, 318 * MQ.configs.SCALE, 'tab-recent');
+        best_of_buy.anchor.set(0.5);
+        // best_of_buy.scale.set(MQ.configs.SCALE);
+        this.practiceGroup.add(best_of_buy);
+        var txt_bob = MQ.game.add.text(-(540 - 275), 0, 'Best Of Mua', {
+            font: `45px Roboto`,
+            fill: "white",
+            boundsAlignH: "center",
+            boundsAlignV: "middle"
+        });
+        txt_bob.anchor.set(0, 0.5);
+        // txt_bob.scale.set(1 / MQ.configs.SCALE);
+        best_of_buy.addChild(txt_bob);
+        var bob = MQ.game.add.sprite(-480, 0, 'bop');
+        bob.anchor.set(0, 0.5);
+        best_of_buy.addChild(bob);
+        var tab_of_buy = MQ.game.add.button((906 - 540), 0, 'tab-gem');
+        tab_of_buy.anchor.set(0.5);
+        best_of_buy.addChild(tab_of_buy);
+        //
+        //
+        recent_playlist_list.events.onInputDown.add(() => {
+            MQ.button_sound.play();
+            // MQ.sound.stop();
+            getSongToPractice(() => {
+                MQ.practiceMode = true;
+                this.startLoad();
+                subHeartOnPractice();
+                // MQ.game.state.start('practice');
+            });
         });
     }
 }

@@ -78,17 +78,21 @@ var playState = {
             //
             // console.log(MQ.wrongList);
             for (i = 0; i < MQ.correctList.length; i++) {
+                var circleWhite = MQ.game.add.sprite((336 + MQ.correctList[i] * 102) * MQ.configs.SCALE, 656.5 * MQ.configs.SCALE, 'circle-white');
+                circleWhite.anchor.set(0.5);
                 var correctMini = MQ.game.add.sprite(
-                    (323 + MQ.correctList[i] * 107.5) * MQ.configs.SCALE,
-                    580.5 * MQ.configs.SCALE,
+                    (336 + MQ.correctList[i] * 102) * MQ.configs.SCALE,
+                    656.5 * MQ.configs.SCALE,
                     'correct-mini');
                 // correctMini.scale.set(MQ.configs.SCALE);
                 correctMini.anchor.set(0.5);
             }
             for (i = 0; i < MQ.wrongList.length; i++) {
+                var circleWhite = MQ.game.add.sprite((336 + MQ.wrongList[i] * 102) * MQ.configs.SCALE, 656.5 * MQ.configs.SCALE, 'circle-white');
+                circleWhite.anchor.set(0.5);
                 var wrongMini = MQ.game.add.sprite(
-                    (323 + MQ.wrongList[i] * 107.5) * MQ.configs.SCALE,
-                    580.5 * MQ.configs.SCALE,
+                    (336 + MQ.wrongList[i] * 102) * MQ.configs.SCALE,
+                    656.5 * MQ.configs.SCALE,
                     'wrong-mini');
                 // wrongMini.scale.set(MQ.configs.SCALE);
                 wrongMini.anchor.set(0.5);
@@ -193,17 +197,21 @@ var playState = {
             tweenSpriteTime.start();
             //
             for (i = 0; i < MQ.correctList.length; i++) {
+                var circleWhite = MQ.game.add.sprite((336 + MQ.correctList[i] * 102) * MQ.configs.SCALE, 656.5 * MQ.configs.SCALE, 'circle-white');
+                circleWhite.anchor.set(0.5);
                 var correctMini = MQ.game.add.sprite(
-                    (323 + MQ.correctList[i] * 107.5) * MQ.configs.SCALE,
-                    580.5 * MQ.configs.SCALE,
+                    (336 + MQ.correctList[i] * 102) * MQ.configs.SCALE,
+                    656.5 * MQ.configs.SCALE,
                     'correct-mini');
                 // correctMini.scale.set(MQ.configs.SCALE);
                 correctMini.anchor.set(0.5);
             }
             for (i = 0; i < MQ.wrongList.length; i++) {
+                var circleWhite = MQ.game.add.sprite((336 + MQ.wrongList[i] * 102) * MQ.configs.SCALE, 656.5 * MQ.configs.SCALE, 'circle-white');
+                circleWhite.anchor.set(0.5);
                 var wrongMini = MQ.game.add.sprite(
-                    (323 + MQ.wrongList[i] * 107.5) * MQ.configs.SCALE,
-                    580.5 * MQ.configs.SCALE,
+                    (336 + MQ.wrongList[i] * 102) * MQ.configs.SCALE,
+                    656.5 * MQ.configs.SCALE,
                     'wrong-mini');
                 // wrongMini.scale.set(MQ.configs.SCALE);
                 wrongMini.anchor.set(0.5);
