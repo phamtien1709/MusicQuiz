@@ -56,22 +56,22 @@ function getUserID(callback) {
                 MQ.practiceModeScore = obj.practiceModeScore;
                 MQ.partyModeScore = obj.partyModeScore;
                 MQ.oidUserData = obj._id.$oid;
-                // console.log(MQ.practiceModeScore);
-                // console.log(MQ.oidUserData);
                 callback();
             }
         }
     });
 }
-function getJSONFile(callback) {
+function getJSONFile(name, url, callback) {
     $.ajax({
-        url: 'img/assets/json/excelExport.json',
+        url: url,
         type: "GET",
         contentType: "application/json",
         success: function (data) {
             var obj = data;
-            MQ.data = obj;
-            // console.log(MQ.data)
+            MQ.data.push({
+                "nameData": name,
+                "data" : obj
+            });
             callback();
         }
     })

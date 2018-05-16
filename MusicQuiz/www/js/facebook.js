@@ -4,10 +4,10 @@ function statusChangeCallback(response, callback) {
     if (response.status === 'connected') {
         // Logged into your app and Facebook.
         MQ.accessToken = response.authResponse.accessToken;
+        testAPI();
         // console.log(response);
         //socket
         MQ.checkConnect = response.status;
-        testAPI();
         callback();
     } else {
         console.log('not connected');
@@ -55,4 +55,25 @@ function testAPI() {
             // console.log(response.data);
         });
     return MQ.checkId, MQ.nameFB, MQ.installed_friend;
+}
+function postDBUser (accessToken, id){
+    // console.log(accessToken, id);
+    $.ajax({
+        url: "https://yan.gamezoka.com/api/user/login",
+        method: "POST",
+        dataType : "json",
+        data: {
+            "accessToken": accessToken,
+            "fbId" : id
+        },
+        success: function(response){
+            console.log(response);
+        },
+        error: function(xhr, ajaxOptions, thrownError){
+            console.log("Error");
+               console.log(thrownError);
+               console.log(xhr.status);
+               console.log(xhr.responseJSON);
+           }
+    });
 }

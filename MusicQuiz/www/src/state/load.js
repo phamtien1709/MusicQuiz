@@ -13,7 +13,8 @@ var loadState = {
             font: "40px Roboto",
             fill: "white",
             boundsAlignH: "center",
-            boundsAlignV: "middle"
+            boundsAlignV: "middle",
+            fontWeight: 400
         });
         this.term_txt.anchor.set(0.5);
         // this.term_txt.addColor("#ffffff",0);
@@ -38,15 +39,19 @@ var loadState = {
         this.tweenScale = MQ.game.add.tween(this.disc.scale).to({ x: 1.2, y: 1.2 }, 700, "Linear", true, 0, -1);
         this.tweenScale.yoyo(true, 700);
         //92909b, 
-        this.txt_loading = MQ.game.add.text(MQ.game.world.centerX, 850, 'Đang tải...', {
+        this.txt_loading = MQ.game.add.text(MQ.game.world.centerX, 895, 'Đang tải...', {
             font: "42px Roboto",
             fill: "#92909b",
             boundsAlignH: "center",
-            boundsAlignV: "middle"
+            boundsAlignV: "middle",
+            fontWeight: 400
         });
         this.txt_loading.anchor.set(0.5);
-        // this.game.stage.background.width = MQ.game.width;
-        // this.game.stage.background.height = MQ.game.height;
+        //load playlist arr
+        for (i = 0; i < MQ.playListFree.length; i++) {
+            // console.log(`playlist-${i}`);
+            MQ.game.load.image(`playlist-${i}`, `${MQ.playListFree[i].imgPlaylist}`);
+        }
         MQ.game.load.image('ava_fb', `https://graph.facebook.com/${MQ.checkId}/picture?width=241`);
         MQ.game.load.image('ava_default', 'img/assets/ava-default.png');
         MQ.game.load.image('ava_150', 'img/assets/ava-default150x150.png');
@@ -54,8 +59,12 @@ var loadState = {
         MQ.game.load.image('btn-next', 'img/assets/btn-next.png');
         // MQ.game.load.image('btn-home', 'img/assets/btn-home.png');
         MQ.game.load.image('btn-playing', 'img/assets/btn-playing.png');
+        //party test art
+        MQ.game.load.image('art-party', 'img/assets/Menu/07_A_Party_mode.jpg');
         //practice
         MQ.game.load.image('bg-practice', 'img/assets/Practice/BG_GamePlay.png');
+        MQ.game.load.image('dot_practice', 'img/assets/Practice/Circle_Active_Small.png');
+        MQ.game.load.image('lock-answer', 'img/assets/Practice/lock-answer.png');
         //play state
         MQ.game.load.image('bg-play', 'img/assets/Play/BG_GamePlay.png');
         MQ.game.load.image('tween-time', 'img/assets/tween-time.png');
@@ -65,7 +74,6 @@ var loadState = {
         MQ.game.load.image('wrong-mini', 'img/assets/Play/Sai.png');
         MQ.game.load.image('correct-mini', 'img/assets/Play/Dung.png');
         MQ.game.load.image('circle-white', 'img/assets/Play/Circle_01.png');
-        // MQ.game.load.image('btn-play', 'img/assets/btn-play.png');;
         MQ.game.load.image('btn-playing', 'img/assets/btn-playing.png');
         MQ.game.load.image('btn-invite', 'img/assets/btn-invite.png');
         MQ.game.load.image('circle-active', 'img/assets/Practice/Circle_active.png');
@@ -73,6 +81,7 @@ var loadState = {
         MQ.game.load.image('btn-rehome', 'img/assets/Practice/btn_home.png');
         MQ.game.load.image('bg-playlist', 'img/assets/playlist/bg-playlist.png');
         MQ.game.load.image('arrow-playlist', 'img/assets/playlist/Arrow.png');
+        MQ.game.load.image('arrow-go', 'img/assets/playlist/Arrow-go.png');
         MQ.game.load.image('change-btn', 'img/assets/playlist/Change_Button.png');
         MQ.game.load.image('gem-playlist', 'img/assets/playlist/gem-playlist.png');
         MQ.game.load.image('tab-playlist', 'img/assets/playlist/Tab_chonplaylist.png');
@@ -80,9 +89,18 @@ var loadState = {
         MQ.game.load.image('vn-muzik', 'img/assets/playlist/VietNam_Muzik.png');
         MQ.game.load.image('w-muzik', 'img/assets/playlist/Word_Muzik.png');
         MQ.game.load.image('tab-recent', 'img/assets/playlist/tab_recent.png');
-        MQ.game.load.image('bop', 'img/assets/playlist/best-of-playlist.png');
+        MQ.game.load.image('tab-recent2', 'img/assets/playlist/tab_recent2.png');
+        // MQ.game.load.image('bop', 'img/assets/playlist/Nhactre.png');
         //popup playlist
-        
+        MQ.game.load.image('popup-playlist', 'img/assets/popup/popup-playlist.png');
+        MQ.game.load.image('x-button', 'img/assets/popup/x-button.png');
+        //playlist chall to FIXME:
+        MQ.game.load.image('icon-lock', 'img/assets/popup/Icon_lock.png');
+        MQ.game.load.image('icon-rank', 'img/assets/popup/icon_Rank.png');
+        for (playlist in MQ.listPlaylist){
+            // console.log(MQ.listPlaylist[playlist].img);
+            MQ.game.load.image(`${MQ.listPlaylist[playlist].img}`, `img/assets/playlist/${MQ.listPlaylist[playlist].img}.png`);
+        };
         // menu
         MQ.game.load.image('bg-menu', 'img/assets/Menu/BG_main.png');
         MQ.game.load.image('heart', 'img/assets/Menu/Heart_Icon.png');
@@ -104,7 +122,66 @@ var loadState = {
         MQ.game.load.image('btn-shop-active', 'img/assets/Menu/IconMenu_Shop_active.png');
         MQ.game.load.image('line-under', 'img/assets/Menu/line-under.png');
         MQ.game.load.image('btn-accept', 'img/assets/Menu/btn-accept.png');
-        //
+        MQ.game.load.image('playlist-chitiet', 'img/assets/Menu/playlist-chitiet.png');
+        //mail 
+        // MQ.game.load.image('ava-micro-mail', 'img/assets/mail/ava_01.png');
+        MQ.game.load.image('btn-nhan-mail', 'img/assets/mail/Button_Nhan.png');
+        MQ.game.load.image('header-line-mail', 'img/assets/mail/Header_Line.png');
+        MQ.game.load.image('header-line-gradient-mail', 'img/assets/mail/Header_Line_Gradient.png');
+        MQ.game.load.image('header-tab-active-mail', 'img/assets/mail/Header_tab_Active.png');
+        MQ.game.load.image('header-tab-disactive-mail', 'img/assets/mail/Header_tab_disActive.png');
+        MQ.game.load.image('line-mail', 'img/assets/mail/Line.png');
+        MQ.game.load.image('search-bg-mail', 'img/assets/mail/Search_BG.png');
+        MQ.game.load.image('search-icon-mail', 'img/assets/mail/Search_icon.png');
+        MQ.game.load.image('search-tab-mail', 'img/assets/mail/Search_tab.png');
+        MQ.game.load.image('tab-mess-mail', 'img/assets/mail/Tab_chon playlist.png');
+        for(i=0; i<MQ.mailDemo.length; i++){
+            MQ.game.load.image(`${MQ.mailDemo[i].avaName}`, `${MQ.mailDemo[i].avaUrl}`);
+        }
+        //shopLoader
+        for(img in MQ.shopLoader){
+            MQ.game.load.image(`${MQ.shopLoader[img].name}`, `${MQ.shopLoader[img].url}`);
+        }
+        //setting Loader
+        for(img in MQ.settingLoader){
+            MQ.game.load.image(`${MQ.settingLoader[img].name}`, `${MQ.settingLoader[img].url}`);
+        }
+        //rank ava loader
+        for(img in MQ.rankFake){
+            MQ.game.load.image(`${MQ.rankFake[img].ava}`, `${MQ.rankFake[img].url}`);
+        };
+        //rank loader
+        for(img in MQ.rankLoader){
+            MQ.game.load.image(`${MQ.rankLoader[img].name}`, `${MQ.rankLoader[img].url}`);
+        }
+        //popup reward
+        MQ.game.load.image('screen-dim', 'img/assets/Practice/reward/screen-dim.png');
+        MQ.game.load.image('circle-reward', 'img/assets/Practice/reward/Circle.png');
+        MQ.game.load.image('circle-stroke-reward', 'img/assets/Practice/reward/Circle_Stroke.png');
+        MQ.game.load.image('diamond-reward', 'img/assets/Practice/reward/Diamond.png');
+        MQ.game.load.image('lr-reward', 'img/assets/Practice/reward/Light_Rotation.png');
+        MQ.game.load.image('starall-reward', 'img/assets/Practice/reward/star_all.png');
+        MQ.game.load.image('congrat-reward', 'img/assets/Practice/reward/Chucmung.png');
+        MQ.game.load.image('box-lose-practice', 'img/assets/Practice/reward/BOX.png');
+        MQ.game.load.image('btn-replay-lose-practice', 'img/assets/Practice/reward/Button_Choilai.png');
+        MQ.game.load.image('btn-home-lose-practice', 'img/assets/Practice/reward/Button_home.png');
+        MQ.game.load.image('disc-lose-practice', 'img/assets/Practice/reward/Disc.png');
+        MQ.game.load.image('timeout-lose-practice', 'img/assets/Practice/reward/icon_timeout.png');
+        MQ.game.load.image('btn-rank-practice', 'img/assets/Practice/reward/Button_Xephang.png');
+        //win state
+        MQ.game.load.image('bg-win', 'img/assets/win/BG.png');
+        MQ.game.load.image('box-score-win', 'img/assets/win/Box_Score.png');
+        MQ.game.load.image('cd-win', 'img/assets/win/CD.png');
+        MQ.game.load.image('line-win', 'img/assets/win/Line.png');
+        MQ.game.load.image('tab-highscore-win', 'img/assets/win/Tab_Kiluc.png');
+        MQ.game.load.image('box-result-win', 'img/assets/win/Box_ketqua.png');
+        MQ.game.load.image('pick-playlist-win', 'img/assets/win/Playlist_Cuaban.png');
+        MQ.game.load.image('v-icon-win', 'img/assets/win/v_icon.png');
+        MQ.game.load.image('x-icon-win', 'img/assets/win/x_icon.png');
+        MQ.game.load.image('ava-playlist', 'img/assets/win/Ava_Playlist.png');
+        MQ.game.load.image('line-box-win', 'img/assets/win/line-box-win.png');
+        MQ.game.load.image('dot-icon-win', 'img/assets/win/dot.png');
+        MQ.game.load.image('btn-next-player-win', 'img/assets/win/Button_Choilai.png');
         MQ.game.load.onFileComplete.add(this.fileComplete, this);
     },
     create: function () {
@@ -113,22 +190,28 @@ var loadState = {
         console.log(MQ.nameFB);
         console.log(MQ.checkId);
         console.log(MQ.accessToken);
-        // var loading = MQ.game.add.text(MQ.game.width / 2, MQ.game.height / 2 - 100, 'Loading...',{
-        //     font: `${150/MQ.configs.DPR}px Roboto`,
-        //     fill: "black",
-        //     boundsAlignH: "center",
-        //     boundsAlignV: "middle"
-        // });
-        // loading.anchor.set(0.5);
-        getJSONFile(() => {
-            // MQ.game.state.start('menu');
-            console.log('getJSONFile');
+        // getJSONFile
+        getJSONFile('all', 'img/assets/json/excelExport.json', () => {
+        });
+        getJSONFile('new2017Data', 'img/assets/json/new2017Data.json', () => {
+        });
+        getJSONFile('cookieData', 'img/assets/json/cookieData.json', () => {
+        });
+        getJSONFile('mtpData', 'img/assets/json/mtpData.json', () => {
+        });
+        getJSONFile('nooData', 'img/assets/json/nooData.json', () => {
+        });
+        getJSONFile('indieData', 'img/assets/json/indieData.json', () => {
         });
         MQ.dataChallenge = [];
         getChallengeByFriend(() => {
             console.log('Get apprequests');
             getDataChallengeFromDB(() => {
-                MQ.game.state.start('menu');
+                // console.log(MQ.responseChallen);
+                getBotChallenge(() => {
+                    // console.log(MQ.botChallenges);
+                    MQ.game.state.start('menu');
+                });
             });
         });
         // });

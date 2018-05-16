@@ -5,10 +5,10 @@ function createSoundDefault() {
             // console.log('Load done!');
         }
     });
-    MQ.sound = new Howl({
-        src: ['./img/assets/mp3Song/edm.mp3'],
-        onload: () => {
+    // MQ.sound = new Howl({
+    //     src: ['./img/assets/mp3Song/edm.mp3'],
+    //     onload: () => {
             
-        }
-    });
+    //     }
+    // });
 }

@@ -16,8 +16,51 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+
+@font-face {
+    font-family: Roboto;
+    src: url("../css/fonts/Roboto-Bold.ttf") format("truetype");
+      font-weight: 700;
+      font-style: normal; 
+   }
+@font-face { 
+    font-family: Roboto;
+    src: url("../css/fonts/Roboto-Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal; 
+}
+@font-face { 
+    font-family: Roboto;
+    src: url("../css/fonts/Roboto-Medium.ttf") format("truetype");
+    font-weight: 500;
+    font-style: normal; 
+}
+   
 * {
     -webkit-tap-highlight-color: rgba(0,0,0,0); /* make transparent link selection, adjust last value opacity 0 to 1.0 */
+}
+/* Portrait layout (default) */
+.app {
+    position: absolute;
+    left: -9999px;
+    /* font-weight: 500; */
+    /* height:100%; */
+    /* margin:0px;
+    padding:0px; */
+    /* text-transform:uppercase; */
+    /* width:100%; */
+}
+.get700Roboto {
+    font-family: Roboto;
+    font-weight: 700;
+}
+.get500Roboto {
+    font-family: Roboto;
+    font-weight: 500;
+}
+.get400Roboto {
+    font-family: Roboto;
+    font-weight: 400;
 }
 
 body {
@@ -36,27 +79,15 @@ body {
         color-stop(0.51, #E4E4E4)
     );
     background-attachment:fixed;
-    font-family:'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
+    font-family: Roboto;
     font-size:12px;
+    font-weight: 500;
+    /* font-weight: 500; */
     height:100%;
     margin:0px;
     padding:0px;
     text-transform:uppercase;
     width:100%;
-}
-
-/* Portrait layout (default) */
-.app {
-    background:url(../img/logo.png) no-repeat center top; /* 170px x 200px */
-    position:absolute;             /* position in the center of the screen */
-    left:50%;
-    top:50%;
-    height:50px;                   /* text area height */
-    width:225px;                   /* text area width */
-    text-align:center;
-    padding:180px 0px 0px 0px;     /* image height is 200px (bottom 20px are overlapped with text) */
-    margin:-115px 0px 0px -112px;  /* offset vertical: half of image height and text area height */
-                                   /* offset horizontal: half of text area width */
 }
 
 /* Landscape layout (with min-width) */
@@ -123,3 +154,4 @@ h1 {
     top: 95%;
     color: #00ffea;
 }
+

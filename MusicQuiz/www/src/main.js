@@ -22,7 +22,7 @@ MQ.configs = {
     DPR: window.devicePixelRatio * dpr
 };
 window.onload = function () {
-    MQ.game = new Phaser.Game(1080, 1920, Phaser.CANVAS, '', null, false, false);
+    MQ.game = new Phaser.Game(1080, 1920, Phaser.CANVAS, 'game', true);
     // Add all the states
     MQ.game.state.add('boot', bootState);
     MQ.game.state.add('load', loadState);
@@ -31,6 +31,7 @@ window.onload = function () {
     MQ.game.state.add('win', winState);
     MQ.game.state.add('party', partyState);
     MQ.game.state.add('practice', practiceState);
+    MQ.game.state.add('bonus', bonusState);
     // Start the 'boot' state
     MQ.game.state.start('boot');
 }

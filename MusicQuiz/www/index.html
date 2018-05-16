@@ -33,15 +33,15 @@
     <meta name="msapplication-tap-highlight" content="no">
     <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
-    <!-- <meta name="apple-mobile-web-app-capable" content="yes"> -->
-    <!-- <style type="text/css">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <style type="text/css">
         canvas {
             touch-action-delay: none;
             touch-action: none;
             -ms-touch-action: none;
         }
-    </style> -->
-    <link rel="stylesheet" type="text/css" href="css/index.css">
+    </style>
     <title>Music Quiz</title>
     <script src="https://connect.facebook.net/en_US/fbinstant.6.0.js"></script>
     <!-- <style>
@@ -53,6 +53,15 @@
     <script src="./js/libs/webfont.js"></script>
     <script src="./js/libs/jquery-3.2.1.min.js"></script>
     <script src="./js/libs/jquery-3.2.1.js"></script>
+</head>
+
+<body>
+    <div class="app">
+        <span class="get700Roboto">get700Roboto</span>
+        <span class="get500Roboto">get500Roboto</span>
+        <span class="get400Roboto">get400Roboto</span>
+    </div>
+    <div class="game"></div>
     <script src="./src/state/boot.js"></script>
     <script src="./src/state/load.js"></script>
     <script src="./src/state/menu.js"></script>
@@ -60,8 +69,12 @@
     <script src="./src/state/win.js"></script>
     <script src="./src/state/party.js"></script>
     <script src="./src/state/practice.js"></script>
+    <script src="./src/state/bonus.js"></script>
     <script src="./src/main.js"></script>
     <script src="./src/controller/handleGame.js"></script>
+    <script src="./src/controller/mail.js"></script>
+    <script src="./src/controller/shop.js"></script>
+    <script src="./src/controller/setting.js"></script>
     <script src="./src/controller/party/handlePartyMode.js"></script>
     <script src="./src/controller/practice/handlePracticeMode.js"></script>
     <script src="./js/facebook.js"></script>
@@ -71,9 +84,6 @@
     <script src="./src/handle/handleHeart.js"></script>
     <script src="./src/handle/handleTicket.js"></script>
     <script src="./src/handle/handleSound.js"></script>
-</head>
-
-<body>
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
     <!-- <div id="console">

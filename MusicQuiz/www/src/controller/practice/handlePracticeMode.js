@@ -1,8 +1,9 @@
-function getSongToPractice(callback) {
+function getSongToPractice(data, callback) {
+    // console.log(data);
     var arr = [];
     // add new array of dataType
-    for (i = 0; i < MQ.data.length; i++) {
-        arr[i] = MQ.data[i];
+    for (i = 0; i < data.length; i++) {
+        arr[i] = data[i];
     };
     // splice songChoiced Previous
     for (i = 0; i < MQ.indexSongChoiced.length; i++) {
@@ -11,26 +12,22 @@ function getSongToPractice(callback) {
         arr.splice(MQ.indexSongChoiced[i], 1);
     };
     //get song to ask
-    let random = Math.floor(Math.random() * (MQ.configs.SONG_NUMBER - MQ.indexSongChoiced.length));
+    let random = Math.floor(Math.random() * (data.length - MQ.indexSongChoiced.length));
     MQ.songChoiced = arr[random];
     MQ.indexSongChoiced.push(random);
     // arr.splice(random, 1);
     var arrNotRandom = [
         {
-            "song": MQ.songChoiced.Song1,
-            "singer": MQ.songChoiced.Singer1
+            "answer": MQ.songChoiced.Answer1
         },
         {
-            "song": MQ.songChoiced.Song2,
-            "singer": MQ.songChoiced.Singer2
+            "answer": MQ.songChoiced.Answer2
         },
         {
-            "song": MQ.songChoiced.Song3,
-            "singer": MQ.songChoiced.Singer3
+            "answer": MQ.songChoiced.Answer3
         },
         {
-            "song": MQ.songChoiced.Song4,
-            "singer": MQ.songChoiced.Singer4
+            "answer": MQ.songChoiced.Answer4
         }
     ];
     MQ.songRandomChoiced = [];
