@@ -842,16 +842,19 @@ var playState = {
         countdownNumber.anchor.set(0.5);
         let firstTween = MQ.game.add.tween(countdownNumber.scale).to({ x: 0.5, y: 0.5 }, 1000, "Linear");
         firstTween.start();
+        MQ.soundCountDown.play();
         firstTween.onComplete.add(() => {
             countdownNumber.scale.set(1);
             countdownNumber.setText('2');
             let secondTween = MQ.game.add.tween(countdownNumber.scale).to({ x: 0.5, y: 0.5 }, 1000, "Linear");
             secondTween.start();
+            MQ.soundCountDown.play();
             secondTween.onComplete.add(() => {
                 countdownNumber.scale.set(1);
                 countdownNumber.setText('1');
                 let thirdTween = MQ.game.add.tween(countdownNumber.scale).to({ x: 0.5, y: 0.5 }, 1000, "Linear");
-                thirdTween.start();
+                thirdTween.start();                
+                MQ.soundCountDown.play();
                 thirdTween.onComplete.add(() => {
                     // countdownNumber.scale.set(1);
                     countdownNumber.setText('Bắt đầu');

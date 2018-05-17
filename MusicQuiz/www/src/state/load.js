@@ -7,7 +7,7 @@ var loadState = {
         MQ.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
         //bg loading
         this.game.stage.background = MQ.game.add.sprite(0, 0, 'bg-load');
-        this.logo = MQ.game.add.sprite(MQ.game.world.centerX, 222, 'logo');
+        this.logo = MQ.game.add.sprite(MQ.game.world.centerX, 565, 'logo');
         this.logo.anchor.set(0.5);
         this.term_txt = MQ.game.add.text(MQ.game.world.centerX, 1848, 'Để bắt đầu game, bạn phải đồng ý với Điều khoản sử dụng', {
             font: "40px Roboto",
@@ -20,17 +20,17 @@ var loadState = {
         // this.term_txt.addColor("#ffffff",0);
         this.term_txt.addColor("#ffa33a", 37);
         //646
-        this.disc = MQ.game.add.sprite(MQ.game.world.centerX, 646, 'disc');
+        this.disc = MQ.game.add.sprite(MQ.game.world.centerX, 277, 'disc');
         this.disc.anchor.set(0.5);
         // console.log(this.disc.y);
-        //531, 505
-        this.c_o = MQ.game.add.sprite(-MQ.game.world.centerX + 531, -this.disc.y + 505, 'c-orange');
+        // //531, 505
+        this.c_o = MQ.game.add.sprite(0, -145, 'c-orange');
         this.c_o.anchor.set(0.5);
         //420, 726
-        this.c_p = MQ.game.add.sprite(-MQ.game.world.centerX + 420, 726 - this.disc.y, 'c-pink');
+        this.c_p = MQ.game.add.sprite(-113, 100, 'c-pink');
         this.c_p.anchor.set(0.5);
         //666, 707
-        this.c_v = MQ.game.add.sprite(-MQ.game.world.centerX + 666, 707 - this.disc.y, 'c-violet');
+        this.c_v = MQ.game.add.sprite(134, 62, 'c-violet');
         this.c_v.anchor.set(0.5);
         this.disc.addChild(this.c_o);
         this.disc.addChild(this.c_p);
@@ -39,7 +39,7 @@ var loadState = {
         this.tweenScale = MQ.game.add.tween(this.disc.scale).to({ x: 1.2, y: 1.2 }, 700, "Linear", true, 0, -1);
         this.tweenScale.yoyo(true, 700);
         //92909b, 
-        this.txt_loading = MQ.game.add.text(MQ.game.world.centerX, 895, 'Đang tải...', {
+        this.txt_loading = MQ.game.add.text(MQ.game.world.centerX, 835, 'Đang tải...', {
             font: "42px Roboto",
             fill: "#92909b",
             boundsAlignH: "center",
@@ -60,7 +60,7 @@ var loadState = {
         // MQ.game.load.image('btn-home', 'img/assets/btn-home.png');
         MQ.game.load.image('btn-playing', 'img/assets/btn-playing.png');
         //party test art
-        MQ.game.load.image('art-party', 'img/assets/Menu/07_A_Party_mode.jpg');
+        MQ.game.load.image('art-party', 'img/assets/Menu/07_A_Party_mode.png');
         //practice
         MQ.game.load.image('bg-practice', 'img/assets/Practice/BG_GamePlay.png');
         MQ.game.load.image('dot_practice', 'img/assets/Practice/Circle_Active_Small.png');
@@ -97,10 +97,13 @@ var loadState = {
         //playlist chall to FIXME:
         MQ.game.load.image('icon-lock', 'img/assets/popup/Icon_lock.png');
         MQ.game.load.image('icon-rank', 'img/assets/popup/icon_Rank.png');
-        for (playlist in MQ.listPlaylist){
+        for (playlist in MQ.listPlaylist) {
             // console.log(MQ.listPlaylist[playlist].img);
             MQ.game.load.image(`${MQ.listPlaylist[playlist].img}`, `img/assets/playlist/${MQ.listPlaylist[playlist].img}.png`);
         };
+        //ranking practice
+        MQ.game.load.image('circle-stroke-ranking', 'img/assets/Practice/rank/Circle_Stroke.png');
+        MQ.game.load.image('ve-ranking', 'img/assets/Practice/rank/VE.png');
         // menu
         MQ.game.load.image('bg-menu', 'img/assets/Menu/BG_main.png');
         MQ.game.load.image('heart', 'img/assets/Menu/Heart_Icon.png');
@@ -135,23 +138,23 @@ var loadState = {
         MQ.game.load.image('search-icon-mail', 'img/assets/mail/Search_icon.png');
         MQ.game.load.image('search-tab-mail', 'img/assets/mail/Search_tab.png');
         MQ.game.load.image('tab-mess-mail', 'img/assets/mail/Tab_chon playlist.png');
-        for(i=0; i<MQ.mailDemo.length; i++){
+        for (i = 0; i < MQ.mailDemo.length; i++) {
             MQ.game.load.image(`${MQ.mailDemo[i].avaName}`, `${MQ.mailDemo[i].avaUrl}`);
         }
         //shopLoader
-        for(img in MQ.shopLoader){
+        for (img in MQ.shopLoader) {
             MQ.game.load.image(`${MQ.shopLoader[img].name}`, `${MQ.shopLoader[img].url}`);
         }
         //setting Loader
-        for(img in MQ.settingLoader){
+        for (img in MQ.settingLoader) {
             MQ.game.load.image(`${MQ.settingLoader[img].name}`, `${MQ.settingLoader[img].url}`);
         }
         //rank ava loader
-        for(img in MQ.rankFake){
+        for (img in MQ.rankFake) {
             MQ.game.load.image(`${MQ.rankFake[img].ava}`, `${MQ.rankFake[img].url}`);
         };
         //rank loader
-        for(img in MQ.rankLoader){
+        for (img in MQ.rankLoader) {
             MQ.game.load.image(`${MQ.rankLoader[img].name}`, `${MQ.rankLoader[img].url}`);
         }
         //popup reward

@@ -504,7 +504,7 @@ var winState = {
         });
         txt_score.anchor.set(0.5);
         tab_score.addChild(txt_score);
-        if(MQ.isCheckRank){
+        if (MQ.isCheckRank) {
             this.createPopupRanking();
         }
     },
@@ -837,6 +837,9 @@ var winState = {
         grapRank.addChild(tab_top3);
         //1344 - 180
         var rank4to10 = MQ.game.add.sprite(0, 1164, 'rank4to10-rank');
+        var ve_reward = MQ.game.add.button(1020, 90, 've-ranking');
+        ve_reward.anchor.set(1, 0.5);
+        rank4to10.addChild(ve_reward);
         grapRank.addChild(rank4to10);
         for (i = 0; i < 3; i++) {
             let icon = MQ.game.add.sprite(100, 710 + i * 188, `rank${i + 1}-orange-rank`);
@@ -854,7 +857,10 @@ var winState = {
             });
             name.anchor.set(0, 0.5);
             grapRank.addChild(name);
-            let score = MQ.game.add.text(1020, 710 + i * 188, `${MQ.rankFake[i].score}`, {
+            let circle = MQ.game.add.sprite(1020, 710 + i * 188, 'circle-stroke-ranking');
+            circle.anchor.set(1, 0.5);
+            grapRank.addChild(circle);
+            let score = MQ.game.add.text(1000, 710 + i * 188, `${MQ.rankFake[i].score}`, {
                 font: `40px Roboto`,
                 fill: "#ffffff",
                 boundsAlignH: "center",
@@ -863,6 +869,8 @@ var winState = {
             });
             score.anchor.set(1, 0.5);
             grapRank.addChild(score);
+            let line = MQ.game.add.sprite(60, 790+i*188, 'line_setting');
+            grapRank.addChild(line);
         }
         for (i = 0; i < 6; i++) {
             let icon = MQ.game.add.sprite(60, 1440 + i * 188, `icon-rank-small-rank`);
@@ -889,7 +897,10 @@ var winState = {
             });
             name.anchor.set(0, 0.5);
             grapRank.addChild(name);
-            let score = MQ.game.add.text(1020, 1440 + i * 188, `${MQ.rankFake[i + 3].score}`, {
+            let circle = MQ.game.add.sprite(1020, 1440 + i * 188, 'circle-stroke-ranking');
+            circle.anchor.set(1, 0.5);
+            grapRank.addChild(circle);
+            let score = MQ.game.add.text(1000, 1440 + i * 188, `${MQ.rankFake[i + 3].score}`, {
                 font: `40px Roboto`,
                 fill: "#ffffff",
                 boundsAlignH: "center",
@@ -898,16 +909,18 @@ var winState = {
             });
             score.anchor.set(1, 0.5);
             grapRank.addChild(score);
+            let line = MQ.game.add.sprite(60, 1520+i*188, 'line_setting');
+            grapRank.addChild(line);
         }
-        var yourScore = MQ.game.add.text(MQ.game.width/2,2520, `YOUR SCORE:  ${MQ.practiceModeScore}`,{
-            font: `60px Roboto`,
-            fill: "#ffffff",
-            boundsAlignH: "center",
-            boundsAlignV: "middle",
-            fontWeight: 400
-        });
-        yourScore.anchor.set(0.5);
-        grapRank.addChild(yourScore);
+        // var yourScore = MQ.game.add.text(MQ.game.width / 2, 2520, `Điểm của bạn:  ${MQ.practiceModeScore}`, {
+        //     font: `60px Roboto`,
+        //     fill: "#ffffff",
+        //     boundsAlignH: "center",
+        //     boundsAlignV: "middle",
+        //     fontWeight: 400
+        // });
+        // yourScore.anchor.set(0.5);
+        // grapRank.addChild(yourScore);
         var header_rank = MQ.game.add.sprite(0, 0, 'tab-header-rank');
         var arrow = MQ.game.add.button(0, 0, 'arrow-rank');
         header_rank.addChild(arrow);

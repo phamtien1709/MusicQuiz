@@ -20,8 +20,6 @@ var bootState = {
     this.logo = MQ.game.add.sprite(MQ.game.world.centerX, 222, 'logo');
     this.logo.anchor.set(0.5);
     // showConsole("Boot screen");
-    // console.log(MQ.game.width, MQ.game.height);
-    // this.game.stage.smoothed = true;
     MQ.data = [];
     MQ.dataChoosed = [];
     MQ.listPlaylist = [
@@ -1033,11 +1031,25 @@ var bootState = {
     ];
     MQ.randomBotList = [[0, 1, 2, 3], [2, 6, 0, 4], [3, 5, 1, 0], [2, 6, 3, 0], [1, 3, 5, 6], [4, 5, 6, 0], [5, 1, 0, 2], [6, 4, 2, 1], [5, 3, 1, 10], [2, 6, 1, 2], [8, 6, 9, 7], [11, 12, 13, 14], [9, 14, 10, 1], [11, 6, 3, 14], [14, 3, 2, 1], [9, 6, 13, 12], [12, 10, 6, 1], [14, 1, 3, 10], [6, 7, 8, 9], [13, 14, 6, 5]];
     // console.log(MQ.playListFree.length);
-    MQ.game.stage.backgroundColor = "#ffffff";
-    // var bg = MQ.game.add.sprite(0, 0, 'bg');
-    // bg.width = MQ.game.width;
-    // bg.height = MQ.game.height;
-    MQ.btn_fb = MQ.game.add.button(MQ.game.world.centerX, 613, 'btn-fb');
+    this.game.stage.background = MQ.game.add.sprite(0, 0, 'bg-load');
+    this.logo = MQ.game.add.sprite(MQ.game.world.centerX, 565, 'logo');
+    this.logo.anchor.set(0.5);
+    this.disc = MQ.game.add.sprite(MQ.game.world.centerX, 277, 'disc');
+    this.disc.anchor.set(0.5);
+    // console.log(this.disc.y);
+    // //531, 505
+    this.c_o = MQ.game.add.sprite(0, -145, 'c-orange');
+    this.c_o.anchor.set(0.5);
+    //420, 726
+    this.c_p = MQ.game.add.sprite(-113, 100, 'c-pink');
+    this.c_p.anchor.set(0.5);
+    //666, 707
+    this.c_v = MQ.game.add.sprite(134, 62, 'c-violet');
+    this.c_v.anchor.set(0.5);
+    this.disc.addChild(this.c_o);
+    this.disc.addChild(this.c_p);
+    this.disc.addChild(this.c_v);
+    MQ.btn_fb = MQ.game.add.button(MQ.game.world.centerX, 835, 'btn-fb');
     MQ.btn_fb.anchor.set(0.5);
     // MQ.btn_fb.scale.set(MQ.configs.SCALE);
     MQ.btn_fb.events.onInputDown.add(() => {
