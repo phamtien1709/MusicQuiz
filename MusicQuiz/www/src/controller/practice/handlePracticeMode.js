@@ -40,11 +40,6 @@ function getSongToPractice(data, callback) {
             MQ.songRandomChoiced[3] = arrNotRandom[0];
         }
     }
-    // console.log(MQ.songChoiced);
-    // console.log(MQ.songRandomChoiced);
-    // console.log(MQ.timeAnswerSaveToData);
-    // MQ.songChoicedList.push(MQ.songChoiced);
-    // MQ.songRandomChoicedList.push(MQ.songRandomChoiced);
     callback();
 }
 function updatePracticeMode(val) {
@@ -60,4 +55,17 @@ function updatePracticeMode(val) {
                 console.log(data);
             }
         });
+}
+function checkRankPracticeMode(name, ava, url, score) {
+    var Swap = {
+        name: name,
+        ava: ava,
+        url: url,
+        score: score
+    };
+    for (i = 0; i < MQ.rankFake.length; i++) {
+        if (MQ.rankFake[i].score < Swap.score) {
+            [MQ.rankFake[i], Swap] = [Swap, MQ.rankFake[i]];
+        }
+    };
 }

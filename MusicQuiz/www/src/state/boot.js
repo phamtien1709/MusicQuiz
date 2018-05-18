@@ -984,49 +984,49 @@ var bootState = {
         name: 'Min',
         ava: 'ava-rank2',
         url: 'img/assets/Practice/rank/ava/2.png',
-        score: 52
+        score: 45
       },
       {
         name: 'Chi Pu',
         ava: 'ava-rank3',
         url: 'img/assets/Practice/rank/ava/3.png',
-        score: 45
+        score: 42
       },
       {
         name: 'Bi Rain',
         ava: 'ava-rank4',
         url: 'img/assets/Practice/rank/ava/4.png',
-        score: 42
+        score: 6
       },
       {
         name: 'Hà Anh Tuấn',
         ava: 'ava-rank5',
         url: 'img/assets/Practice/rank/ava/5.png',
-        score: 40
+        score: 5
       },
       {
         name: 'Hồ Ngọc Hà',
         ava: 'ava-rank6',
         url: 'img/assets/Practice/rank/ava/6.png',
-        score: 32
+        score: 4
       },
       {
         name: 'Tuấn Hưng',
         ava: 'ava-rank7',
         url: 'img/assets/Practice/rank/ava/7.png',
-        score: 27
+        score: 3
       },
       {
         name: 'Đức Phúc',
         ava: 'ava-rank8',
         url: 'img/assets/Practice/rank/ava/8.png',
-        score: 26
+        score: 2
       },
       {
         name: 'Hương Tràm',
         ava: 'ava-rank9',
         url: 'img/assets/Practice/rank/ava/9.png',
-        score: 25
+        score: 1
       }
     ];
     MQ.randomBotList = [[0, 1, 2, 3], [2, 6, 0, 4], [3, 5, 1, 0], [2, 6, 3, 0], [1, 3, 5, 6], [4, 5, 6, 0], [5, 1, 0, 2], [6, 4, 2, 1], [5, 3, 1, 10], [2, 6, 1, 2], [8, 6, 9, 7], [11, 12, 13, 14], [9, 14, 10, 1], [11, 6, 3, 14], [14, 3, 2, 1], [9, 6, 13, 12], [12, 10, 6, 1], [14, 1, 3, 10], [6, 7, 8, 9], [13, 14, 6, 5]];
@@ -1051,6 +1051,7 @@ var bootState = {
     this.disc.addChild(this.c_v);
     MQ.btn_fb = MQ.game.add.button(MQ.game.world.centerX, 835, 'btn-fb');
     MQ.btn_fb.anchor.set(0.5);
+    MQ.btn_fb.scale.set(0.9);
     // MQ.btn_fb.scale.set(MQ.configs.SCALE);
     MQ.btn_fb.events.onInputDown.add(() => {
       // MQ.button_sound.play();

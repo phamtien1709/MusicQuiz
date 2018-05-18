@@ -35,26 +35,33 @@ class AnswerController {
                                 MQ.inThisQuiz = false;
                                 practiceState.startLoad();
                             });
-                        }, 2500);
+                        }, 1000);
                     }
                 } else {
                     const obj = MQ.achievementPractice.filter(ele => ele.answer == MQ.indexSongChoiced.length);
                     // console.log(obj);
-                    if(obj[0] !== undefined){
+                    if (obj[0] !== undefined) {
                         setTimeout(() => {
                             this.createPopupNotReward(obj[0].answer);
                         }, 1000);
+                        setTimeout(() => {
+                            getSongToPractice(MQ.dataChoosed, () => {
+                                MQ.inThisQuiz = false;
+                                practiceState.startLoad();
+                            });
+                        }, 3000);
+                    } else {
+                        setTimeout(() => {
+                            getSongToPractice(MQ.dataChoosed, () => {
+                                MQ.inThisQuiz = false;
+                                practiceState.startLoad();
+                            });
+                        }, 1000);
                     }
-                    setTimeout(() => {
-                        getSongToPractice(MQ.dataChoosed, () => {
-                            MQ.inThisQuiz = false;
-                            practiceState.startLoad();
-                        });
-                    }, 3000);
                 }
             } else {
-                if(MQ.firstCorrect){
-                    MQ.correctCount = MQ.indexSongChoiced.length-1;
+                if (MQ.firstCorrect) {
+                    MQ.correctCount = MQ.indexSongChoiced.length - 1;
                 } else {
                     MQ.correctCount = 0;
                 }
@@ -173,9 +180,11 @@ class AnswerController {
         var btn_rank = MQ.game.add.button(90, 185, 'btn-rank-practice');
         btn_rank.anchor.set(0.5);
         box_lose_practice.addChild(btn_rank);
-        var disc = MQ.game.add.sprite(0, -252, 'disc-lose-practice');
-        disc.anchor.set(0.5);
-        box_lose_practice.addChild(disc);
+        var wrong = MQ.game.add.sprite(0, -252, 'wrong_practice');
+        wrong.anchor.set(0.5);
+        var runSSWrong = wrong.animations.add('run_load_wrong');
+        wrong.animations.play('run_load_wrong', 30, false);
+        box_lose_practice.addChild(wrong);
         var txt_lose = MQ.game.add.text(0, -29, 'BẠN ĐÃ TRẢ LỜI SAI', {
             font: `45px Roboto`,
             fill: "black",
@@ -195,17 +204,18 @@ class AnswerController {
         });
         btn_home.events.onInputDown.add(() => {
             MQ.songChoicedPlay.stop();
+            checkRankPracticeMode(MQ.nameFB, 'ava_rank', '0', MQ.practiceModeScore);
             MQ.loadFirst = true;
             MQ.game.state.start('win');
         });
-        btn_rank.events.onInputDown.add(()=>{
+        btn_rank.events.onInputDown.add(() => {
             MQ.songChoicedPlay.stop();
+            checkRankPracticeMode(MQ.nameFB, 'ava_rank', '0', MQ.practiceModeScore);
             MQ.isCheckRank = true;
             MQ.game.state.start('win');
         });
     }
-    createPopupNotReward (answer) {
-        // console.log(`Bạn đã đạt mốc: ${answer}`);
+    createPopupNotReward(answer) {
         var screen_dim = MQ.game.add.button(0, 0, 'screen-dim');
         screen_dim.alpha = 0.8;
         var congrat_reward = MQ.game.add.sprite(MQ.game.world.centerX, MQ.game.world.centerY, 'congrat-reward');

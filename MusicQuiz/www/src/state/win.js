@@ -106,6 +106,7 @@ var winState = {
             btn_home.scale.set(MQ.configs.SCALE - 0.1);
             btn_home.anchor.set(0.5);
             btn_home.events.onInputDown.add(() => {
+                MQ.button_sound.play();
                 MQ.game.state.start('menu');
             });
             this.createBoxScorePractice();
@@ -473,6 +474,7 @@ var winState = {
         // btn_home.scale.set(MQ.configs.SCALE - 0.1);
         btn_pick_playlist.anchor.set(0.5, 1);
         btn_pick_playlist.events.onInputDown.add(() => {
+            MQ.button_sound.play();
             // console.log('pick');
             MQ.game.state.start('bonus');
         });
@@ -679,6 +681,7 @@ var winState = {
         // btn_home.scale.set(MQ.configs.SCALE - 0.1);
         btn_pick_playlist.anchor.set(0.5, 1);
         btn_pick_playlist.events.onInputDown.add(() => {
+            MQ.button_sound.play();
             console.log('pick');
             MQ.game.state.start('bonus');
         });
@@ -779,19 +782,20 @@ var winState = {
         // btn_home.scale.set(MQ.configs.SCALE - 0.1);
         btn_next_playlist.anchor.set(0.5);
         btn_next_playlist.events.onInputDown.add(() => {
-            console.log('next playlist');
             MQ.button_sound.play();
             MQ.game.state.start('bonus');
         });
         var btn_rehome = MQ.game.add.button(135, 1814, 'btn-home-lose-practice');
         btn_rehome.anchor.set(0.5);
         btn_rehome.events.onInputDown.add(() => {
+            MQ.button_sound.play();
             // console.log('menu');
             MQ.game.state.start('menu');
         });
-        ///////
+        //
     },
     createPopupRanking: function () {
+        // console.log(MQ.rankFake);
         this.popupRanking = MQ.game.add.group();
         var bg = MQ.game.add.sprite(0, 0, 'bg-rank');
         this.popupRanking.add(bg);
@@ -807,12 +811,16 @@ var winState = {
         grapRank.input.enableDrag();
         grapRank.input.allowHorizontalDrag = false;
         grapRank.mask = scrollMaskRank;
-        grapRank.events.onDragStop.add(() => {
+        grapRank.events.onDragUpdate.add(() => {
             if (grapRank.position.y > 180) {
-                MQ.game.add.tween(grapRank).to({ y: 180 }, 250, "Linear", true);
+                grapRank.input.disableDrag();
+                grapRank.position.y = 180;
+                grapRank.input.enableDrag();
             }
-            if (grapRank.position.y < (-180)) {
-                MQ.game.add.tween(grapRank).to({ y: (-740) }, 250, "Linear", true);
+            if (grapRank.position.y < -(grapRank.height - 1920)) {
+                grapRank.input.disableDrag();
+                grapRank.position.y = -(grapRank.height - 1920);
+                grapRank.input.enableDrag();
             }
         })
         this.popupRanking.add(grapRank);
@@ -845,8 +853,14 @@ var winState = {
             let icon = MQ.game.add.sprite(100, 710 + i * 188, `rank${i + 1}-orange-rank`);
             icon.anchor.set(0.5);
             grapRank.addChild(icon);
+            let maskAva = MQ.game.add.graphics(0, 0);
+            maskAva.beginFill(0xffffff);
+            maskAva.drawCircle(290, 710 + i * 188, 120);
+            maskAva.anchor.set(0.5);
+            grapRank.addChild(maskAva);
             let ava = MQ.game.add.sprite(230, 710 + i * 188, `${MQ.rankFake[i].ava}`);
             ava.anchor.set(0, 0.5);
+            ava.mask = maskAva;
             grapRank.addChild(ava);
             let name = MQ.game.add.text(371, 710 + i * 188, `${MQ.rankFake[i].name}`, {
                 font: `40px Roboto`,
@@ -859,17 +873,17 @@ var winState = {
             grapRank.addChild(name);
             let circle = MQ.game.add.sprite(1020, 710 + i * 188, 'circle-stroke-ranking');
             circle.anchor.set(1, 0.5);
-            grapRank.addChild(circle);
-            let score = MQ.game.add.text(1000, 710 + i * 188, `${MQ.rankFake[i].score}`, {
+            let score = MQ.game.add.text(-45, 0, `${MQ.rankFake[i].score}`, {
                 font: `40px Roboto`,
                 fill: "#ffffff",
                 boundsAlignH: "center",
                 boundsAlignV: "middle",
                 fontWeight: 400
             });
-            score.anchor.set(1, 0.5);
-            grapRank.addChild(score);
-            let line = MQ.game.add.sprite(60, 790+i*188, 'line_setting');
+            score.anchor.set(0.5);
+            circle.addChild(score);
+            grapRank.addChild(circle);
+            let line = MQ.game.add.sprite(60, 800 + i * 188, 'line_setting');
             grapRank.addChild(line);
         }
         for (i = 0; i < 6; i++) {
@@ -885,8 +899,14 @@ var winState = {
             });
             number.anchor.set(0, 0.5);
             grapRank.addChild(number);
+            let maskAva = MQ.game.add.graphics(0, 0);
+            maskAva.beginFill(0xffffff);
+            maskAva.drawCircle(290, 1440 + i * 188, 120);
+            maskAva.anchor.set(0.5);
+            grapRank.addChild(maskAva);
             let ava = MQ.game.add.sprite(230, 1440 + i * 188, `${MQ.rankFake[i + 3].ava}`);
             ava.anchor.set(0, 0.5);
+            ava.mask = maskAva;
             grapRank.addChild(ava);
             let name = MQ.game.add.text(371, 1440 + i * 188, `${MQ.rankFake[i + 3].name}`, {
                 font: `40px Roboto`,
@@ -899,17 +919,17 @@ var winState = {
             grapRank.addChild(name);
             let circle = MQ.game.add.sprite(1020, 1440 + i * 188, 'circle-stroke-ranking');
             circle.anchor.set(1, 0.5);
-            grapRank.addChild(circle);
-            let score = MQ.game.add.text(1000, 1440 + i * 188, `${MQ.rankFake[i + 3].score}`, {
+            let score = MQ.game.add.text(-45, 0, `${MQ.rankFake[i + 3].score}`, {
                 font: `40px Roboto`,
                 fill: "#ffffff",
                 boundsAlignH: "center",
                 boundsAlignV: "middle",
                 fontWeight: 400
             });
-            score.anchor.set(1, 0.5);
-            grapRank.addChild(score);
-            let line = MQ.game.add.sprite(60, 1520+i*188, 'line_setting');
+            score.anchor.set(0.5);
+            circle.addChild(score);
+            grapRank.addChild(circle);
+            let line = MQ.game.add.sprite(60, 1530 + i * 188, 'line_setting');
             grapRank.addChild(line);
         }
         // var yourScore = MQ.game.add.text(MQ.game.width / 2, 2520, `Điểm của bạn:  ${MQ.practiceModeScore}`, {
@@ -925,6 +945,7 @@ var winState = {
         var arrow = MQ.game.add.button(0, 0, 'arrow-rank');
         header_rank.addChild(arrow);
         arrow.events.onInputDown.add(() => {
+            MQ.button_sound.play();
             this.popupRanking.position.x = MQ.game.width;
         });
         var icon_rank_header = MQ.game.add.button(1020, 43, 'icon-rank-header-rank');
@@ -938,6 +959,15 @@ var winState = {
             fontWeight: 400
         });
         scoreText.anchor.set(1, 0);
+        var txt_header_rank = MQ.game.add.text(540, 87, 'NHẠC TRẺ', {
+            font: `55px Roboto`,
+            fill: "#ffffff",
+            boundsAlignH: "center",
+            boundsAlignV: "middle",
+            fontWeight: 500
+        });
+        txt_header_rank.anchor.set(0.5);
+        header_rank.addChild(txt_header_rank);
         header_rank.addChild(scoreText);
         this.popupRanking.add(header_rank);
     }

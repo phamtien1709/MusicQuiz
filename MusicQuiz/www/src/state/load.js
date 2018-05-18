@@ -53,6 +53,7 @@ var loadState = {
             MQ.game.load.image(`playlist-${i}`, `${MQ.playListFree[i].imgPlaylist}`);
         }
         MQ.game.load.image('ava_fb', `https://graph.facebook.com/${MQ.checkId}/picture?width=241`);
+        MQ.game.load.image('ava_rank', `https://graph.facebook.com/${MQ.checkId}/picture?width=120`);
         MQ.game.load.image('ava_default', 'img/assets/ava-default.png');
         MQ.game.load.image('ava_150', 'img/assets/ava-default150x150.png');
         MQ.game.load.image('ava_70', 'img/assets/ava-default70x70.png');
@@ -61,7 +62,12 @@ var loadState = {
         MQ.game.load.image('btn-playing', 'img/assets/btn-playing.png');
         //party test art
         MQ.game.load.image('art-party', 'img/assets/Menu/07_A_Party_mode.png');
+        MQ.game.load.image('header-party', 'img/assets/Menu/header-party.png');
         //practice
+        //spritesheet
+        MQ.game.load.spritesheet('timeout_practice', 'img/assets/Practice/Timeout_Final263x325.png', 263, 325, 24);
+        MQ.game.load.spritesheet('wrong_practice', 'img/assets/Practice/Wrong338x338.png', 338, 338, 15);
+        //
         MQ.game.load.image('bg-practice', 'img/assets/Practice/BG_GamePlay.png');
         MQ.game.load.image('dot_practice', 'img/assets/Practice/Circle_Active_Small.png');
         MQ.game.load.image('lock-answer', 'img/assets/Practice/lock-answer.png');
@@ -129,6 +135,8 @@ var loadState = {
         //mail 
         // MQ.game.load.image('ava-micro-mail', 'img/assets/mail/ava_01.png');
         MQ.game.load.image('btn-nhan-mail', 'img/assets/mail/Button_Nhan.png');
+        MQ.game.load.image('hethong-mail', 'img/assets/mail/Mail_Hethong.png');
+        MQ.game.load.image('banbe-mail', 'img/assets/mail/Mail_Banbe.png');
         MQ.game.load.image('header-line-mail', 'img/assets/mail/Header_Line.png');
         MQ.game.load.image('header-line-gradient-mail', 'img/assets/mail/Header_Line_Gradient.png');
         MQ.game.load.image('header-tab-active-mail', 'img/assets/mail/Header_tab_Active.png');
@@ -151,7 +159,9 @@ var loadState = {
         }
         //rank ava loader
         for (img in MQ.rankFake) {
-            MQ.game.load.image(`${MQ.rankFake[img].ava}`, `${MQ.rankFake[img].url}`);
+            if(MQ.rankFake[img].url !== 0){
+                MQ.game.load.image(`${MQ.rankFake[img].ava}`, `${MQ.rankFake[img].url}`);
+            }
         };
         //rank loader
         for (img in MQ.rankLoader) {

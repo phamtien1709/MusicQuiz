@@ -186,9 +186,11 @@ var practiceState = {
         var btn_rank = MQ.game.add.button(90, 185, 'btn-rank-practice');
         btn_rank.anchor.set(0.5);
         box_lose_practice.addChild(btn_rank);
-        var disc = MQ.game.add.sprite(0, -252, 'timeout-lose-practice');
-        disc.anchor.set(0.5);
-        box_lose_practice.addChild(disc);
+        var timeout = MQ.game.add.sprite(0, -252, 'timeout_practice');
+        timeout.anchor.set(0.5);
+        var runSSTimeout = timeout.animations.add('run_load_timeout');
+        timeout.animations.play('run_load_timeout',24, true);
+        box_lose_practice.addChild(timeout);
         var txt_lose = MQ.game.add.text(0, -29, 'HẾT GIỜ! BẠN ĐÃ THUA', {
             font: `45px Roboto`,
             fill: "black",
@@ -207,11 +209,13 @@ var practiceState = {
             });
         });
         btn_home.events.onInputDown.add(() => {
+            checkRankPracticeMode(MQ.nameFB, 'ava_rank', '0', MQ.practiceModeScore);
             MQ.songChoicedPlay.stop();
             MQ.loadFirst = true;
             MQ.game.state.start('win');
         });
         btn_rank.events.onInputDown.add(() => {
+            checkRankPracticeMode(MQ.nameFB, 'ava_rank', '0', MQ.practiceModeScore);
             MQ.isCheckRank = true;
             MQ.game.state.start('win');
         });
@@ -254,37 +258,5 @@ var practiceState = {
                 num.anchor.set(1, 0.5);
             }
         }
-        // for (dot in MQ.posDotPractice){
-        //     var dot = MQ.game.add.sprite(MQ.posDotPractice[dot].x, MQ.posDotPractice[dot].y, 'dot_practice');
-        //     dot.anchor.set(0.5);
-            // if ((MQ.posDotPractice[dot].num > 2 && MQ.posDotPractice[dot].num < 8) || (MQ.posDotPractice[dot].num > 12 && MQ.posDotPractice[dot].num < 25) || (MQ.posDotPractice[dot].num > 33 && MQ.posDotPractice[dot].num < 56)) {
-            //     var num = MQ.game.add.text(MQ.posDotPractice[dot].x, MQ.posDotPractice[dot].y + 20, `${MQ.posDotPractice[dot].num}`, {
-            //         font: `34px Roboto`,
-            //         fill: "white",
-            //         boundsAlignH: "center",
-            //         boundsAlignV: "middle",
-            //         fontWeight: 400
-            //     });
-            //     num.anchor.set(0.5, 0);
-            // } else if (MQ.posDotPractice[dot].num > 8 && MQ.posDotPractice[dot].num < 12) {
-            //     var num = MQ.game.add.text(MQ.posDotPractice[dot].x + 20, MQ.posDotPractice[dot].y, `${MQ.posDotPractice[dot].num}`, {
-            //         font: `34px Roboto`,
-            //         fill: "white",
-            //         boundsAlignH: "center",
-            //         boundsAlignV: "middle",
-            //         fontWeight: 400
-            //     });
-            //     num.anchor.set(0, 0.5);
-            // } else if (MQ.posDotPractice[dot].num > 25 && MQ.posDotPractice[dot].num < 33) {
-            //     var num = MQ.game.add.text(MQ.posDotPractice[dot].x - 20, MQ.posDotPractice[dot].y, `${MQ.posDotPractice[dot].num}`, {
-            //         font: `34px Roboto`,
-            //         fill: "white",
-            //         boundsAlignH: "center",
-            //         boundsAlignV: "middle",
-            //         fontWeight: 400
-            //     });
-            //     num.anchor.set(1, 0.5);
-            // }
-        // }
     }
 }

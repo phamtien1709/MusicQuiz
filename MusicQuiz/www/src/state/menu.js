@@ -350,7 +350,7 @@ var menuState = {
         btn_party.anchor.set(0.5);
         btn_party.events.onInputDown.add(() => {
             MQ.button_sound.play();
-            this.createArtStylePopup();
+            this.createArtStylePopupParty();
         });
         var btn_practice = MQ.game.add.button(540, 518, 'btn-practice');
         btn_practice.anchor.set(0.5);
@@ -593,14 +593,12 @@ var menuState = {
                 // console.log('run prac');
                 MQ.game.state.start('practice');
             } else {
+                // console.log('run play');
                 MQ.game.state.start('play');
             }
-            // MQ.game.load.stop();
         }
-        // MQ.game.state.start('play');
     },
     createButtonPlaylist(index, namePlaylist) {
-        // console.log(0/2);
         if (index % 2 == 0) {
             if (index == 0) {
                 var spritePlaylist = MQ.game.add.button(-232, -47, `playlist-${index}`);
@@ -611,11 +609,8 @@ var menuState = {
                 icon_rank.anchor.set(0.5)
                 spritePlaylist.addChild(icon_rank);
                 spritePlaylist.events.onInputDown.add(() => {
-                    // console.log(spritePlaylist.value);
                     MQ.button_sound.play();
-                    var findData = MQ.data.filter(data => data.nameData == spritePlaylist.value)
-                    // MQ.sound.stop();
-                    // console.log(findData);
+                    var findData = MQ.data.filter(data => data.nameData == spritePlaylist.value);
                     MQ.dataChoosed = findData[0].data;
                     MQ.correctCount = 0;
                     MQ.firstCorrect = false;
@@ -623,7 +618,6 @@ var menuState = {
                         MQ.practiceMode = true;
                         this.startLoad();
                         subHeartOnPractice();
-                        // MQ.game.state.start('practice');
                     });
                 })
             }
@@ -664,7 +658,7 @@ var menuState = {
         // bg_findgame.scale.set(MQ.configs.SCALE);
         this.findgameGroup.add(bg_findgame);
         //btn-invite
-        MQ.btn_invite = MQ.game.add.button(1020, 250, 'btn-invite');
+        MQ.btn_invite = MQ.game.add.button(1020, 270, 'btn-invite');
         MQ.btn_invite.anchor.set(1, 0.5);
         // MQ.btn_invite.scale.set(MQ.configs.SCALE);
         MQ.btn_invite.events.onInputDown.add(() => {
@@ -677,7 +671,7 @@ var menuState = {
             })
         });
         this.findgameGroup.add(MQ.btn_invite);
-        const txt_chooseCompetitor = MQ.game.add.text(110, 350, 'CHỌN ĐỐI THỦ', {
+        const txt_chooseCompetitor = MQ.game.add.text(60, 270, 'CHỌN ĐỐI THỦ', {
             font: `45px Roboto`,
             fill: "#8a8a8a",
             boundsAlignH: "center",
@@ -687,10 +681,10 @@ var menuState = {
         this.findgameGroup.add(txt_chooseCompetitor);
         this.scrollMaskPoke = MQ.game.add.graphics(0, 400);
         this.scrollMaskPoke.beginFill();
-        this.scrollMaskPoke.drawRect(0, 0, MQ.game.width, 1280);
+        this.scrollMaskPoke.drawRect(0, 0, MQ.game.width, 1350);
         this.scrollMaskPoke.endFill();
         this.grapFriendInstalled = MQ.game.add.graphics(0, 400);
-        this.grapFriendInstalled.drawRect(0, 0, MQ.game.width, 750);
+        this.grapFriendInstalled.drawRect(0, 0, MQ.game.width, 1350);
         this.grapFriendInstalled.inputEnabled = true;
         this.grapFriendInstalled.input.enableDrag();
         this.grapFriendInstalled.input.allowHorizontalDrag = false;
@@ -714,15 +708,15 @@ var menuState = {
             // testMaskInstalled.scale.set(MQ.configs.SCALE);
             let maskAvaFriendInstall = MQ.game.add.graphics(0, 0);
             maskAvaFriendInstall.beginFill(0xffffff);
-            maskAvaFriendInstall.drawCircle(150, 90, 120);
+            maskAvaFriendInstall.drawCircle(120, 90, 120);
             maskAvaFriendInstall.anchor.set(0.5);
             testMaskInstalled.addChild(maskAvaFriendInstall);
-            let friend_avaInstalled = MQ.game.add.sprite(150, 90, `'friend${i}'`);
+            let friend_avaInstalled = MQ.game.add.sprite(120, 90, `'friend${i}'`);
             friend_avaInstalled.anchor.set(0.5);
             friend_avaInstalled.mask = maskAvaFriendInstall;
             // friend_avaInstalled.scale.set(MQ.configs.SCALE);
             testMaskInstalled.addChild(friend_avaInstalled);
-            let nameFriendInstalled = MQ.game.add.text(300, 90, `${MQ.installed_friend[i].name}`, {
+            let nameFriendInstalled = MQ.game.add.text(220, 90, `${MQ.installed_friend[i].name}`, {
                 font: `45px Roboto`,
                 fill: "white",
                 boundsAlignH: "center",
@@ -762,6 +756,55 @@ var menuState = {
             this.grapFriendInstalled.addChild(testMaskInstalled);
             this.findgameGroup.add(this.grapFriendInstalled);
         }
+        this.grapBotToChall = MQ.game.add.group();
+        this.grapBotToChall.y = this.grapFriendInstalled.y + this.grapFriendInstalled.height;
+        // for(i = 0; i < MQ.botChallenges.length; i++){
+        //     let testMaskInstalled = MQ.game.add.sprite(0, (i * 190), 'tab-friend');
+        //     let friend_avaInstalled = MQ.game.add.sprite(150, 90, `bot-menu${i}`);
+        //     friend_avaInstalled.anchor.set(0.5);
+        //     // friend_avaInstalled.scale.set(MQ.configs.SCALE);
+        //     testMaskInstalled.addChild(friend_avaInstalled);
+        //     let nameFriendInstalled = MQ.game.add.text(300, 90, `${MQ.botChallenges[i].name}`, {
+        //         font: `45px Roboto`,
+        //         fill: "white",
+        //         boundsAlignH: "center",
+        //         boundsAlignV: "middle",
+        //         fontWeight: 400
+        //     });
+        //     nameFriendInstalled.anchor.set(0, 0.5);
+        //     // nameFriendInstalled.scale.set(1 / MQ.configs.SCALE);
+        //     // console.log(nameFriendInstalled);
+        //     let btn_play = MQ.game.add.button(950, 90, 'btn-playing');
+        //     btn_play.anchor.set(0.5);
+        //     // btn_play.scale.set(MQ.configs.SCALE);
+        //     testMaskInstalled.addChild(btn_play);
+        //     testMaskInstalled.addChild(nameFriendInstalled);
+        //     this.testMaskInstalled += testMaskInstalled.height;
+        //     let idFriend = MQ.installed_friend[i].id;
+        //     btn_play.events.onInputDown.add(() => {
+        //         MQ.button_sound.play();
+        //         MQ.score = 0;
+        //         MQ.correctList = [];
+        //         MQ.wrongList = [];
+        //         MQ.songChoicedList = [];
+        //         MQ.songRandomChoicedList = [];
+        //         MQ.botKey = friend_avaInstalled.key.slice(-1);
+        //         MQ.isBotMode = true;
+        //         MQ.streak = 1;
+        //         MQ.timeAnswerSaveToDataAndScore = {
+        //             "time": [],
+        //             "score": 0
+        //         };
+        //         MQ.idFriendChallenge = idFriend;
+        //         MQ.nameFriendChallenge = nameFriendInstalled._text;
+        //         var tween_challPlaylist = MQ.game.add.tween(this.challPlaylistGroup).to({
+        //             x: 0
+        //         }, 300, "Linear");
+        //         tween_challPlaylist.start();
+        //     });
+            // this.grapBotToChall.addChild(testMaskInstalled);
+        // }
+        this.grapFriendInstalled.addChild(this.grapBotToChall);
         const tab_chonplaylist = MQ.game.add.sprite(MQ.game.world.centerX, 0, 'tab-playlist');
         tab_chonplaylist.anchor.set(0.5, 0);
         // tab_chonplaylist.scale.set(MQ.configs.SCALE);
@@ -788,30 +831,39 @@ var menuState = {
             tween_findgameReturn.start();
         });
     },
-    createArtStylePopup() {
+    createArtStylePopupParty() {
         this.artPartyGroup = MQ.game.add.group();
         var screen_dim = MQ.game.add.button(0, 0, 'screen-dim');
-        screen_dim.alpha = 0.8;
+        // screen_dim.alpha = 1;
         this.artPartyGroup.add(screen_dim);
         var artParty = MQ.game.add.sprite(0, 0, 'art-party');
         artParty.inputEnabled = true;
         artParty.input.enableDrag();
         artParty.input.allowHorizontalDrag = false;
-        artParty.events.onDragStop.add(() => {
-            if(artParty.position.y > 0){
-                MQ.game.add.tween(artParty).to({y:0}, 150, "Linear", true);
+        artParty.events.onDragUpdate.add(() => {
+            if (artParty.position.y > 0) {
+                // console.log('<=0');
+                artParty.input.disableDrag();
+                artParty.position.y = 0;
+                artParty.input.enableDrag();
             }
-            if(artParty.position.y < (-artParty.height+1920)){
-                MQ.game.add.tween(artParty).to({y:-artParty.height+1920}, 150, "Linear", true);
+            if (artParty.position.y < -(artParty.height - 1920)) {
+                // console.log('>=1920');
+                artParty.input.disableDrag();
+                artParty.position.y = -(artParty.height - 1920);
+                artParty.input.enableDrag();
             }
         });
+        var header_party = MQ.game.add.sprite(0, 0, 'header-party');
+        this.artPartyGroup.add(artParty);
+        this.artPartyGroup.add(header_party);
         var btn = MQ.game.add.button(77, 87, 'arrow-playlist');
         btn.anchor.set(0.5);
-        artParty.addChild(btn);
+        header_party.addChild(btn);
         btn.events.onInputDown.add(()=>{
+            MQ.button_sound.play();
             this.artPartyGroup.destroy();
         });
-        this.artPartyGroup.add(artParty);
     },
     createPlaylistDetail: function () {
         let img_playlist_detail = MQ.game.add.button(0, MQ.game.height, 'playlist-chitiet');
@@ -992,6 +1044,32 @@ var menuState = {
         this.mailGroup.position.x = MQ.game.width;
         var bg = MQ.game.add.button(0, 0, 'bg-playlist');
         this.mailGroup.add(bg);
+        var img_mail_hethong = MQ.game.add.sprite(MQ.game.width, 345,'hethong-mail');
+        img_mail_hethong.inputEnabled = true;
+        img_mail_hethong.input.enableDrag();
+        img_mail_hethong.input.allowHorizontalDrag = false;
+        img_mail_hethong.events.onDragStop.add(()=>{
+            if(img_mail_hethong.position.y > 345){
+                MQ.game.add.tween(img_mail_hethong).to({ y: 345 }, 250, "Linear", true);
+            }
+            if(img_mail_hethong.position.y < 0){
+                MQ.game.add.tween(img_mail_hethong).to({ y: 0 }, 250, "Linear", true);
+            }
+        });
+        this.mailGroup.add(img_mail_hethong);
+        var img_mail_banbe = MQ.game.add.sprite(MQ.game.width, 345,'banbe-mail');
+        img_mail_banbe.inputEnabled = true;
+        img_mail_banbe.input.enableDrag();
+        img_mail_banbe.input.allowHorizontalDrag = false;
+        img_mail_banbe.events.onDragStop.add(()=>{
+            if(img_mail_banbe.position.y > 345){
+                MQ.game.add.tween(img_mail_banbe).to({ y: 345 }, 250, "Linear", true);
+            }
+            if(img_mail_banbe.position.y < 0){
+                MQ.game.add.tween(img_mail_banbe).to({ y: 0 }, 250, "Linear", true);
+            }
+        });
+        this.mailGroup.add(img_mail_banbe);
         var scrollMaskMess = MQ.game.add.graphics(0, 345);
         scrollMaskMess.beginFill();
         scrollMaskMess.drawRect(0, 0, MQ.game.width, 1360);
@@ -1116,6 +1194,7 @@ var menuState = {
         lineHeaderTab3.kill();
         this.mailGroup.add(headerTab3);
         headerTab1.events.onInputDown.add(() => {
+            MQ.button_sound.play();
             headerTab1.loadTexture('header-tab-active-mail');
             headerTab2.loadTexture('header-tab-disactive-mail');
             headerTab3.loadTexture('header-tab-disactive-mail');
@@ -1126,8 +1205,11 @@ var menuState = {
             txtHeaderTab2.addColor('#93909d', 0);
             txtHeaderTab3.addColor('#93909d', 0);
             MQ.game.add.tween(grapMess).to({ x: 0 }, 250, "Linear", true);
+            MQ.game.add.tween(img_mail_hethong).to({ x: MQ.game.width }, 250, "Linear", true);
+            MQ.game.add.tween(img_mail_banbe).to({ x: MQ.game.width }, 250, "Linear", true);
         });
         headerTab2.events.onInputDown.add(() => {
+            MQ.button_sound.play();
             headerTab2.loadTexture('header-tab-active-mail');
             headerTab1.loadTexture('header-tab-disactive-mail');
             headerTab3.loadTexture('header-tab-disactive-mail');
@@ -1137,9 +1219,12 @@ var menuState = {
             txtHeaderTab1.addColor('#93909d', 0);
             txtHeaderTab2.addColor('#ffffff', 0);
             txtHeaderTab3.addColor('#93909d', 0);
-            MQ.game.add.tween(grapMess).to({ x: -MQ.game.width }, 250, "Linear", true);
+            MQ.game.add.tween(img_mail_hethong).to({ x: 0 }, 250, "Linear", true);
+            MQ.game.add.tween(grapMess).to({ x: MQ.game.width }, 250, "Linear", true);
+            MQ.game.add.tween(img_mail_banbe).to({ x: MQ.game.width }, 250, "Linear", true);
         });
         headerTab3.events.onInputDown.add(() => {
+            MQ.button_sound.play();
             headerTab3.loadTexture('header-tab-active-mail');
             headerTab2.loadTexture('header-tab-disactive-mail');
             headerTab1.loadTexture('header-tab-disactive-mail');
@@ -1149,7 +1234,9 @@ var menuState = {
             txtHeaderTab1.addColor('#93909d', 0);
             txtHeaderTab2.addColor('#93909d', 0);
             txtHeaderTab3.addColor('#ffffff', 0);
-            MQ.game.add.tween(grapMess).to({ x: -MQ.game.width }, 250, "Linear", true);
+            MQ.game.add.tween(grapMess).to({ x: MQ.game.width }, 250, "Linear", true);
+            MQ.game.add.tween(img_mail_hethong).to({ x: MQ.game.width }, 250, "Linear", true);
+            MQ.game.add.tween(img_mail_banbe).to({ x: 0}, 250, "Linear", true);
         });
     },
     createShopDisplay: function () {
@@ -1183,6 +1270,7 @@ var menuState = {
         btn_gift_active.kill();
         btn_vip_active.kill();
         btn_playlist.events.onInputDown.add(() => {
+            MQ.button_sound.play();
             btn_playlist_active.revive();
             btn_diamond_active.kill();
             btn_gift_active.kill();
@@ -1193,6 +1281,7 @@ var menuState = {
             MQ.game.add.tween(this.grapVipShop).to({ x: MQ.game.width }, 100, "Linear", true);
         });
         btn_diamond.events.onInputDown.add(() => {
+            MQ.button_sound.play();
             btn_playlist_active.kill();
             btn_diamond_active.revive();
             btn_gift_active.kill();
@@ -1203,6 +1292,7 @@ var menuState = {
             MQ.game.add.tween(this.grapVipShop).to({ x: MQ.game.width }, 100, "Linear", true);
         });
         btn_gift.events.onInputDown.add(() => {
+            MQ.button_sound.play();
             btn_playlist_active.kill();
             btn_diamond_active.kill();
             btn_gift_active.revive();
@@ -1213,6 +1303,7 @@ var menuState = {
             MQ.game.add.tween(this.grapVipShop).to({ x: MQ.game.width }, 100, "Linear", true);
         });
         btn_vip.events.onInputDown.add(() => {
+            MQ.button_sound.play();
             btn_playlist_active.kill();
             btn_diamond_active.kill();
             btn_gift_active.kill();
