@@ -445,7 +445,7 @@ var winState = {
                     let correct = MQ.game.add.sprite(-405, 90 + i * 230, 'v-icon-win');
                     correct.anchor.set(0.5);
                     box_result.addChild(correct);
-                    let txt_correct = MQ.game.add.text(-405, 126 + i * 230, `${MQ.dataChooseToChall.data.time[i].timeAnswer}s`, {
+                    let txt_correct = MQ.game.add.text(-405, 126 + i * 230, `${MQ.dataChooseToChall.data.time[i].timeAnswer.toFixed(1)}s`, {
                         font: `30px Roboto`,
                         fill: "#07cf81",
                         boundsAlignH: "center",
@@ -458,7 +458,7 @@ var winState = {
                     let wrong = MQ.game.add.sprite(-405, 90 + i * 230, 'x-icon-win');
                     wrong.anchor.set(0.5);
                     box_result.addChild(wrong);
-                    let txt_wrong = MQ.game.add.text(-405, 126 + i * 230, `${MQ.dataChooseToChall.data.time[i].timeAnswer}s`, {
+                    let txt_wrong = MQ.game.add.text(-405, 126 + i * 230, `${MQ.dataChooseToChall.data.time[i].timeAnswer.toFixed(1)}s`, {
                         font: `30px Roboto`,
                         fill: "#ff1d58",
                         boundsAlignH: "center",
@@ -653,7 +653,7 @@ var winState = {
                 let correct = MQ.game.add.sprite(-405, 90 + i * 230, 'v-icon-win');
                 correct.anchor.set(0.5);
                 box_result.addChild(correct);
-                let txt_correct = MQ.game.add.text(-405, 126 + i * 230, `${MQ.dataChooseToChall.time[i].timeAnswer}s`, {
+                let txt_correct = MQ.game.add.text(-405, 126 + i * 230, `${MQ.dataChooseToChall.time[i].timeAnswer.toFixed(1)}s`, {
                     font: `30px Roboto`,
                     fill: "#07cf81",
                     boundsAlignH: "center",
@@ -666,7 +666,7 @@ var winState = {
                 let wrong = MQ.game.add.sprite(-405, 90 + i * 230, 'x-icon-win');
                 wrong.anchor.set(0.5);
                 box_result.addChild(wrong);
-                let txt_wrong = MQ.game.add.text(-405, 126 + i * 230, `${MQ.dataChooseToChall.time[i].timeAnswer}s`, {
+                let txt_wrong = MQ.game.add.text(-405, 126 + i * 230, `${MQ.dataChooseToChall.time[i].timeAnswer.toFixed(1)}s`, {
                     font: `30px Roboto`,
                     fill: "#ff1d58",
                     boundsAlignH: "center",

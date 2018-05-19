@@ -93,6 +93,7 @@ class AnswerController {
                 this.sprite.alpha = 0.5;
                 if ((this.answer == MQ.songChoiced.RightAnswer)) {
                     if (MQ.inThisQuiz) {
+                        this.sprite.alpha = 1;
                         this.answerText.addColor("#30FF77", 0);
                     }
                 }

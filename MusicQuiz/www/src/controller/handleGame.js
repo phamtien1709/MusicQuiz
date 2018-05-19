@@ -53,9 +53,6 @@ function getChallengeByFriend(callback) {
         function (response) {
             if (response && !response.error) {
                 var countInvite = [];
-                // console.log(response);
-                // console.log()
-                // console.log(response.data[0]);
                 if (response.data[0] !== undefined) {
                     // console.log(response.data[0].data.idData);
                     console.log(response.data[0].message);

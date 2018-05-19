@@ -17,12 +17,10 @@ var loadState = {
             fontWeight: 400
         });
         this.term_txt.anchor.set(0.5);
-        // this.term_txt.addColor("#ffffff",0);
         this.term_txt.addColor("#ffa33a", 37);
         //646
         this.disc = MQ.game.add.sprite(MQ.game.world.centerX, 277, 'disc');
         this.disc.anchor.set(0.5);
-        // console.log(this.disc.y);
         // //531, 505
         this.c_o = MQ.game.add.sprite(0, -145, 'c-orange');
         this.c_o.anchor.set(0.5);
@@ -49,7 +47,6 @@ var loadState = {
         this.txt_loading.anchor.set(0.5);
         //load playlist arr
         for (i = 0; i < MQ.playListFree.length; i++) {
-            // console.log(`playlist-${i}`);
             MQ.game.load.image(`playlist-${i}`, `${MQ.playListFree[i].imgPlaylist}`);
         }
         MQ.game.load.image('ava_fb', `https://graph.facebook.com/${MQ.checkId}/picture?width=241`);
@@ -58,7 +55,6 @@ var loadState = {
         MQ.game.load.image('ava_150', 'img/assets/ava-default150x150.png');
         MQ.game.load.image('ava_70', 'img/assets/ava-default70x70.png');
         MQ.game.load.image('btn-next', 'img/assets/btn-next.png');
-        // MQ.game.load.image('btn-home', 'img/assets/btn-home.png');
         MQ.game.load.image('btn-playing', 'img/assets/btn-playing.png');
         //party test art
         MQ.game.load.image('art-party', 'img/assets/Menu/07_A_Party_mode.png');

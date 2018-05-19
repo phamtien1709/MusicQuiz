@@ -20,6 +20,8 @@ var playState = {
     },
     create: function () {
         //TODO: 102px each circle distance, 656.5
+        MQ.answerPlayGroup = MQ.game.add.group();
+        MQ.inThisQuiz = true;
         var bg = MQ.game.add.sprite(0, 0, 'bg-play');
         this.bg_fake = MQ.game.add.sprite(0, 0, 'bg-win');
         var line_top = MQ.game.add.sprite(0, 0, 'line-top');
@@ -146,16 +148,28 @@ var playState = {
                 for (i = 0; i < 4; i++) {
                     if (i == 0) {
                         // console.log(i);
-                        this.createAnswerTabA(i);
+                        MQ.answerA = new AnswerPlayController(MQ.game.width / 2, 898 + (i * 220), {
+                            "index": i
+                        });
+                        // this.createAnswerTabA(i);
                     }
                     if (i == 1) {
-                        this.createAnswerTabB(i);
+                        // this.createAnswerTabB(i);
+                        MQ.answerB = new AnswerPlayController(MQ.game.width / 2, 898 + (i * 220), {
+                            "index": i
+                        });
                     }
                     if (i == 2) {
-                        this.createAnswerTabC(i);
+                        // this.createAnswerTabC(i);
+                        MQ.answerC = new AnswerPlayController(MQ.game.width / 2, 898 + (i * 220), {
+                            "index": i
+                        });
                     }
                     if (i == 3) {
-                        this.createAnswerTabD(i);
+                        // this.createAnswerTabD(i);
+                        MQ.answerD = new AnswerPlayController(MQ.game.width / 2, 898 + (i * 220), {
+                            "index": i
+                        });
                     }
                 }
                 tweenSpriteTime.onComplete.add(() => {
@@ -262,16 +276,29 @@ var playState = {
                 tweenSpriteTime.start();
                 for (i = 0; i < 4; i++) {
                     if (i == 0) {
-                        this.createAnswerTabA(i);
+                        // console.log(i);
+                        MQ.answerA = new AnswerPlayController(MQ.game.width / 2, 898 + (i * 220), {
+                            "index": i
+                        });
+                        // this.createAnswerTabA(i);
                     }
                     if (i == 1) {
-                        this.createAnswerTabB(i);
+                        // this.createAnswerTabB(i);
+                        MQ.answerB = new AnswerPlayController(MQ.game.width / 2, 898 + (i * 220), {
+                            "index": i
+                        });
                     }
                     if (i == 2) {
-                        this.createAnswerTabC(i);
+                        // this.createAnswerTabC(i);
+                        MQ.answerC = new AnswerPlayController(MQ.game.width / 2, 898 + (i * 220), {
+                            "index": i
+                        });
                     }
                     if (i == 3) {
-                        this.createAnswerTabD(i);
+                        // this.createAnswerTabD(i);
+                        MQ.answerD = new AnswerPlayController(MQ.game.width / 2, 898 + (i * 220), {
+                            "index": i
+                        });
                     }
                 }
                 tweenSpriteTime.onComplete.add(() => {
@@ -288,468 +315,6 @@ var playState = {
     },
     render: function () {
         MQ.game.debug.text(MQ.game.time.fps || '--', 10, 35, "#00ff00");
-    },
-    createAnswerTabA: function (index) {
-        // console.log(MQ.songChoicedList);
-        MQ.answerA = MQ.game.add.button(MQ.game.width / 2, 898 + (index * 220), 'answer-tab');
-        // MQ.answerA.scale.set(MQ.configs.SCALE);
-        MQ.answerA.anchor.set(0.5);
-        MQ.answerA.events.onInputDown.add(() => {
-            MQ.choosed = true;
-            MQ.answerA.input.enabled = false;
-            MQ.answerB.input.enabled = false;
-            MQ.answerC.input.enabled = false;
-            MQ.answerD.input.enabled = false;
-            MQ.answerB.alpha = 0.3;
-            MQ.answerC.alpha = 0.3;
-            MQ.answerD.alpha = 0.3;
-            this.showCorrectAnswer();
-            this.calculateScoreOpp();
-            if (MQ.answerA.value == MQ.songChoicedList[MQ.countQuiz].RightAnswer) {
-                if (MQ.timeCounter.ms <= 10000) {
-                    this.showTimeAnswerAndCalculatorScore(MQ.timeCounter.ms);
-                    this.addTimeAnswerToData(MQ.timeCounter.ms / 1000, true, MQ.answerA.value, MQ.streak);
-                    // correct.revive();
-                    MQ.answerTextA.addColor('#01c66a', 0);
-                    MQ.correctList.push({
-                        "countQuiz": MQ.countQuiz,
-                        "time": (MQ.timeCounter.ms / 1000).toFixed(1)
-                    });
-                } else {
-                    this.showTimeAnswerAndCalculatorScore(10000);
-                    this.addTimeAnswerToData(10, true, MQ.answerA.value, MQ.streak);
-                    // correct.revive();
-                    MQ.answerTextA.addColor('#01c66a', 0);
-                    MQ.correctList.push({
-                        "countQuiz": MQ.countQuiz,
-                        "time": 10
-                    });
-                }
-            } else {
-                MQ.streak = 1;
-                if (MQ.timeCounter.ms <= 10000) {
-                    this.addTimeAnswerToData(MQ.timeCounter.ms / 1000, false, MQ.answerA.value, MQ.streak);
-                    // wrong.revive();
-                    MQ.answerTextA.addColor('#ff0000', 0);
-                    MQ.wrongList.push(MQ.countQuiz);
-                } else {
-                    this.addTimeAnswerToData(10, false, MQ.answerA.value, MQ.streak);
-                    // wrong.revive();
-                    MQ.answerTextA.addColor('#ff0000', 0);
-                    MQ.wrongList.push(MQ.countQuiz);
-                }
-            }
-            // show time
-            // console.log(MQ.timeCounter.ms);
-            MQ.timeCounter.stop();
-            setTimeout(() => {
-                if (MQ.countQuiz < 4) {
-                    if (MQ.isChallenged) {
-                        // getSongToQuiz(() => {
-                        // MQ.songRandomChoiced = [[],[],[]];
-                        MQ.songChoicedPlay.stop();
-                        MQ.countQuiz += 1;
-                        MQ.game.state.restart();
-                        // });
-                    } else {
-                        // getSongToChallenge(() => {
-                        MQ.songChoicedPlay.stop();
-                        MQ.countQuiz += 1;
-                        MQ.game.state.restart();
-                        // });
-                    }
-                } else {
-                    MQ.timeAnswerSaveToDataAndScore.score = MQ.score;
-                    MQ.songChoicedPlay.stop();
-                    MQ.game.state.start('win');
-                }
-            }, 1000);
-        }
-        );
-        // console.log(MQ.songRandomChoicedList[MQ.countQuiz]);
-        // console.log(index);
-        MQ.answerTextA = MQ.game.add.text(0, 0, `${MQ.songRandomChoicedList[MQ.countQuiz][index].answer}`, {
-            font: `50px Roboto`,
-            fill: "black",
-            boundsAlignH: "center",
-            boundsAlignV: "middle",
-            fontWeight: 400
-        });
-        MQ.answerTextA.anchor.set(0.5);
-        // MQ.answerTextA.scale.set(1/MQ.configs.SCALE);
-        MQ.answerA.value = MQ.songRandomChoicedList[MQ.countQuiz][index].answer;
-        MQ.answerA.addChild(MQ.answerTextA);
-        // MQ.songRandomChoiced.splice(0, 1);
-        // console.log(MQ.answerA.value);
-        // console.log(MQ.songChoicedList);
-        if (MQ.answerA.value == MQ.songChoicedList[MQ.countQuiz].answer) {
-            var maskAvaFriend = MQ.game.add.graphics(0, 0);
-            maskAvaFriend.beginFill(0xffffff);
-            maskAvaFriend.drawCircle(-400, 0, 70);
-            maskAvaFriend.anchor.set(0.5);
-            if (!MQ.isBotMode) {
-                var ava_friend_challenge = MQ.game.add.sprite(-400, 0, 'friend-challenge-mini');
-                ava_friend_challenge.anchor.set(0.5);
-                ava_friend_challenge.mask = maskAvaFriend;
-            } else {
-                var ava_friend_challenge = MQ.game.add.sprite(-400, 0, `bot-mini${MQ.botKey}`);
-                ava_friend_challenge.anchor.set(0.5);
-                ava_friend_challenge.mask = maskAvaFriend;
-            }
-            ava_friend_challenge.kill();
-            MQ.game.time.events.add(Phaser.Timer.SECOND * MQ.songChoicedList[MQ.countQuiz].timingFriendChallenged, () => {
-                // console.log('events');
-                // console.log('fuck');
-                if (!MQ.isChallenged) {
-                    ava_friend_challenge.revive();
-                }
-            });
-            MQ.answerA.addChild(maskAvaFriend);
-            MQ.answerA.addChild(ava_friend_challenge);
-        }
-    },
-    createAnswerTabB: function (index) {
-        MQ.answerB = MQ.game.add.button(MQ.game.width / 2, 898 + (index * 220), 'answer-tab');
-        // MQ.answerB.scale.set(MQ.configs.SCALE);
-        MQ.answerB.anchor.set(0.5);
-        MQ.answerB.events.onInputDown.add(() => {
-            MQ.choosed = true;
-            MQ.answerA.input.enabled = false;
-            MQ.answerB.input.enabled = false;
-            MQ.answerC.input.enabled = false;
-            MQ.answerD.input.enabled = false;
-            MQ.answerA.alpha = 0.3;
-            MQ.answerC.alpha = 0.3;
-            MQ.answerD.alpha = 0.3;
-            this.showCorrectAnswer();
-            this.calculateScoreOpp();
-            if (MQ.answerB.value == MQ.songChoicedList[MQ.countQuiz].RightAnswer) {
-                if (MQ.timeCounter.ms <= 10000) {
-                    this.showTimeAnswerAndCalculatorScore(MQ.timeCounter.ms);
-                    this.addTimeAnswerToData(MQ.timeCounter.ms / 1000, true, MQ.answerB.value, MQ.streak);
-                    // correct.revive();
-                    MQ.answerTextB.addColor('#01c66a', 0);
-                    MQ.correctList.push({
-                        "countQuiz": MQ.countQuiz,
-                        "time": (MQ.timeCounter.ms / 1000).toFixed(1)
-                    });
-                } else {
-                    this.showTimeAnswerAndCalculatorScore(10000);
-                    this.addTimeAnswerToData(10, true, MQ.answerB.value, MQ.streak);
-                    // correct.revive();
-                    MQ.answerTextB.addColor('#01c66a', 0);
-                    MQ.correctList.push({
-                        "countQuiz": MQ.countQuiz,
-                        "time": 10
-                    });
-                }
-            } else {
-                MQ.streak = 1;
-                if (MQ.timeCounter.ms <= 10000) {
-                    this.addTimeAnswerToData(MQ.timeCounter.ms / 1000, false, MQ.answerB.value, MQ.streak);
-                    // wrong.revive();
-                    MQ.answerTextB.addColor('#ff0000', 0);
-                    MQ.wrongList.push(MQ.countQuiz);
-                } else {
-                    this.addTimeAnswerToData(10, false, MQ.answerB.value, MQ.streak);
-                    // wrong.revive();
-                    MQ.answerTextB.addColor('#ff0000', 0);
-                    MQ.wrongList.push(MQ.countQuiz);
-                }
-            }
-            // show time
-            // console.log(MQ.timeCounter.ms);
-            MQ.timeCounter.stop();
-            setTimeout(() => {
-                if (MQ.countQuiz < 4) {
-                    if (MQ.isChallenged) {
-                        // getSongToQuiz(() => {
-                        // MQ.songRandomChoiced = [[],[],[]];
-                        MQ.songChoicedPlay.stop();
-                        MQ.countQuiz += 1;
-                        MQ.game.state.restart();
-                        // });
-                    } else {
-                        // getSongToChallenge(() => {
-                        MQ.songChoicedPlay.stop();
-                        MQ.countQuiz += 1;
-                        MQ.game.state.restart();
-                        // });
-                    }
-                } else {
-                    MQ.timeAnswerSaveToDataAndScore.score = MQ.score;
-                    MQ.songChoicedPlay.stop();
-                    MQ.game.state.start('win');
-                }
-            }, 1000);
-        }
-        );
-        MQ.answerTextB = MQ.game.add.text(0, 0, `${MQ.songRandomChoicedList[MQ.countQuiz][index].answer}`, {
-            font: `50px Roboto`,
-            fill: "black",
-            boundsAlignH: "center",
-            boundsAlignV: "middle",
-            fontWeight: 400
-        });
-        MQ.answerTextB.anchor.set(0.5);
-        // MQ.answerTextB.scale.set(1/MQ.configs.SCALE);
-        MQ.answerB.value = MQ.songRandomChoicedList[MQ.countQuiz][index].answer;
-        MQ.answerB.addChild(MQ.answerTextB);
-        // MQ.songRandomChoiced.splice(0, 1);
-        if (MQ.answerB.value == MQ.songChoicedList[MQ.countQuiz].answer) {
-            var maskAvaFriend = MQ.game.add.graphics(0, 0);
-            maskAvaFriend.beginFill(0xffffff);
-            maskAvaFriend.drawCircle(-400, 0, 70);
-            maskAvaFriend.anchor.set(0.5);
-            if (!MQ.isBotMode) {
-                var ava_friend_challenge = MQ.game.add.sprite(-400, 0, 'friend-challenge-mini');
-                ava_friend_challenge.anchor.set(0.5);
-                ava_friend_challenge.mask = maskAvaFriend;
-            } else {
-                var ava_friend_challenge = MQ.game.add.sprite(-400, 0, `bot-mini${MQ.botKey}`);
-                ava_friend_challenge.anchor.set(0.5);
-                ava_friend_challenge.mask = maskAvaFriend;
-            }
-            ava_friend_challenge.kill();
-            MQ.game.time.events.add(Phaser.Timer.SECOND * MQ.songChoicedList[MQ.countQuiz].timingFriendChallenged, () => {
-                // console.log('events');
-                // console.log('fuck');
-                if (!MQ.isChallenged) {
-                    ava_friend_challenge.revive();
-                }
-            });
-            MQ.answerB.addChild(maskAvaFriend);
-            MQ.answerB.addChild(ava_friend_challenge);
-        }
-    },
-    createAnswerTabC: function (index) {
-        MQ.answerC = MQ.game.add.button(MQ.game.width / 2, 898 + (index * 220), 'answer-tab');
-        // MQ.answerC.scale.set(MQ.configs.SCALE);
-        MQ.answerC.anchor.set(0.5);
-        MQ.answerC.events.onInputDown.add(() => {
-            MQ.choosed = true;
-            MQ.answerA.input.enabled = false;
-            MQ.answerB.input.enabled = false;
-            MQ.answerC.input.enabled = false;
-            MQ.answerD.input.enabled = false;
-            MQ.answerB.alpha = 0.3;
-            MQ.answerA.alpha = 0.3;
-            MQ.answerD.alpha = 0.3;
-            this.showCorrectAnswer();
-            this.calculateScoreOpp();
-            if (MQ.answerC.value == MQ.songChoicedList[MQ.countQuiz].RightAnswer) {
-                if (MQ.timeCounter.ms <= 10000) {
-                    this.showTimeAnswerAndCalculatorScore(MQ.timeCounter.ms);
-                    this.addTimeAnswerToData(MQ.timeCounter.ms / 1000, true, MQ.answerC.value, MQ.streak);
-                    // correct.revive();
-                    MQ.answerTextC.addColor('#01c66a', 0);
-                    MQ.correctList.push({
-                        "countQuiz": MQ.countQuiz,
-                        "time": (MQ.timeCounter.ms / 1000).toFixed(1)
-                    });
-                } else {
-                    this.showTimeAnswerAndCalculatorScore(10000);
-                    this.addTimeAnswerToData(10, true, MQ.answerC.value, MQ.streak);
-                    // correct.revive();
-                    MQ.answerTextC.addColor('#01c66a', 0);
-                    MQ.correctList.push({
-                        "countQuiz": MQ.countQuiz,
-                        "time": 10
-                    });
-                }
-            } else {
-                MQ.streak = 1;
-                if (MQ.timeCounter.ms <= 10000) {
-                    this.addTimeAnswerToData(MQ.timeCounter.ms / 1000, false, MQ.answerC.value, MQ.streak);
-                    // wrong.revive();
-                    MQ.answerTextC.addColor('#ff0000', 0);
-                    MQ.wrongList.push(MQ.countQuiz);
-                } else {
-                    this.addTimeAnswerToData(10, false, MQ.answerC.value, MQ.streak);
-                    // wrong.revive();
-                    MQ.answerTextC.addColor('#ff0000', 0);
-                    MQ.wrongList.push(MQ.countQuiz);
-                }
-            }
-            // show time
-            // console.log(MQ.timeCounter.ms);
-            MQ.timeCounter.stop();
-            setTimeout(() => {
-                if (MQ.countQuiz < 4) {
-                    if (MQ.isChallenged) {
-                        // getSongToQuiz(() => {
-                        // MQ.songRandomChoiced = [[],[],[]];
-                        MQ.songChoicedPlay.stop();
-                        MQ.countQuiz += 1;
-                        MQ.game.state.restart();
-                        // });
-                    } else {
-                        // getSongToChallenge(() => {
-                        MQ.songChoicedPlay.stop();
-                        MQ.countQuiz += 1;
-                        MQ.game.state.restart();
-                        // });
-                    }
-                } else {
-                    MQ.timeAnswerSaveToDataAndScore.score = MQ.score;
-                    MQ.songChoicedPlay.stop();
-                    MQ.game.state.start('win');
-                }
-            }, 1000);
-        }
-        );
-        MQ.answerTextC = MQ.game.add.text(0, 0, `${MQ.songRandomChoicedList[MQ.countQuiz][index].answer}`, {
-            font: `50px Roboto`,
-            fill: "black",
-            boundsAlignH: "center",
-            boundsAlignV: "middle",
-            fontWeight: 400
-        });
-        MQ.answerTextC.anchor.set(0.5);
-        // MQ.answerTextC.scale.set(1/MQ.configs.SCALE);
-        MQ.answerC.value = MQ.songRandomChoicedList[MQ.countQuiz][index].answer;
-        MQ.answerC.addChild(MQ.answerTextC);
-        // MQ.songRandomChoiced.splice(0, 1);
-        if (MQ.answerC.value == MQ.songChoicedList[MQ.countQuiz].answer) {
-            var maskAvaFriend = MQ.game.add.graphics(0, 0);
-            maskAvaFriend.beginFill(0xffffff);
-            maskAvaFriend.drawCircle(-400, 0, 70);
-            maskAvaFriend.anchor.set(0.5);
-            if (!MQ.isBotMode) {
-                var ava_friend_challenge = MQ.game.add.sprite(-400, 0, 'friend-challenge-mini');
-                ava_friend_challenge.anchor.set(0.5);
-                ava_friend_challenge.mask = maskAvaFriend;
-            } else {
-                var ava_friend_challenge = MQ.game.add.sprite(-400, 0, `bot-mini${MQ.botKey}`);
-                ava_friend_challenge.anchor.set(0.5);
-                ava_friend_challenge.mask = maskAvaFriend;
-            }
-            ava_friend_challenge.kill();
-            MQ.game.time.events.add(Phaser.Timer.SECOND * MQ.songChoicedList[MQ.countQuiz].timingFriendChallenged, () => {
-                // console.log('events');
-                // console.log('fuck');
-                if (!MQ.isChallenged) {
-                    ava_friend_challenge.revive();
-                }
-            });
-            MQ.answerC.addChild(maskAvaFriend);
-            MQ.answerC.addChild(ava_friend_challenge);
-        }
-    },
-    createAnswerTabD: function (index) {
-        MQ.answerD = MQ.game.add.button(MQ.game.width / 2, 898 + (index * 220), 'answer-tab');
-        // MQ.answerD.scale.set(MQ.configs.SCALE);
-        MQ.answerD.anchor.set(0.5);
-        MQ.answerD.events.onInputDown.add(() => {
-            MQ.choosed = true;
-            MQ.answerA.input.enabled = false;
-            MQ.answerB.input.enabled = false;
-            MQ.answerC.input.enabled = false;
-            MQ.answerD.input.enabled = false;
-            MQ.answerB.alpha = 0.3;
-            MQ.answerC.alpha = 0.3;
-            MQ.answerA.alpha = 0.3;
-            this.showCorrectAnswer();
-            // console.log(MQ.answerA.answer);
-            this.calculateScoreOpp();
-            if (MQ.answerD.value == MQ.songChoicedList[MQ.countQuiz].RightAnswer) {
-                if (MQ.timeCounter.ms <= 10000) {
-                    this.showTimeAnswerAndCalculatorScore(MQ.timeCounter.ms);
-                    this.addTimeAnswerToData(MQ.timeCounter.ms / 1000, true, MQ.answerD.value, MQ.streak);
-                    // correct.revive();
-                    MQ.answerTextD.addColor('#01c66a', 0);
-                    MQ.correctList.push({
-                        "countQuiz": MQ.countQuiz,
-                        "time": (MQ.timeCounter.ms / 1000).toFixed(1)
-                    });
-                } else {
-                    this.showTimeAnswerAndCalculatorScore(10000);
-                    this.addTimeAnswerToData(10, true, MQ.answerD.value, MQ.streak);
-                    // correct.revive();
-                    MQ.answerTextD.addColor('#01c66a', 0);
-                    MQ.correctList.push({
-                        "countQuiz": MQ.countQuiz,
-                        "time": 10
-                    });
-                }
-            } else {
-                MQ.streak = 1;
-                if (MQ.timeCounter.ms <= 10000) {
-                    this.addTimeAnswerToData(MQ.timeCounter.ms / 1000, false, MQ.answerD.value, MQ.streak);
-                    // wrong.revive();
-                    MQ.answerTextD.addColor('#ff0000', 0);
-                    MQ.wrongList.push(MQ.countQuiz);
-                } else {
-                    this.addTimeAnswerToData(10, false, MQ.answerD.value, MQ.streak);
-                    // wrong.revive();
-                    MQ.answerTextD.addColor('#ff0000', 0);
-                    MQ.wrongList.push(MQ.countQuiz);
-                }
-            }
-            // show time
-            // console.log(MQ.timeCounter.ms);
-            MQ.timeCounter.stop();
-            setTimeout(() => {
-                if (MQ.countQuiz < 4) {
-                    if (MQ.isChallenged) {
-                        // getSongToQuiz(() => {
-                        // MQ.songRandomChoiced = [[],[],[]];
-                        MQ.songChoicedPlay.stop();
-                        MQ.countQuiz += 1;
-                        MQ.game.state.restart();
-                        // });
-                    } else {
-                        // getSongToChallenge(() => {
-                        MQ.songChoicedPlay.stop();
-                        MQ.countQuiz += 1;
-                        MQ.game.state.restart();
-                        // });
-                    }
-                } else {
-                    MQ.timeAnswerSaveToDataAndScore.score = MQ.score;
-                    MQ.songChoicedPlay.stop();
-                    MQ.game.state.start('win');
-                }
-            }, 1000);
-        }
-        );
-        MQ.answerTextD = MQ.game.add.text(0, 0, `${MQ.songRandomChoicedList[MQ.countQuiz][index].answer}`, {
-            font: `50px Roboto`,
-            fill: "black",
-            boundsAlignH: "center",
-            boundsAlignV: "middle",
-            fontWeight: 400
-        });
-        MQ.answerTextD.anchor.set(0.5);
-        // MQ.answerTextD.scale.set(1/MQ.configs.SCALE);
-        MQ.answerD.value = MQ.songRandomChoicedList[MQ.countQuiz][index].answer;
-        MQ.answerD.addChild(MQ.answerTextD);
-        // MQ.songRandomChoiced.splice(0, 1);
-        if (MQ.answerD.value == MQ.songChoicedList[MQ.countQuiz].answer) {
-            var maskAvaFriend = MQ.game.add.graphics(0, 0);
-            maskAvaFriend.beginFill(0xffffff);
-            maskAvaFriend.drawCircle(-400, 0, 70);
-            maskAvaFriend.anchor.set(0.5);
-            if (!MQ.isBotMode) {
-                var ava_friend_challenge = MQ.game.add.sprite(-400, 0, 'friend-challenge-mini');
-                ava_friend_challenge.anchor.set(0.5);
-                ava_friend_challenge.mask = maskAvaFriend;
-            } else {
-                var ava_friend_challenge = MQ.game.add.sprite(-400, 0, `bot-mini${MQ.botKey}`);
-                ava_friend_challenge.anchor.set(0.5);
-                ava_friend_challenge.mask = maskAvaFriend;
-            }
-            ava_friend_challenge.kill();
-            MQ.game.time.events.add(Phaser.Timer.SECOND * MQ.songChoicedList[MQ.countQuiz].timingFriendChallenged, () => {
-                // console.log('events');
-                // console.log('fuck');
-                if (!MQ.isChallenged) {
-                    ava_friend_challenge.revive();
-                }
-            });
-            MQ.answerD.addChild(maskAvaFriend);
-            MQ.answerD.addChild(ava_friend_challenge);
-        }
     },
     showTimeAnswerAndCalculatorScore: function (timeAnswer) {
         // console.log(timeAnswer);
@@ -853,7 +418,7 @@ var playState = {
                 countdownNumber.scale.set(1);
                 countdownNumber.setText('1');
                 let thirdTween = MQ.game.add.tween(countdownNumber.scale).to({ x: 0.5, y: 0.5 }, 1000, "Linear");
-                thirdTween.start();                
+                thirdTween.start();
                 MQ.soundCountDown.play();
                 thirdTween.onComplete.add(() => {
                     // countdownNumber.scale.set(1);
@@ -875,16 +440,28 @@ var playState = {
                         for (i = 0; i < 4; i++) {
                             if (i == 0) {
                                 // console.log(i);
-                                this.createAnswerTabA(i);
+                                MQ.answerA = new AnswerPlayController(MQ.game.width / 2, 898 + (i * 220), {
+                                    "index": i
+                                });
+                                // this.createAnswerTabA(i);
                             }
                             if (i == 1) {
-                                this.createAnswerTabB(i);
+                                // this.createAnswerTabB(i);
+                                MQ.answerB = new AnswerPlayController(MQ.game.width / 2, 898 + (i * 220), {
+                                    "index": i
+                                });
                             }
                             if (i == 2) {
-                                this.createAnswerTabC(i);
+                                // this.createAnswerTabC(i);
+                                MQ.answerC = new AnswerPlayController(MQ.game.width / 2, 898 + (i * 220), {
+                                    "index": i
+                                });
                             }
                             if (i == 3) {
-                                this.createAnswerTabD(i);
+                                // this.createAnswerTabD(i);
+                                MQ.answerD = new AnswerPlayController(MQ.game.width / 2, 898 + (i * 220), {
+                                    "index": i
+                                });
                             }
                         }
                         tweenSpriteTime.onComplete.add(() => {
